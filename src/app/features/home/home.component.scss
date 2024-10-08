@@ -1,0 +1,33 @@
+
+h2 {
+    text-transform: capitalize;
+    font-size: clamp(2rem, 1.8rem + 0.7vw, 2.6rem);
+    margin-bottom: 3rem;
+}
+
+.recipe-showcase {
+    padding-block: min(20vh, 2rem);
+    width: calc(min(76rem, 90%));
+    margin-inline: auto;
+    color: #111;
+
+    .recipes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+
+    }
+}
+
+.blog-showcase {
+    padding-block: min(20vh, 2rem);
+    width: calc(min(76rem, 90%));
+    margin-inline: auto;
+    color: #111;
+
+    .blogs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+        gap: 2rem;
+    }
+}
