@@ -3,21 +3,68 @@ nav {
     align-content: center;
     grid-template-columns: 1fr 1fr 1fr;
 
+    margin: 1rem 10rem;
+    padding: 0 2rem;
     min-height: 4rem;
-    border: 1px solid #ccc;
+    border: 2px solid black;
+    border-radius: 1.5rem;
+
+    box-shadow: 5px 5px 0 3px black;
+    background-color: #90FF90;
+
+    .logo {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.5rem;
+        justify-self: start;
+    }
 
     ul {
+        padding: 0;         // magic padding
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        list-style: none;
+        align-items: center;
+        list-style-type: none;
         li {
             a {
+                display: flex;
+                align-items: center;
+                padding: 0 1.5rem;
                 text-decoration: none;
                 color: black;
+                font-size: 1.1rem;
+                font-weight: bold;
                 &:hover, &.active {
                     text-decoration: underline;
                 }
+            }
+        }
+
+        .dropdown {
+            a {
+                position: relative;
+            }
+
+            .sub-menu {
+                position: absolute;
+                display: none;
+                background-color: #90FF90;
+                border: 2px solid black;
+                border-radius: 1.5rem;
+                padding: 0;
+                li {
+                    padding: 0.5rem 1rem;
+                    a {
+                        color: black;
+                        font-size: 1rem;
+                        font-weight: bold;
+                    }    
+                }
+            }
+            &:hover ul {
+                display: block;
             }
         }
     }

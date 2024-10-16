@@ -1,13 +1,19 @@
 <nav>
-    <div class="logo-container">
-        <a routerLink="home" class="logo">Recept PWA</a>
-    </div>
+    <a class="logo" routerLink="home">Recept PWA</a>
+    
     <ul>
-        <li><a routerLink="home" routerLinkActive="active">Home</a></li>
-        <li><a routerLink="blog" routerLinkActive="active">Blog</a></li>
-        <li><a routerLink="about" routerLinkActive="active">About</a></li>
+        <li><a routerLink="home" routerLinkActive="active-page">Home</a></li>
+        <li class="dropdown"><a routerLink="blog" routerLinkActive="active-page">Blog</a>
+            <ul class="sub-menu">
+                <li><a href="#">1. opció</a></li>
+                <li><a href="#">2. opció</a></li>
+                <li><a href="#">3. opció</a></li>
+                <li><a href="#">4. opció</a></li>
+                <li><a href="#">5. opció</a></li>
+            </ul>
+        </li>
+        <li><a routerLink="about" routerLinkActive="active-page">About</a></li>
     </ul>
-    <div class="right">
-        <a routerLink="login" routerLinkActive="active">Login</a>
-    </div>
+
+    <a class="right btn" routerLink="login">LOGIN</a>
 </nav>

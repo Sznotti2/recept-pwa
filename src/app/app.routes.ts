@@ -12,19 +12,19 @@ export const routes: Routes = [
     },
     {
         path: 'about',
-        component: AboutComponent
+        loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent)
     },
     {
         path: 'blog',
-        component: BlogComponent
+        loadComponent: () => import('./features/blog/blog.component').then(m => m.BlogComponent)
     },
     {
         path: 'login',
-        component: LoginComponent
+        loadComponent: () => import('./features/login/login.component').then(m => m.LoginComponent)
     },
     {
         path: 'register',
-        component: RegisterComponent
+        loadComponent: () => import('./features/register/register.component').then(m => m.RegisterComponent)
     },
     {
         path: '**',

@@ -2,10 +2,12 @@
     max-width: 24rem;
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 0px 0px black;
     background-color: whitesmoke;
 
     img {
+        object-fit: cover;
         border-radius: 1rem;
     }
 
@@ -16,10 +18,21 @@
         gap: .5rem;
 
         > * {
-            border: 1px solid gray;
+            color: black;
+            border: 2px solid black;
             border-radius: 5rem;
-            padding: 0 .5rem;
-            font-size: 1.15rem;
+            padding: .2rem .7rem;
+            font-size: 1.1rem;
+        }
+
+        > *:first-child {
+            background-color: #fe5a35;
+        }
+        > *:nth-child(2) {
+            background-color: #06ae56;
+        }
+        > *:last-child {
+            background-color: #91a8ec;
         }
     }
 
@@ -33,10 +46,9 @@
         list-style: none;
         padding-inline-start: 0;
         font-size: 1.15rem;
-        color: gray;
+        font-weight: bold;
+        color: #9723c9;
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
-        flex-wrap: wrap;
     }
 }
