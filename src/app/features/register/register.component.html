@@ -1,1 +1,132 @@
-<p>register works!</p>
+<main>
+	<!-- ==={{ registerForm.controls["terms"].errors | json }}=== -->
+	<form [formGroup]="registerForm" (ngSubmit)="register()">
+		<div class="form-group">
+			<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''" type="text" placeholder=" " formControlName="username">
+			<label>username</label>
+		</div>
+		<!-- ha akarsz ikonokat csak töltsd le ezt:
+		https://www.npmjs.com/package/material-icons -->
+		@if ( username.invalid && (username.dirty || username.touched) ) {
+			@if ( username.errors?.['required'] ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>A felhasználó nevet meg kell adni!</span>	
+				</div>
+			}
+			@if ( username.hasError("minlength") ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>A felhasználó név minimum 3 karakter kell, hogy legyen!</span>
+				</div>
+			}
+			@if ( username.hasError("maxlength") ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>A felhasználó név maximum 32 karakterből állhat!</span>
+				</div>
+			}
+		}
+
+		<div class="form-group">
+			<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="email" placeholder=" " formControlName="email">
+			<label>Email cím</label>
+		</div>
+		@if (email.invalid && (email.dirty || email.touched)) {
+			@if (email.errors?.['required']) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>Az email címet meg kell adni!</span>
+				</div>
+			}
+			@if (email.hasError("email") ) {
+				<div class="error">	
+					<span class="material-icons">warning</span>
+					<span>Helytelen email formátum!</span>
+				</div>
+			}
+		}
+
+		<div class="form-group">
+			<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''" [type]="inputType" placeholder=" " formControlName="password">
+			<label>Jelszó</label>
+            @if (!passwordVisible) {
+                <span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>                
+            } @else {
+    			<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
+            }
+		</div>
+		@if (password.invalid && (password.dirty || password.touched)) {
+			@if (password.errors?.['required']) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>Jelszót kötelező megadni!</span>
+				</div>
+			}
+			@if ( password.hasError("minlength") ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>A jelszó minimum 6 karakter kell, hogy legyen!</span>
+				</div>
+			}
+			@if ( password.hasError("maxlength") ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>A jelszó maximum 32 karakterből állhat!</span>
+				</div>
+			}
+			@if ( password.hasError("hasOnlyLowercaseLetters") ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+					<span>Legalább 1 nagybetűt meg kell adni!</span>
+				</div>
+			}
+		}
+
+		<div class="form-group">
+			<input [ngClass]="passwordAgain.valid ? 'valid' : passwordAgain.dirty || passwordAgain.touched ? 'invalid' : ''" type="password" placeholder=" " formControlName="passwordAgain">
+			<label>Jelszó újra</label>
+		</div>
+		@if (passwordAgain.invalid && (passwordAgain.dirty || passwordAgain.touched)) {
+			@if (passwordAgain.errors?.['required']) {
+				<div class="error">
+					<span class="material-icons-outlined">warning</span>
+					<span>Ismétlő jelszót meg kell adni!</span>
+				</div>
+			}
+		}
+
+		<div>
+			<input type="checkbox" id="terms" formControlName="terms">
+			<label for="terms">Elfogadom az <a routerLink="/terms">Adatkezelési tájékoztatóban</a> foglaltakat</label>
+		</div>
+		@if (terms.invalid && (terms.dirty || terms.touched)) {
+			@if (terms.errors?.['requiredTrue']) {
+				<div class="error">
+					<span class="material-icons-outlined">warning</span>
+					<span>Adatkezelési tájékoztatóban foglaltakat el kell fogadni!</span>
+				</div>
+			}
+		}
+
+		<div class="row">
+			<div>
+				<input type="checkbox" id="keep-logged-in">
+				<label for="keep-logged-in">Emlékezz rám</label>
+			</div>
+
+			<a routerLink="/forgot-password">Elfelejtett jelszó?</a>
+		</div>
+
+		<button [disabled]="registerForm.invalid" class="btn" type="submit">Register</button>
+
+		<div class="divider">
+			<div class="line"></div>
+			<span>or</span>
+			<div class="line"></div>
+		</div>
+
+		<button class="btn" type="button">Register with Google</button>
+	</form>
+	<p>Már van fiókod? <a routerLink="/login">Bejelentkezés</a></p>
+</main>

@@ -1,1 +1,67 @@
-<p>login works!</p>
+<main>
+	<form [formGroup]="loginForm" (ngSubmit)="login()">
+		<div class="form-group">
+			<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="email" placeholder=" " formControlName="email">
+			<label>Email cím</label>
+		</div>
+		<!-- ha akarsz ikonokat csak töltsd le ezt:
+		https://www.npmjs.com/package/material-icons -->
+		@if (email.invalid && (email.dirty || email.touched)) {
+			@if (email.errors?.['required']) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+                    <span>Az email címet meg kell adni!</span>
+                </div>
+			}
+			@if (email.hasError("email") ) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+                    <span>Helytelen email formátum!</span>
+                </div>
+			}
+		}
+
+		<div class="form-group">
+			<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''" [type]="inputType" placeholder=" " formControlName="password">
+			<label>Jelszó</label>
+            @if (!passwordVisible) {
+                <span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>                
+            } @else {
+    			<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
+            }
+
+		</div>
+		@if (password.invalid && (password.dirty || password.touched)) {
+			@if (password.errors?.['required']) {
+				<div class="error">
+					<span class="material-icons">warning</span>
+                    <span>Jelszót kötelező megadni!</span>
+                </div>
+			}
+		}
+
+		<div class="row">
+			<div>
+				<input type="checkbox" name="keep-logged-in" id="keep-logged-in">
+				<label for="keep-logged-in">Emlékezz rám</label>
+			</div>
+			<div>
+				<input id="keep-logged-in2" type="checkbox" class="toggle-switch">
+				<label for="keep-logged-in2">Emlékezz rám</label>
+			</div>
+
+			<a routerLink="/forgot-password">Elfelejtett jelszó?</a>
+		</div>
+
+		<button [disabled]="loginForm.invalid" class="btn" type="submit">Belépés</button>
+
+		<div class="divider">
+			<div class="line"></div>
+			<span>or</span>
+			<div class="line"></div>
+		</div>
+
+		<button class="btn" type="button">Login with Google</button>
+	</form>
+	<p>Már van fiókod? <a routerLink="/register">Regisztrálj</a></p>
+</main>
