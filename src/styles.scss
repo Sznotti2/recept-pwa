@@ -69,6 +69,12 @@ h6 {
 #__next {
     isolation: isolate;
 }
+/* ROOT */
+:root {
+    --clr-600: #69d2e7;
+    --clr-400: #f6f6f6;
+    --gap: 1rem;
+}
 
 /* GLOBAL STYLES  */
 body {

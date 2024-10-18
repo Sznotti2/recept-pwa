@@ -1,15 +1,22 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
-import { AboutComponent } from './features/about/about.component';
-import { BlogComponent } from './features/blog/blog.component';
-import { LoginComponent } from './features/login/login.component';
-import { RegisterComponent } from './features/register/register.component';
+import { RecipeViewComponent } from './shared/components/recipe-view/recipe-view.component';
+import { SearchComponent } from './features/search/search.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
+        pathMatch: 'full'
     },
+    {
+        path: "search/:id",
+        component: RecipeViewComponent,
+    },
+	{
+		path: "search",
+		component: SearchComponent
+	},
     {
         path: 'about',
         loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent)

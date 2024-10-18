@@ -2,12 +2,16 @@
     <img src="https://cdn.mindmegette.hu/2024/04/opzjny9csMKOEH_pU9QME4PMmz8OZP3_mjsUsP_aWNY/fill/0/0/no/1/aHR0cHM6Ly9jbXNjZG4uYXBwLmNvbnRlbnQucHJpdmF0ZS9jb250ZW50L2Y0YTEyYjU1MjVjNzRiOWRhNTUzYjhjZDFlZmMxNWEy.jpg" alt="recipe image">
 
     <div class="tags">
-        <a class="tag" href="">pecsenye</a>
+        <!-- <a class="tag" href="">pecsenye</a>
         <a class="tag" href="">cigánypecsenye</a>
-        <a class="tag" href="">sertéshús receptek</a>
+        <a class="tag" href="">sertéshús receptek</a> -->
+        @for (tag of recipe.categories; track $index) {
+			<a class="tag" href="#">{{ tag }}</a>
+		}
     </div>
+    
 
-    <h3 class="title">Cigánypecsenye kétféleképpen</h3>
+    <a [routerLink]="[ '/search', recipe.id ]" class="title">{{ recipe.name }}</a>
 
     <ul class="info">
         <li>30 perc</li>

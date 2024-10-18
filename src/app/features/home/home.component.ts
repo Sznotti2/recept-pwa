@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RecipeCardComponent } from '../../shared/components/recipe-card/recipe-card.component';
 import { BlogCardComponent } from '../../shared/components/blog-card/blog-card.component';
 import { RecipeCard2Component } from '../../shared/components/recipe-card2/recipe-card2.component';
 import { RecipeCard3Component } from '../../shared/components/recipe-card3/recipe-card3.component';
 import { BlogCard2Component } from '../../shared/components/blog-card2/blog-card2.component';
+import { Recipe } from '../../core/interfaces/recipe';
+import { RecipeService } from '../../core/services/recipe.service';
 
 @Component({
   selector: 'app-home',
@@ -13,5 +15,10 @@ import { BlogCard2Component } from '../../shared/components/blog-card2/blog-card
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  recipeList: Recipe[] = [];
+	recipeService = inject(RecipeService);
 
+	constructor() {
+		this.recipeList = this.recipeService.getAllRecipes().slice(0, 8);
+	}
 }

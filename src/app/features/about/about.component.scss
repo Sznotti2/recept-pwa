@@ -1,0 +1,87 @@
+p {
+	margin-block: 1rem;
+}
+
+#app a {
+	text-decoration: none;
+}
+.image-hover {
+	/* --easing: cubic-bezier(0.5, 0.5, 0.2, 1);
+
+	transform-origin: top left;
+	animation: skwoop 0.7s var(--easing) backwards;
+	animation-duration: calc(0.6s + (var(--i) * 0.1s));
+	animation-delay: calc((var(--i) * 50ms)); */
+
+	&:hover,
+	&:focus {
+		z-index: 10;
+
+		.title::after {
+			display: block;
+		}
+
+		> img {
+			transition-delay: 0s;
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+
+	> img {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		max-width: 40%;
+		max-height: 60vh;
+		pointer-events: none;
+		z-index: 2;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 0.2s linear, visibility 0s linear 0.2s;
+
+		--x-px: calc(var(--x) * 1px);
+		--y-px: calc(var(--y) * 1px);
+		top: 0;
+		left: 0;
+		transform: translate(var(--x-px), var(--y-px)) translate(-50%, -50%);
+	}
+}
+/* @keyframes skwoop {
+	from {
+		opacity: 0;
+		transform: translateY(5vh) skewY(5deg);
+	}
+} */
+
+.opake {
+	color: var(--clr-500);
+	margin: 0;
+}
+
+.kiemel {
+	font-weight: var(--fw-bold);
+}
+
+.full-height {
+	padding-block: var(--gap);
+}
+
+/* multi-line undeline with animation */
+/* https://css-irl.info/animating-underlines/ */
+.multi-line-undeline {
+	text-decoration: none;
+	background: 
+		linear-gradient(to right, rgba(100, 200, 200, 1), rgba(100, 200, 200, 1)),
+		linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 180, 1), rgba(0, 100, 200, 1));
+	background-size: 100% 0.1em, 0 0.1em;
+	background-position: 100% 100%, 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 400ms;
+}
+
+.multi-line-undeline:hover,
+.multi-line-undeline:focus {
+	background-size: 0 0.1em, 100% 0.1em;
+}

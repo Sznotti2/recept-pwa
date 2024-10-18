@@ -4,14 +4,20 @@
 <section class="recipe-showcase">
     <h2>Legnépszerűbb édességek</h2>
 
+    <!-- <div class="recipes">
+        <app-recipe-card></app-recipe-card>
+        <app-recipe-card2></app-recipe-card2>
+        <app-recipe-card3></app-recipe-card3>
+        <app-recipe-card></app-recipe-card>
+        <app-recipe-card2></app-recipe-card2>
+        <app-recipe-card3></app-recipe-card3>
+    </div> -->
     <div class="recipes">
-        <app-recipe-card></app-recipe-card>
-        <app-recipe-card2></app-recipe-card2>
-        <app-recipe-card3></app-recipe-card3>
-        <app-recipe-card></app-recipe-card>
-        <app-recipe-card2></app-recipe-card2>
-        <app-recipe-card3></app-recipe-card3>
+        @for (currentRecipe of recipeList; track $index) {
+            <app-recipe-card3 [recipe]="currentRecipe"></app-recipe-card3>
+        }
     </div>
+    
 </section>
 
 <section class="blog-showcase">
