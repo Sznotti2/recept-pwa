@@ -3,22 +3,30 @@
 	<header>
 		<img [src]="recipe?.image" alt="{{ recipe?.name }}">
 		<div class="recipe__info">
-			<div class="time-it-takes">
-				<span class="material-icons">schedule</span>
-				<p><span>{{ recipe?.time }}</span> perc</p>
-			</div>
+			<ul class="info">
+				<li>
+					<span class="material-icons">schedule</span>
+					<p>{{ recipe?.time }} perc</p>
+				</li>
+				<li>
+					<span class="material-icons">pie_chart</span>
+					<p>{{ recipe?.servings }} adag</p>
+				</li>
+				<li>
+					<span class="material-icons">star</span>
+					<p>{{ recipe?.rating }}</p>
+				</li>
+			</ul>
 			<h1 class="recipie-title">{{ recipe?.name }}</h1>
 			<p class="description">{{ recipe?.description }}</p>
 		</div>
-	</header>
-	
-	<section>
+
 		<ul class="categories">
 			@for (category of recipe?.categories; track $index) {
 				<li><a class="chips link" href="#">{{ category }}</a></li>
 			}
 		</ul>
-	</section>
+	</header>
 
 	<section class="instructions">
 		<h3>Elkészítés</h3>

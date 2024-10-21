@@ -1,25 +1,39 @@
 .container {
 	padding: 0 15rem;
+	display: grid;
+	gap: var(--gap-medium);
+	grid-template-columns: 1fr 1fr;
+
+	header,
+	.categories,
+	.comment-thread {
+		grid-column: span 2;
+	}
+
+	.ingredients h3,
+	.comment-thread h3 {
+		text-align: center;
+	}
+
+	.instructions,
+	.ingredients,
+	.comment-thread {
+		font-size: var(--fs-medium);
+	}
+	
+	.instructions,
+	.comment-thread {
+		width: 65ch;
+		
+	}
 }
 
-header, 
-section {
-	font-size: 1.3rem;
-}
-.ingredients h3,
-.comment-thread h3 {
-    text-align: center;
-}
 
 header {
     display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: center;
     gap: var(--gap-small);
-
-	> * {
-		border: 1px solid red;
-	}
 
 	img {
 		justify-self: end;
@@ -28,27 +42,43 @@ header {
 
 	.recipe__info {
 
-		.time-it-takes {
+		.info {
+			list-style-type: none;
+			padding-left: 0;
 			display: flex;
 			align-items: center;
-			gap: .5rem;
-			color: var(--gray-600);
-			font-weight: 600;
+			gap: var(--gap-medium);
 
-			.material-icons {
-				--_size: 1.7rem;
-				width: var(--_size);
-				height: var(--_size);
-				font-size: var(--_size);
+			li {
+				display: flex;
+				align-items: center;
+				gap: .5rem;
+				color: var(--gray-600);
+
+				.material-icons {
+					--_size: 1.7rem;
+					width: var(--_size);
+					height: var(--_size);
+					font-size: var(--_size);
+				}
+
+				p {
+					font-size: var(--fs-small);
+				}
 			}
 		}
 
 		.recipie-title {
 			font-family: 'Lora', serif;
 			font-weight: 600;
+			font-size: var(--fs-large);
 			line-height: 1.2;
 			letter-spacing: -2px;
 			font-size: clamp(2rem, 5vw, 3rem);
+		}
+
+		.description {
+			font-size: var(--fs-medium);
 		}
 	}
 
@@ -75,29 +105,6 @@ header {
 	// 	color: black;
 	// }
 }
-https://codepen.io/shangle/pen/Dyrvvr
-https://codepen.io/hugo/pen/kQdYee
-https://codepen.io/pavlovsk/pen/zYvbGKe
-https://codepen.io/kcheverie/pen/ENaLYJ
-https://codepen.io/meodai/pen/RerqjG
-https://codepen.io/hussard/pen/ExgbXMP
-https://codepen.io/giana/pen/BabdgjB
-https://codepen.io/reimersjan/pen/nBQrNB
-https://codepen.io/adamlindqvist/pen/EaPeJg
-https://codepen.io/giana/pen/gOEQmVW
-https://codepen.io/junchow/pen/RwrwzPe
-https://codepen.io/cbolson/pen/LYommYY
-https://codepen.io/gibsonmurray/pen/zYVgaBN
-https://codepen.io/uiswarup/pen/RwNraeW?editors=1100
-https://codepen.io/ui-kenjie/pen/PogjBzJ
-https://codepen.io/Taluska/pen/eYqmXpJ
-https://codepen.io/hexagoncircle
-https://codepen.io/argyleink
-https://codepen.io/jkantner/full/OJGBYJG
-https://codepen.io/yuanchuan/pen/ePpGXP
-https://codepen.io/thecubiq/pens/public
-https://codepen.io/jbeargraphics/pen/BbbgYR
-https://codepen.io/aaroniker/pen/qLvXKy
 
 .instructions {
 	ol {
@@ -156,8 +163,8 @@ https://codepen.io/aaroniker/pen/qLvXKy
 
 /* COMMENT THREAD */
 .comment-thread {
+	place-self: center;
     margin-block: var(--gap-big);
-	max-width: 65ch;
 }
 .comment * {
     margin-block: calc(var(--gap-small) / 3);

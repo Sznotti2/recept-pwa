@@ -42,5 +42,10 @@
         color: #9723c9;
         display: flex;
         justify-content: space-between;
+
+		li {
+			display: flex;
+			align-items: center;
+		}
     }
 }
