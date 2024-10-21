@@ -17,14 +17,6 @@
         flex-wrap: wrap;
         gap: .5rem;
 
-        > * {
-            color: black;
-            border: 2px solid black;
-            border-radius: 5rem;
-            padding: .2rem .7rem;
-            font-size: 1.1rem;
-        }
-
         > *:first-child {
             background-color: #fe5a35;
         }

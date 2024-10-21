@@ -1,6 +1,3 @@
-<h1>Főoldal</h1>
-
-
 <section class="recipe-showcase">
     <h2>Legnépszerűbb édességek</h2>
 
@@ -14,7 +11,7 @@
     </div> -->
     <div class="recipes">
         @for (currentRecipe of recipeList; track $index) {
-            <app-recipe-card3 [recipe]="currentRecipe"></app-recipe-card3>
+            <app-recipe-card2 [recipe]="currentRecipe"></app-recipe-card2>
         }
     </div>
     

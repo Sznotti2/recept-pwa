@@ -10,19 +10,19 @@
 		@if ( username.invalid && (username.dirty || username.touched) ) {
 			@if ( username.errors?.['required'] ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>A felhasználó nevet meg kell adni!</span>	
 				</div>
 			}
 			@if ( username.hasError("minlength") ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>A felhasználó név minimum 3 karakter kell, hogy legyen!</span>
 				</div>
 			}
 			@if ( username.hasError("maxlength") ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>A felhasználó név maximum 32 karakterből állhat!</span>
 				</div>
 			}
@@ -35,13 +35,13 @@
 		@if (email.invalid && (email.dirty || email.touched)) {
 			@if (email.errors?.['required']) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>Az email címet meg kell adni!</span>
 				</div>
 			}
 			@if (email.hasError("email") ) {
 				<div class="error">	
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>Helytelen email formátum!</span>
 				</div>
 			}
@@ -59,25 +59,25 @@
 		@if (password.invalid && (password.dirty || password.touched)) {
 			@if (password.errors?.['required']) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>Jelszót kötelező megadni!</span>
 				</div>
 			}
 			@if ( password.hasError("minlength") ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>A jelszó minimum 6 karakter kell, hogy legyen!</span>
 				</div>
 			}
 			@if ( password.hasError("maxlength") ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>A jelszó maximum 32 karakterből állhat!</span>
 				</div>
 			}
 			@if ( password.hasError("hasOnlyLowercaseLetters") ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
 					<span>Legalább 1 nagybetűt meg kell adni!</span>
 				</div>
 			}
@@ -90,20 +90,20 @@
 		@if (passwordAgain.invalid && (passwordAgain.dirty || passwordAgain.touched)) {
 			@if (passwordAgain.errors?.['required']) {
 				<div class="error">
-					<span class="material-icons-outlined">warning</span>
+					<span class="material-icons-outlined">cancel</span>
 					<span>Ismétlő jelszót meg kell adni!</span>
 				</div>
 			}
 		}
 
 		<div>
-			<input type="checkbox" id="terms" formControlName="terms">
+			<input id="terms" class="checkbox" type="checkbox" aria-hidden="true" formControlName="terms" >
 			<label for="terms">Elfogadom az <a routerLink="/terms">Adatkezelési tájékoztatóban</a> foglaltakat</label>
 		</div>
 		@if (terms.invalid && (terms.dirty || terms.touched)) {
 			@if (terms.errors?.['requiredTrue']) {
 				<div class="error">
-					<span class="material-icons-outlined">warning</span>
+					<span class="material-icons-outlined">cancel</span>
 					<span>Adatkezelési tájékoztatóban foglaltakat el kell fogadni!</span>
 				</div>
 			}
@@ -111,7 +111,7 @@
 
 		<div class="row">
 			<div>
-				<input type="checkbox" id="keep-logged-in">
+				<input id="keep-logged-in" class="checkbox" type="checkbox" aria-hidden="true" formControlName="terms" >
 				<label for="keep-logged-in">Emlékezz rám</label>
 			</div>
 

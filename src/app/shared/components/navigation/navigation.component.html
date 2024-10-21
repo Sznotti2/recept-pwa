@@ -1,19 +1,44 @@
 <nav>
-    <a class="logo" routerLink="home">Recept PWA</a>
-    
-    <ul>
-        <li><a routerLink="home" routerLinkActive="active-page">Home</a></li>
-        <li class="dropdown"><a routerLink="blog" routerLinkActive="active-page">Blog</a>
-            <ul class="sub-menu">
-                <li><a href="#">1. opció</a></li>
-                <li><a href="#">2. opció</a></li>
-                <li><a href="#">3. opció</a></li>
-                <li><a href="#">4. opció</a></li>
-                <li><a href="#">5. opció</a></li>
-            </ul>
-        </li>
-        <li><a routerLink="about" routerLinkActive="active-page">About</a></li>
-    </ul>
+    <a class="logo" routerLink="/home">Recept PWA</a>
 
-    <a class="right btn" routerLink="register">REGISTER</a>
+	<ul id="menu">
+		<li><a routerLink="/home">Főoldal</a></li>
+		<li>
+			<a routerLink="/search">Receptek</a>
+			<ul class="sub-menu">
+				<a routerLink="/">Torta</a>
+				<a routerLink="/">Pizza</a>
+				<a routerLink="/">Leves</a>
+				<a routerLink="/">Tárt</a>
+				<a routerLink="/">Muffin</a>
+				<a routerLink="/">Pite</a>
+			</ul>
+		<li><a routerLink="/blog">Blog</a></li>
+		<li><a routerLink="/about">Rólunk</a></li>
+	</ul>
+
+	<div id="user-menu">	
+		<input class="dropdown-toggle" type="checkbox" id="dropdown-toggle"/>
+		<label for="dropdown-toggle">
+			<span class="material-icons">person</span>
+		</label>
+		<ul class="dropdown">
+			<li routerLink="/register">
+				<a>Regisztrálj</a>
+				<span class="material-icons">chevron_right</span>
+			</li>
+			<li routerLink="/login">
+				<a>Bejelentkezés</a>
+				<span class="material-icons">chevron_right</span>
+			</li>
+			<li routerLink="/profile">
+				<a>Profil</a>
+				<span class="material-icons">settings</span>
+			</li>
+			<li>
+				<a (click)="logout()">Kijelentkezés</a>
+				<span class="material-icons">logout</span>
+			</li>
+		</ul>
+	</div>
 </nav>

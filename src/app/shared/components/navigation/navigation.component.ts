@@ -10,4 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavigationComponent {
 
+	logout() {
+		
+	}
 }

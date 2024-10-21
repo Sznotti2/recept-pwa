@@ -9,13 +9,13 @@
 		@if (email.invalid && (email.dirty || email.touched)) {
 			@if (email.errors?.['required']) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
                     <span>Az email címet meg kell adni!</span>
                 </div>
 			}
 			@if (email.hasError("email") ) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
                     <span>Helytelen email formátum!</span>
                 </div>
 			}
@@ -34,20 +34,16 @@
 		@if (password.invalid && (password.dirty || password.touched)) {
 			@if (password.errors?.['required']) {
 				<div class="error">
-					<span class="material-icons">warning</span>
+					<span class="material-icons">cancel</span>
                     <span>Jelszót kötelező megadni!</span>
                 </div>
 			}
 		}
 
 		<div class="row">
-			<div>
-				<input type="checkbox" name="keep-logged-in" id="keep-logged-in">
+			<div class="switch-container">
+				<input type="checkbox" class="toggle-switch" id="keep-logged-in">
 				<label for="keep-logged-in">Emlékezz rám</label>
-			</div>
-			<div>
-				<input id="keep-logged-in2" type="checkbox" class="toggle-switch">
-				<label for="keep-logged-in2">Emlékezz rám</label>
 			</div>
 
 			<a routerLink="/forgot-password">Elfelejtett jelszó?</a>

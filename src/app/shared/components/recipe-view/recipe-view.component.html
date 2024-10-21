@@ -1,38 +1,26 @@
-<header class="recipe full-height breakout">
-	<img [src]="recipe?.image" alt="{{ recipe?.name }}">
-	<div class="recipe__info">
-		<div class="time-it-takes">
-            <span class="material-icons">schedule</span>
-			<p><span>{{ recipe?.time }}</span> perc</p>
+<div class="container">
+
+	<header>
+		<img [src]="recipe?.image" alt="{{ recipe?.name }}">
+		<div class="recipe__info">
+			<div class="time-it-takes">
+				<span class="material-icons">schedule</span>
+				<p><span>{{ recipe?.time }}</span> perc</p>
+			</div>
+			<h1 class="recipie-title">{{ recipe?.name }}</h1>
+			<p class="description">{{ recipe?.description }}</p>
 		</div>
-		<h1 class="recipie-title">{{ recipe?.name }}</h1>
-		<p class="description">{{ recipe?.description }}</p>
-	</div>
-</header>
+	</header>
+	
+	<section>
+		<ul class="categories">
+			@for (category of recipe?.categories; track $index) {
+				<li><a class="chips link" href="#">{{ category }}</a></li>
+			}
+		</ul>
+	</section>
 
-<section class="breakout">
-	<ul class="categories">
-		@for (category of recipe?.categories; track $index) {
-			<li><a href="#">{{ category }}</a></li>
-		}
-	</ul>
-</section>
-
-<section class="process breakout">
-	<div class="ingredients">
-		<h3>Hozzávalók</h3>
-
-		@for (item of recipe?.ingredients; track $index) {
-			<p>{{ item.title }}:</p>
-			<ul>
-				@for (ingredient of item.ingredientList; track $index) {
-					<li>{{ ingredient }}</li>
-				}
-			</ul>
-		}
-	</div>
-
-	<div class="instructions">
+	<section class="instructions">
 		<h3>Elkészítés</h3>
 		
 		<ol>
@@ -47,37 +35,51 @@
 				</li>
 			}
 		</ol>
-	</div>
-</section>
+	</section>
+	
+	<section class="ingredients">
+		<h3>Hozzávalók</h3>
 
-<section class="comment-thread content">
-	<h3>Komment Szekció</h3>
-	<!-- Comment 1 start -->
-	<div class="comment" id="comment-1">
-		<div class="comment-info">
-			<span class="author">someguy14</span>
-			<p class="time">4 days ago</p>
-		</div>
-		<p>This is really great! I fully agree with what you wrote, and this is sure to help me out in the future. Thank you for posting this.</p>
-		<button class="reply-btn" type="button">Reply</button>
-		<div class="line"></div>
-
-		<div class="replies">
-			<!-- Comment 2 start -->
-			<div class="comment" id="comment-2">
-				<div class="comment-info">
-					<span class="author">randomperson81</span>
-					<p class="time">3 days ago</p>
-				</div>
-				<p>Took the words right out of my mouth!</p>
-				<button class="reply-btn" type="button">Reply</button>
-				<div class="line"></div>
+		@for (item of recipe?.ingredients; track $index) {
+			<p>{{ item.title }}:</p>
+			<ul>
+				@for (ingredient of item.ingredientList; track $index) {
+					<li>{{ ingredient }}</li>
+				}
+			</ul>
+		}
+	</section>
+	
+	<section class="comment-thread">
+		<h3>Komment Szekció</h3>
+		<!-- Comment 1 start -->
+		<div class="comment" id="comment-1">
+			<div class="comment-info">
+				<span class="author">someguy14</span>
+				<p class="time">4 days ago</p>
 			</div>
-			<!-- Comment 2 end -->
-
+			<p>This is really great! I fully agree with what you wrote, and this is sure to help me out in the future. Thank you for posting this.</p>
+			<button class="reply-btn" type="button">Reply</button>
+			<div class="line"></div>
+	
+			<div class="replies">
+				<!-- Comment 2 start -->
+				<div class="comment" id="comment-2">
+					<div class="comment-info">
+						<span class="author">randomperson81</span>
+						<p class="time">3 days ago</p>
+					</div>
+					<p>Took the words right out of my mouth!</p>
+					<button class="reply-btn" type="button">Reply</button>
+					<div class="line"></div>
+				</div>
+				<!-- Comment 2 end -->
+	
+			</div>
 		</div>
-	</div>
-	<!-- Comment 1 end -->
+		<!-- Comment 1 end -->
+	
+		<a href="#load-more">Többi hozzászólás betöltése</a>
+	</section>
 
-	<a href="#load-more">Többi hozzászólás betöltése</a>
-</section>
+</div>

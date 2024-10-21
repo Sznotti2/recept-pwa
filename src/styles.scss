@@ -71,21 +71,56 @@ h6 {
 }
 /* ROOT */
 :root {
-    --clr-600: #69d2e7;
-    --clr-400: #f6f6f6;
-    --gap: 1rem;
+    --gray-100: hwb(210 97% 1%);
+    --gray-200: hwb(210 93% 3%);
+    --gray-300: hwb(214 89% 6%);
+    --gray-400: hwb(211 80% 12%);
+    --gray-500: hwb(214 63% 25%);
+    --gray-600: hwb(216 44% 41%);
+    --gray-700: hwb(218 29% 59%);
+    --gray-800: hwb(218 18% 72%);
+    --gray-900: hwb(220 10% 83%);
+    --gray-1000: hwb(0 0% 100%);
+
+	--clr-text: #000;
+	--clr-primary-hsl: 120, 100%, 78%;
+	--clr-secondary: ;
+	--clr-tetrary: ;
+	--clr-active: hotpink;
+	--clr-accent: hotpink;
+	--clr-error: rgb(255, 3, 3);
+	--clr-valid: rgb(10, 212, 6);
+	--clr-success: rgba(36, 241, 6);
+
+	--clr-bg-light: #ffd0f6;
+
+	--fs-small: 1em;
+	--fs-normal: 1.1em;
+	--fs-medium: 1.2em;
+	--fs-large: 2em;
+
+    --gap-small: 1rem;
+    --gap-medium: 2rem;
+    --gap-big: 4rem;
+    --gap-large: 8rem;
+
+	--nav-height: 4rem;
+
+	--border-width-small: ;
+	--border-width-medium: ;
+	--border-width-large: ;
+
+	--transition: all .1s ease-in;
 }
 
 /* GLOBAL STYLES  */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
+    font-family: 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background-color: #FFB2EF;
-    font-size: 1.1rem;
+    background-color: var(--clr-bg-light);
+    font-size: var(--fs-normal);
 }
 
 
@@ -133,101 +168,271 @@ body {
     }
 }
 
-.tag {
-    text-decoration: underline .1em transparent;
-    text-underline-offset: 5px;
-    transition: all 0.2s ease;
+/* LINKS */
+/* real underline */
+.link {
+	text-decoration: none;
+	color: var(--clr-text);
+	transition: var(--transition);
+	text-decoration: underline .1em;
+	text-underline-offset: .2em;
+	text-decoration-color: transparent;
+
+	&:hover {
+		text-underline-offset: .1em;
+		text-decoration-color: var(--clr-text);
+	}
 }
 
-.tag:hover {
-    text-decoration: underline .1em black;
-    text-underline-offset: 2px;
+/* CHIPS */
+// .tag {
+//     text-decoration: underline .1em transparent;
+//     text-underline-offset: 5px;
+//     transition: all 0.2s ease;
+// }
+
+// .tag:hover {
+//     text-decoration: underline .1em black;
+//     text-underline-offset: 2px;
+// }
+
+.chips {
+	padding: .2em .7em;
+	border-radius: 1em;
+	border: 2px solid black;
 }
 
+
+/* https://piccalil.li/blog/styling-tables-the-modern-css-way/ */
+/* https://css-irl.info/tags/css/ */
 
 /* CHECKBOX */
-input[type=checkbox] {
-    margin: 0;
-    width: 0;
-    height: 0;
-    display: inline;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+[type=checkbox].checkbox {
+	margin: 0;
+	width: 0;
+	height: 0;
+	display: inline;
+	appearance: none;
+
+	+ label:before {
+		content: "";
+		display: inline-block;
+		vertical-align: top;
+		height: var(--fs-medium);
+		width: var(--fs-medium);
+		margin-right: 0.6em;
+		color: rgba(0, 0, 0, 0.275);
+		border: solid 0.06em;
+		border-radius: 0.2em;
+		box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em inset, 0 0 0 0.07em transparent inset;
+		background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>') no-repeat center, white;
+		background-size: 0;
+		will-change: color, border, background, background-size, box-shadow;
+		transform: translate3d(0, 0, 0);
+		transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
+	}
+	/* billentyű lenyomva pipa háttér */
+	&:checked:enabled:active + label:before,
+	&:checked:enabled + label:active:before {
+		background-color: #0a7ffb;
+		color: rgba(0, 0, 0, 0.275);
+	}
+	/* billentyű lenyomva pipa nélküli háttér */
+	&:enabled:active + label:before,
+	&:enabled + label:active:before {
+		box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset;
+		background-color: #f0f0f0;
+	}
+	/* pipa háttér */
+	&:checked + label:before {
+		background-color: #3B99FC;
+		background-size: 0.75em;
+		color: rgba(0, 0, 0, 0.075);	
+	}
+	/*checkbox fókuszálva, billentyű lenyomása pillanatában */
+	&:focus:active + label:before,
+	&:focus + label:active:before {
+		box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset, 0 0 0 3.3px rgba(65, 159, 255, 0.55), 0 0 0 5px rgba(65, 159, 255, 0.3);
+	}
+	/* checkbox fókuszálva, billentyű lenyomása után */
+	&:focus + label:before {
+		box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset, 0 0 0 3.3px rgba(65, 159, 255, 0.55), 0 0 0 5px rgba(65, 159, 255, 0.3);
+	}
+	&:disabled + label,
+	&:disabled + label:before {
+		opacity: 0.5;
+	}
 }
-
-input[type=checkbox]+label:before {
-    content: "";
-    display: inline-block;
-    vertical-align: top;
-    height: 1.15em;
-    width: 1.15em;
-    margin-right: 0.6em;
-    color: rgba(0, 0, 0, 0.275);
-    border: solid 0.06em;
-    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em inset, 0 0 0 0.07em transparent inset;
-    border-radius: 0.2em;
-    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>') no-repeat center, white;
-    background-size: 0;
-    will-change: color, border, background, background-size, box-shadow;
-    transform: translate3d(0, 0, 0);
-    transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
-}
-
-input[type=checkbox]:enabled:active+label:before,
-input[type=checkbox]:enabled+label:active:before {
-    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset;
-    background-color: #f0f0f0;
-}
-
-input[type=checkbox]:checked+label:before {
-    background-color: #3B99FC;
-    background-size: 0.75em;
-    color: rgba(0, 0, 0, 0.075);
-}
-
-input[type=checkbox]:checked:enabled:active+label:before,
-input[type=checkbox]:checked:enabled+label:active:before {
-    background-color: #0a7ffb;
-    color: rgba(0, 0, 0, 0.275);
-}
-
-input[type=checkbox]:focus+label:before {
-    box-shadow: 2px 2px 0 0 black;
-}
-
-input[type=checkbox]:disabled+label:before {
-    opacity: 0.5;
-}
-
-// input[type=checkbox].dark+label:before {
-//     color: rgba(255, 255, 255, 0.275);
-//     background-color: #222;
-//     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="rgba(34, 34, 34, 0.999)" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>');
-// }
-
-// input[type=checkbox].dark:enabled:active+label:before,
-// input[type=checkbox].dark:enabled+label:active:before {
-//     background-color: #444;
-//     box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(255, 255, 255, 0.1) inset;
-// }
-
-// input[type=checkbox].dark:checked+label:before {
-//     background-color: #a97035;
-//     color: rgba(255, 255, 255, 0.075);
-// }
-
-// input[type=checkbox].dark:checked:enabled:active+label:before,
-// input[type=checkbox].dark:checked:enabled+label:active:before {
-//     background-color: #c68035;
-//     color: rgba(0, 0, 0, 0.275);
-// }
-
-input[type=checkbox]+label {
-    -webkit-user-select: none;
-    user-select: none;
-}
-
 
 /* TOGGLE SWITCH */
+.switch-container {
+	--_width: 3em;
+	--_height: 1.5em;
+	--_border-width: .1em;
+	display: flex;
+	gap: .6rem;
 
+	[type=checkbox].toggle-switch {
+		position: relative;
+		font-size: 1rem;
+		appearance: none;
+		width: var(--_width);
+		height: var(--_height);
+		background: #ddd;
+		border-radius: 3em;
+		box-shadow: 0 0 0 var(--_border-width) black;
+		margin-left: .1em;
+		cursor: pointer;
+		outline: none;
+		transition: background-color .2s ease-in-out;
+
+		&:checked {
+			background-color: hotpink;
+		}
+		&:after {
+			position: absolute;
+			content: "";
+			width: var(--_height);
+			height: var(--_height);
+			border-radius: 50%;
+			background-color: #fff;
+			box-shadow: 0 0 0 var(--_border-width) black;
+			transform: scale(.7);
+			left: 0;
+			transition: left .2s ease-in-out;
+		}
+		&:checked:after {
+			left: calc(100% - var(--_height));
+		}
+	}
+}
+
+/* LINKS */
+#links {
+
+	a {
+		text-decoration: none;
+		color: black;
+		transition: all .2s ease-in-out;
+	}
+
+	/* real underline */
+	.link1 {
+		text-decoration: underline .1em;
+		text-underline-offset: .2em;
+		text-decoration-color: transparent;
+	}
+
+	.link1:hover {
+		text-underline-offset: .1em;
+		text-decoration-color: hotpink;
+	}
+
+	.link2,
+	.link3,
+	.link4 {
+		display: inline-flex;
+		/* hogy ne vegyen fül több helyeet mint kell */
+		position: relative;
+	}
+
+	/* underline */
+	.link2::after,
+	.link3::after,
+	.link4::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 0.1em;
+		background-color: hotpink;
+		opacity: 0;
+		transition: opacity 300ms, transform 300ms;
+	}
+
+	/* slide in */
+	.link2 {
+		overflow: hidden;
+	}
+
+	.link2::after {
+		opacity: 1;
+		transform: translate3d(-100%, 0, 0);
+	}
+
+	.link2:hover::after,
+	.link2:focus::after {
+		transform: translate3d(0, 0, 0);
+	}
+
+	/* Scale from center */
+	.link3::after {
+		opacity: 1;
+		transform: scale(0);
+		transform-origin: center;
+	}
+
+	.link3:hover::after,
+	.link3:focus::after {
+		transform: scale(1);
+	}
+
+	/* Fade in */
+	.link4:hover::after,
+	.link4:focus::after {
+		opacity: 1;
+		transform: translate3d(0, 100%, 0);
+		/* így a vonal mindig a link ddoboz alján lesz */
+	}
+
+	/* Underline styles - details of technique here: https://nickymeuleman.netlify.app/blog/css-animated-wrapping-underline */
+	.link5 {
+		padding-block: .2em;
+		background:
+			linear-gradient(to right, rgba(100, 200, 200, 1), rgba(100, 200, 200, 1)),
+			linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 180, 1), rgba(0, 100, 200, 1));
+		background-size: 100% 0.1em, 0 0.1em;
+		background-position: 100% 100%, 0 100%;
+		background-repeat: no-repeat;
+		transition: background-size 400ms;
+	}
+
+	.link5:hover,
+	.link5:focus {
+		background-size: 0 0.1em, 100% 0.1em;
+	}
+}
+
+/* CHIPSES */
+#chipses {
+	list-style-type: none;
+	padding-left: 0;
+	display: flex;
+	gap: .3rem;
+
+	a {
+		text-decoration: none;
+		color: black;
+		color: white;
+		background-color: #3B99FC;
+		border: 2px solid black;
+		padding: .3em .7em;
+	}
+
+	.chips2 {
+		border: 3px solid black;
+		box-shadow: 3px 3px 0 0 black;
+	}
+	.chips3 {
+		border: 3px solid black;
+		box-shadow: 3px 3px 0 0 black;
+		border-radius: 1em;
+	}
+	.chips4 {
+		
+	}
+	.chips5 {
+		
+	}
+}

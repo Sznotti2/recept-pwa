@@ -5,6 +5,8 @@ export interface Recipe {
 	image: string;
 	categories: string[];
 	time: number;
+	rating: number;
+	servings: number; // adagok
 	ingredients: Ingredient[];
 	instructions: Instruction[];
 }
