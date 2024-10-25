@@ -1,1 +1,21 @@
-<p>blog works!</p>
+<section>
+	<header>
+		<h2>Blogok</h2>
+
+		<select [(ngModel)]="selectedOption" (change)="sortBlogs()">
+			<option value="time-asc">Legújabb elől</option>
+			<option value="time-desc">Legrégebbi elől</option>
+			<option value="name-asc">Név szerint [A-Z]</option>
+			<option value="name-desc">Név szerint [Z-A]</option>
+		</select>
+
+
+	</header>
+
+	<main>
+		@for (blog of blogs; track $index) {
+			<app-blog-card2 [blog]="blog"></app-blog-card2>
+		}
+	</main>
+
+</section>

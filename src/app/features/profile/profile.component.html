@@ -1,0 +1,74 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+	<div class="form-group">
+		<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''"
+			type="username" placeholder=" " formControlName="username">
+		<label>Felhasználónév</label>
+	</div>
+
+
+	<div class="form-group">
+		<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="email"
+			placeholder=" " formControlName="email">
+		<label>Email cím</label>
+	</div>
+	<!-- ha akarsz ikonokat csak töltsd le ezt:
+    https://www.npmjs.com/package/material-icons -->
+	@if (email.invalid && (email.dirty || email.touched)) {
+	@if (email.errors?.['required']) {
+	<div class="error">
+		<span class="material-icons">cancel</span>
+		<span>Az email címet meg kell adni!</span>
+	</div>
+	}
+	@if (email.hasError("email") ) {
+	<div class="error">
+		<span class="material-icons">cancel</span>
+		<span>Helytelen email formátum!</span>
+	</div>
+	}
+	}
+
+	<div class="form-group">
+		<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''"
+			[type]="inputType" placeholder=" " formControlName="password">
+		<label>Jelszó</label>
+		@if (!passwordVisible) {
+		<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
+		} @else {
+		<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
+		}
+
+	</div>
+	@if (password.invalid && (password.dirty || password.touched)) {
+		@if (password.errors?.['required']) {
+		<div class="error">
+			<span class="material-icons">cancel</span>
+			<span>Jelszót kötelező megadni!</span>
+		</div>
+		}
+	}
+
+	<div class="image-upload">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+			</svg>
+			<p>Drag your image here or click in this area</p>
+		</div>
+		<input type="file">
+	</div>
+
+	<div class="row">
+		<div class="switch-container">
+			<input type="checkbox" class="toggle-switch" id="keep-logged-in">
+			<label for="keep-logged-in">Emlékezz rám</label>
+		</div>
+
+		<a routerLink="/forgot-password">Elfelejtett jelszó?</a>
+	</div>
+
+	<button [disabled]="loginForm.invalid" class="btn" type="submit">Belépés</button>
+</form>

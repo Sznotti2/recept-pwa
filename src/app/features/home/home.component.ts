@@ -6,6 +6,8 @@ import { RecipeCard3Component } from '../../shared/components/recipe-card3/recip
 import { BlogCard2Component } from '../../shared/components/blog-card2/blog-card2.component';
 import { Recipe } from '../../core/interfaces/recipe';
 import { RecipeService } from '../../core/services/recipe.service';
+import { Blog } from '../../core/interfaces/blog';
+import { BlogService } from '../../core/services/blog.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,11 @@ export class HomeComponent {
   recipeList: Recipe[] = [];
 	recipeService = inject(RecipeService);
 
+  blogList: Blog[] = [];
+	blogService = inject(BlogService);
+
 	constructor() {
 		this.recipeList = this.recipeService.getAllRecipes().slice(0, 8);
+		this.blogList = this.blogService.getAllBlogs().slice(0, 6);
 	}
 }

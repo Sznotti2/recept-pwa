@@ -2,7 +2,7 @@ export interface Blog {
     id: number;
     title: string;
     description: string;
-    date: Date;
+    createdAt: Date;
     image: string;
     paragraphs: string[];
 }

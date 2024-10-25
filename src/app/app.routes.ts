@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { RecipeViewComponent } from './shared/components/recipe-view/recipe-view.component';
 import { SearchComponent } from './features/search/search.component';
+import { BlogComponent } from './features/blog/blog.component';
 
 export const routes: Routes = [
     {
@@ -17,13 +18,35 @@ export const routes: Routes = [
 		path: "search",
 		component: SearchComponent
 	},
+	{
+		path: "settings",
+        loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
+        children: [
+            {
+                path: 'profile',
+                loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent)
+            },
+            {
+                path: 'my-blogs',
+                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+            },
+            {
+                path: 'my-recipes',
+                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+            },
+            {
+                path: 'dashboard',
+                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+            }
+        ]
+	},
     {
         path: 'about',
         loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent)
     },
     {
         path: 'blog',
-        loadComponent: () => import('./features/blog/blog.component').then(m => m.BlogComponent)
+        component: BlogComponent,
     },
     {
         path: 'login',

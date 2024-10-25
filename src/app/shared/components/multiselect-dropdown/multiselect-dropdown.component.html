@@ -1,0 +1,28 @@
+<div class="multiselect">
+    <div [ngClass]="{'dropdownOpen': isDropdownOpen}" class="multiselect-header" (click)="toggleDropdown()">
+        @for (selected of selectedItems; track $index) {
+            <div class="selected-item">
+                <span>{{ selected.value }}</span>
+                <span class="material-icons remove-btn" (click)="removeItem(selected)">close</span>
+            </div>
+        }
+        @if (selectedItems.length === 0) {
+            <div>Select items...</div>
+        }
+        <span class="material-icons dropdown-arrow">arrow_drop_down</span>
+    </div>
+
+    @if (isDropdownOpen) {
+        <form class="dropdown-menu" [formGroup]="categorySerlectForm">
+            @for (category of categories; track $index) {
+                <div class="category-header">{{ category }}</div>
+                @for (item of getItemsByCategory(category); track $index) {
+                    <div class="dropdown-item">
+                        <input type="checkbox" id="{{ item.value }}" formControlName="{{ item.value }}" [checked]="isSelected(item)" (change)="onItemSelect(item)">
+                        <label for="{{ item.value }}">{{ item.value }}</label>
+                    </div>
+                }
+            }
+        </form>
+    }
+</div>

@@ -4,7 +4,7 @@ export interface Recipe {
 	description: string;
 	image: string;
 	categories: string[];
-	time: number;
+	created: Date;
 	rating: number;
 	servings: number; // adagok
 	ingredients: Ingredient[];

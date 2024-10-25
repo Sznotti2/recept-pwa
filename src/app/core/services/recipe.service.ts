@@ -13,7 +13,7 @@ export class RecipeService {
 			description: "Modi necessitatibus itaque aliquam repellat assumenda vitae. Ipsam hic eos voluptatem aliquam qui labore dolorum cupiditate. Minus nostrum aut facilis dolores ut voluptas nemo. Sint id ut explicabo. Libero tempore adipisci earum sint quia. Et officiis perferendis veniam rerum maxime.",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=uwu",
 			categories: ["1", "2", "3", "4", "5", "6", "7"],
-			time: 666,
+			created: new Date(),
 			rating: 3.2,
 			servings: 2,
 			ingredients: [
@@ -29,7 +29,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -58,7 +58,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -87,7 +87,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -116,7 +116,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -145,7 +145,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -174,7 +174,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -203,7 +203,7 @@ export class RecipeService {
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			time: 15,
+			created: new Date(),
 			rating: 4.6,
 			servings: 8,
 			ingredients: [
@@ -240,4 +240,55 @@ export class RecipeService {
 			recipe.id === id
 		);
 	}
+
+	// sortRecipesByName(descending : boolean = false): Recipe[] {
+	// 	return this.recipeList.sort((a, b) => {
+	// 		if (a.name < b.name) {
+	// 			return -1;
+	// 		}
+	// 		if (a.name > b.name) {
+	// 			return 1;
+	// 		}
+	// 		return 0;
+	// 	})
+	// }
+	sortRecipesByName(descending : boolean = false): Recipe[] {
+		return this.recipeList.sort((a, b) => {
+			const comparison = a.name.localeCompare(b.name);
+			return descending ? comparison * -1 : comparison
+		});
+	}
+
+	sortRecipesByRating(descending : boolean = false): Recipe[] {
+		return this.recipeList.sort((a, b) => {
+			const comparison = b.rating - a.rating;
+			return descending ? comparison * -1 : comparison
+		});
+	}
+
+	sortRecipesByDate(descending : boolean = false): Recipe[] {
+		return this.recipeList.sort((a, b) => {
+			const comparison = b.created.getTime() - a.created.getTime();
+			return descending ? comparison * -1 : comparison
+		});
+	}
+
+	filterRecipiesByName(searchTerm: string): Recipe[] {
+		return this.recipeList.filter((recipe) =>
+			recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+	}
+	filterRecipiesByName2(searchTerm: string): Recipe[] {
+		return this.recipeList.filter((recipe) =>
+			recipe.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			recipe.categories.some((category => category.toLowerCase().includes(searchTerm.toLowerCase())))
+		);
+	}
+
+	filterRecipiesByCategory(_categories: string[]): Recipe[] {
+		return this.recipeList.filter((recipe) =>
+			_categories.every(category => recipe.categories.includes(category))
+		);
+	}
+
 }

@@ -36,17 +36,6 @@ export class RegisterComponent {
 		});
 	}
 
-	// registerForm: FormGroup;
-	// constructor(private formBuilder: FormBuilder) {
-	// 	this.registerForm = this.formBuilder.group({
-	// 		username: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
-	// 		email: ["", [Validators.required, Validators.email]],
-	// 		password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(32)]],
-	// 		passwordAgain: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(32)]],
-	// 		terms: ["", [Validators.requiredTrue]],
-	// 	});
-	// }
-
 	public register(): void {
 		if (this.registerForm.valid) {
 			console.log(this.registerForm.value);

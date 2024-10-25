@@ -1,0 +1,47 @@
+header {
+	margin: 0 auto;
+	width: calc(min(76rem, 90%));
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+main {
+	padding-block: min(20vh, 2rem);
+	width: calc(min(76rem, 90%));
+	margin-inline: auto;
+	color: #111;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+	gap: 2rem;
+}
+
+// thanks for the idea
+// https://codepen.io/j0be/pen/jWGVvV
+
+select {
+	padding: 7px 40px 7px 12px;
+	border: 1px solid #e8eaed;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0 1px 3px -2px #9098a9;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 16px;
+	transition: all 150ms ease;
+
+	&:required:invalid {
+		color: #5a667f;
+	}
+
+	option {
+		color: #223254;
+	}
+
+	&:focus {
+		outline: none;
+		border-color: #07f;
+		box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+	}
+}

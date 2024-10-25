@@ -82,17 +82,16 @@ h6 {
     --gray-900: hwb(220 10% 83%);
     --gray-1000: hwb(0 0% 100%);
 
-	--clr-text: #000;
 	--clr-primary-hsl: 120, 100%, 78%;
 	--clr-secondary: ;
 	--clr-tetrary: ;
 	--clr-active: hotpink;
-	--clr-accent: hotpink;
-	--clr-error: rgb(255, 3, 3);
-	--clr-valid: rgb(10, 212, 6);
-	--clr-success: rgba(36, 241, 6);
+	--clr-accent-hsl: 330, 100%, 71%;
+	--clr-error-hsl: 0, 100%, 51%;
+	--clr-success-hsl: 119, 94%, 43%;
 
-	--clr-bg-light: #ffd0f6;
+	--clr-bg-light: hsla(var(--clr-accent-hsl), 0.3);
+	--clr-text: #000;
 
 	--fs-small: 1em;
 	--fs-normal: 1.1em;

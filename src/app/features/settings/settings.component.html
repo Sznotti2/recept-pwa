@@ -1,1 +1,18 @@
-<p>settings works!</p>
+<div class="content">
+    <div class="tabs">
+        <a routerLink="profile" routerLinkActive="active-tab">Profil</a>
+        <a routerLink="my-blogs" routerLinkActive="active-tab">Blogjaim</a>
+        <a routerLink="my-recipes" routerLinkActive="active-tab">Receptjeim</a>
+        <a routerLink="dashboard" routerLinkActive="active-tab">Dashboard</a>
+    </div>
+
+    <div class="content-main">
+        <!-- <div class="card-grid">
+            @for (blog of blogs; track $index) {
+                <app-blog-card2 [blog]="blog"></app-blog-card2>
+            }
+        </div> -->
+        <router-outlet></router-outlet>
+        
+    </div>
+</div>
