@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 
 export const hasOnlyLowercaseLetters = (control: AbstractControl): ValidationErrors | null => {
@@ -16,9 +17,11 @@ export const hasOnlyLowercaseLetters = (control: AbstractControl): ValidationErr
 	styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-	loginForm: FormGroup;
+	router = inject(Router);
+	authService = inject(AuthService);
 
-	constructor(private formBuilder: FormBuilder, private router: Router) {
+	loginForm: FormGroup;
+	constructor(private formBuilder: FormBuilder) {
 		this.loginForm = this.formBuilder.group({
 			email: ["", {
 				validators: [Validators.required, Validators.email],
@@ -29,10 +32,15 @@ export class LoginComponent {
 		});
 	}
 
+	errorMessage: string | null = null;
 	public login(): void {
 		if (this.loginForm.valid) {
-			console.log(this.loginForm.value);
-			this.router.navigateByUrl("/");
+			const form = this.loginForm.value;
+			this.authService.login(form.email, form.password)
+				.subscribe({
+					next: () => this.router.navigateByUrl("/"),
+					error: (error) => this.errorMessage = error.code
+				});
 		} else {
 			console.log("Invalid form");
 		}

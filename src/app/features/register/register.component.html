@@ -119,6 +119,12 @@
 		</div>
 
 		<button [disabled]="registerForm.invalid" class="btn" type="submit">Register</button>
+		@if (errorMessage) {
+			<div class="error">
+				<span class="material-icons-outlined">cancel</span>
+				<span>{{ errorMessage }}</span>
+			</div>
+		}
 
 		<div class="divider">
 			<div class="line"></div>
