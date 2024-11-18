@@ -23,7 +23,7 @@
 			<span class="material-icons">person</span>
 		</label>
 		<ul class="dropdown">
-			@if (authService.currentUserSignal() == null) {
+			<!-- @if (authService.currentUserSignal() == null) {
 				<li routerLink="/register">
 					<a>Regisztrálj</a>
 					<span class="material-icons">chevron_right</span>
@@ -42,7 +42,23 @@
 					<a (click)="logout()">Kijelentkezés</a>
 					<span class="material-icons">logout</span>
 				</li>
-			}
+			} -->
+				<li routerLink="/register">
+					<a>Regisztrálj</a>
+					<span class="material-icons">chevron_right</span>
+				</li>
+				<li routerLink="/login">
+					<a>Bejelentkezés</a>
+					<span class="material-icons">chevron_right</span>
+				</li>
+				<li routerLink="/settings/profile">
+					<a>Profil</a>
+					<span class="material-icons">settings</span>
+				</li>
+				<li>
+					<a (click)="logout()">Kijelentkezés</a>
+					<span class="material-icons">logout</span>
+				</li>
 		</ul>
 	</div>
 </nav>

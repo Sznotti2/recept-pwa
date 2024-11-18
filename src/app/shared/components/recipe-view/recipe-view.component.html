@@ -1,62 +1,60 @@
-<div class="container">
+<div class="container" *ngIf="recipe$ | async as recipe">
+	<!-- @if (recipe$ | async as recipe) { -->
+		<header>
+			<img [src]="recipe.image" alt="{{ recipe?.name }}">
+			<div class="recipe__info">
+				<ul class="info">
+					<li>
+						<span class="material-icons">pie_chart</span>
+						<p>{{ recipe?.servings }} adag</p>
+					</li>
+					<li>
+						<span class="material-icons">star</span>
+						<p>{{ recipe?.rating }}</p>
+					</li>
+				</ul>
+				<h1 class="recipie-title">{{ recipe?.name }}</h1>
+				<p class="description">{{ recipe?.description }}</p>
+			</div>
 
-	<header>
-		<img [src]="recipe?.image" alt="{{ recipe?.name }}">
-		<div class="recipe__info">
-			<ul class="info">
-				<li>
-					<span class="material-icons">schedule</span>
-					<p>{{ recipe?.created }} perc</p>
-				</li>
-				<li>
-					<span class="material-icons">pie_chart</span>
-					<p>{{ recipe?.servings }} adag</p>
-				</li>
-				<li>
-					<span class="material-icons">star</span>
-					<p>{{ recipe?.rating }}</p>
-				</li>
-			</ul>
-			<h1 class="recipie-title">{{ recipe?.name }}</h1>
-			<p class="description">{{ recipe?.description }}</p>
-		</div>
-
-		<ul class="categories">
-			@for (category of recipe?.categories; track $index) {
-				<li><a class="chips link" href="#">{{ category }}</a></li>
-			}
-		</ul>
-	</header>
-
-	<section class="instructions">
-		<h3>Elkészítés</h3>
-		
-		<ol>
-			@for (item of recipe?.instructions; track $index) {
-				<li>
-					<p>{{ item.text }}</p>
-					<div class="image-gallery">
-						@for (image of item.images; track $index) {
-							<img src="{{ image }}" alt="">
-						}
-					</div>
-				</li>
-			}
-		</ol>
-	</section>
-	
-	<section class="ingredients">
-		<h3>Hozzávalók</h3>
-
-		@for (item of recipe?.ingredients; track $index) {
-			<p>{{ item.title }}:</p>
-			<ul>
-				@for (ingredient of item.ingredientList; track $index) {
-					<li>{{ ingredient }}</li>
+			<ul class="categories">
+				@for (category of recipe?.categories; track $index) {
+					<li><a class="chips link" href="#">{{ category }}</a></li>
 				}
 			</ul>
-		}
-	</section>
+		</header>
+
+		<section class="instructions">
+			<h3>Elkészítés</h3>
+			
+			<ol>
+				@for (item of recipe?.instructions; track $index) {
+					<li>
+						<p>{{ item.text }}</p>
+						<div class="image-gallery">
+							@for (image of item.images; track $index) {
+								<img src="{{ image }}" alt="">
+							}
+						</div>
+					</li>
+				}
+			</ol>
+		</section>
+		
+		<section class="ingredients">
+			<h3>Hozzávalók</h3>
+
+			@for (item of recipe?.ingredients; track $index) {
+				<p>{{ item.title }}:</p>
+				<ul>
+					@for (ingredient of item.ingredientList; track $index) {
+						<li>{{ ingredient }}</li>
+					}
+				</ul>
+			}
+		</section>
+	<!-- } -->
+	
 	
 	<section class="comment-thread">
 		<h3>Komment Szekció</h3>

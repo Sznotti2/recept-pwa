@@ -4,12 +4,13 @@ import { FooterComponent } from "./shared/components/footer/footer.component";
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, NavigationComponent, FooterComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+	selector: 'app-root',
+	standalone: true,
+	imports: [RouterOutlet, NavigationComponent, FooterComponent],
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'recept-pwa';
+	title = 'recept-pwa';
+
 }

@@ -1,12 +1,12 @@
 export interface Recipe {
-	id: number;
+	id: string;
 	name: string;
 	description: string;
 	image: string;
 	categories: string[];
-	created: Date;
 	rating: number;
 	servings: number; // adagok
+	isFavorite: boolean;
 	ingredients: Ingredient[];
 	instructions: Instruction[];
 }

@@ -1,0 +1,96 @@
+<div class="container">
+	<form [formGroup]="recipeEditForm" (ngSubmit)="saveRecipe()">
+		<header>
+			<div class="image-upload">
+				<label for="image">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+					</svg>
+					<p>Drag your image here or click in this area</p>
+				</label>
+				<input id="image" type="file" formControlName="image">
+			</div>
+			<div class="recipe__info">
+				<ul class="info">
+					<li>
+						<span class="material-icons">pie_chart</span>
+						<input type="number" formControlName="servings" placeholder="adag">
+					</li>
+					<li>
+						<span class="material-icons">star</span>
+						<input type="number" formControlName="timeToMake" placeholder="elkészítési idő">
+					</li>
+				</ul>
+				<input type="text" formControlName="name" placeholder="Recept neve">
+				<textarea formControlName="description" cols="30" rows="10" placeholder="Recept leírása"></textarea>
+			</div>
+
+			<div class="categories" formArrayName="categories">
+				@for (category of categories.controls; track $index) {
+					<div [formGroupName]="$index">
+						<input formControlName="name" placeholder="kategória"/>
+						<button class="icon-btn" type="button" (click)="removeCategory($index)">
+							<i class="material-icons">close</i>
+						</button>
+					</div>
+				}
+				
+				<button class="icon-btn" type="button" (click)="addCategory()">
+					<i class="material-icons">add</i>
+				</button>
+			</div>
+		</header>
+
+		<section class="instructions" formArrayName="instructions">
+			<h3>Elkészítés</h3>
+			
+			<ol>
+				@for (instruction of instructions.controls; track $index) {
+					<li [formGroupName]="$index">
+						<input formControlName="text" placeholder="recept leírás"/>
+						<div class="image-gallery">
+							@for (image of instruction.get('images').controls; track $index) {
+								<div [formGroupName]="$index">
+									<input formControlName="image" type="file">
+								</div>
+							}
+							<button class="icon-btn" type="button" (click)="addCategory()">
+								<i class="material-icons" description="kép hozzáadása">add</i>
+							</button>
+						</div>
+
+						<button class="icon-btn" type="button" (click)="addCategory()">
+							<i class="material-icons" description="leírás hozzáadása">add</i>
+						</button>
+					</li>
+				}
+			</ol>
+			<button class="icon-btn" type="button">
+				<i class="material-icons" (click)="addCategory()">add</i>
+			</button>
+		</section>
+		
+		<section class="ingredients">
+			<h3>Hozzávalók</h3>
+
+			<!-- @for (item of recipe?.ingredients; track $index) {
+				<p>{{ item.title }}:</p>
+				<ul>
+					@for (ingredient of item.ingredientList; track $index) {
+						<li>{{ ingredient }}</li>
+					}
+				</ul>
+			} -->
+			<button class="icon-btn" type="button">
+				<i class="material-icons" (click)="addCategory()">add</i>
+			</button>
+		</section>
+
+		<section>
+			<button class="btn" type="submit">Mentés</button>
+			<button class="btn" type="button">Mégse</button>
+		</section>
+	</form>
+</div>

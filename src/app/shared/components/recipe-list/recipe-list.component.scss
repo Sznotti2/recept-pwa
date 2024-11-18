@@ -1,0 +1,67 @@
+// CONTAINER
+section {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+}
+
+// RECIPE CARD
+.recipe-card {
+    max-width: 24rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid black;
+    // box-shadow: 5px 5px 0px 0px black;
+    background-color: whitesmoke;
+
+    img {
+        object-fit: cover;
+        border-radius: 1rem;
+    }
+
+    .tags {
+        padding: 1rem 0 .7rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+
+        > *:first-child {
+            background-color: #fe5a35;
+        }
+        > *:nth-child(2) {
+            background-color: #06ae56;
+        }
+        > *:last-child {
+            background-color: #91a8ec;
+        }
+    }
+
+    .title {
+        text-transform: capitalize;
+        font-size: clamp(1.2rem, 1.2rem + 0.2vw, 1.6rem);
+    }
+
+    .info {
+        padding-top: .7rem;
+        list-style: none;
+        padding-inline-start: 0;
+        font-size: 1.15rem;
+        display: flex;
+		gap: 1rem;
+
+		li {
+			display: flex;
+			align-items: center;
+
+			.favorite-icon {
+				color: red;
+				cursor: pointer;
+				transition: all .2s ease-in-out;
+
+				&:hover {
+					transform: scale(1.2);
+				}
+			}
+		}
+    }
+}

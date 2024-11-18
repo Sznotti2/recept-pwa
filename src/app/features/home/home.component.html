@@ -1,31 +1,13 @@
 <section class="recipe-showcase">
     <h2>Legnépszerűbb édességek</h2>
 
-    <!-- <div class="recipes">
-        <app-recipe-card></app-recipe-card>
-        <app-recipe-card2></app-recipe-card2>
-        <app-recipe-card3></app-recipe-card3>
-        <app-recipe-card></app-recipe-card>
-        <app-recipe-card2></app-recipe-card2>
-        <app-recipe-card3></app-recipe-card3>
-    </div> -->
-    <div class="recipes">
-        @for (currentRecipe of recipeList; track $index) {
-            <app-recipe-card2 [recipe]="currentRecipe"></app-recipe-card2>
-        }
-    </div>
-    
+	<app-recipe-list [recipes]="recipeList"></app-recipe-list>    
 </section>
 
 <section class="blog-showcase">
     <h2>Legnépszerűbb blogbejegyzések</h2>
 
-    <div class="blogs">
-        <app-blog-card2></app-blog-card2>
-        <app-blog-card2></app-blog-card2>
-        <app-blog-card2></app-blog-card2>
-        <app-blog-card2></app-blog-card2>
-    </div>
+	<app-blog-list [blogs]="blogList"></app-blog-list>
 </section>
 <!-- 
 https://codepen.io/shangle/pen/Dyrvvr

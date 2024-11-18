@@ -22,15 +22,18 @@
 		padding: 0.75em 1em;
 		background-color: transparent;
 		border-radius: 8px;
+		border: 2px solid transparent;
 		text-decoration: none;
 		color: rgb(45, 45, 45);
 		transition: 0.15s ease;
 
-		&:hover,
-		&:focus,
 		&.active-tab {
 			background-color: var(--clr-active);
 			color: black;
+		}
+		&:hover,
+		&:focus {
+			border: 2px solid var(--clr-active);
 		}
 	}
 }

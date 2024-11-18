@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Recipe } from '../interfaces/recipe';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+	recipesSig = signal<Recipe[]>([]);
 
   private recipeList: Recipe[] = [
 		{
-			id: 1,
+			id: "wasd1",
 			name: "Csak egy teszt, nincs itt semmi látnivaló. Én más vagyok imnt a többiek.",
 			description: "Modi necessitatibus itaque aliquam repellat assumenda vitae. Ipsam hic eos voluptatem aliquam qui labore dolorum cupiditate. Minus nostrum aut facilis dolores ut voluptas nemo. Sint id ut explicabo. Libero tempore adipisci earum sint quia. Et officiis perferendis veniam rerum maxime.",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=uwu",
 			categories: ["1", "2", "3", "4", "5", "6", "7"],
-			created: new Date(),
 			rating: 3.2,
 			servings: 2,
+			isFavorite: false,
 			ingredients: [
 				{title: "a tetejére", ingredientList: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]},
 			],
@@ -24,14 +25,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 2,
+			id: "wasd2",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -53,14 +54,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 3,
+			id: "wasd3",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -82,14 +83,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 4,
+			id: "wasd4",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -111,14 +112,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 5,
+			id: "wasd5",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -140,14 +141,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 6,
+			id: "wasd6",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -169,14 +170,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 7,
+			id: "wasd7",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -198,14 +199,14 @@ export class RecipeService {
 			],
 		},
 		{
-			id: 8,
+			id: "wasd8",
 			name: "Egyszerű tripla csoki mousse torta - sütés nélkül Oreoval",
 			description: "Erre a tortára végre én is büszke vagyok, mert a kinézete olyan, hogy ha egy cukrászdát nyitnék, akkor oda merném tenni a pultba, nem csak az íze, hanem a külleme miatt is. Ez nekem eddig még nem igazán jött össze, ezért most nagyon örülök! 🙂",
 			image: "https://via.placeholder.com/600/000000/FFFFFF/?text=torta helye",
 			categories: ["Könnyű", "Őszi", "Galzúr", "Magyar"],
-			created: new Date(),
 			rating: 4.6,
 			servings: 8,
+			isFavorite: false,
 			ingredients: [
 				{title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"]},
 				{title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"]},
@@ -229,13 +230,41 @@ export class RecipeService {
 		
 	]
 
-  	constructor() { }
+	addRecipe(
+		name: string, 
+		description: string, 
+		image: string, 
+		categories: string[], 
+		rating: number, 
+		servings: number, 
+		ingredients: {
+			title: string;
+			ingredientList: string[]
+		}[],
+		instructions: {
+			text: string;
+			images?: string[];
+		}[]): void {
+		const newRecipe: Recipe = {
+			id: "wasd",
+			name,
+			description,
+			image,
+			categories,
+			rating,
+			servings,
+			isFavorite: false,
+			ingredients,
+			instructions,
+		};
+		this.recipesSig.update((recipes) => [...recipes, newRecipe]);
+	}
 
 	getAllRecipes(): Recipe[] {    
 		return this.recipeList;  
 	}  
 
-	getRecipeById(id: number): Recipe | undefined {    
+	getRecipeById(id: string): Recipe | undefined {    
 		return this.recipeList.find((recipe) => 
 			recipe.id === id
 		);
@@ -262,13 +291,6 @@ export class RecipeService {
 	sortRecipesByRating(descending : boolean = false): Recipe[] {
 		return this.recipeList.sort((a, b) => {
 			const comparison = b.rating - a.rating;
-			return descending ? comparison * -1 : comparison
-		});
-	}
-
-	sortRecipesByDate(descending : boolean = false): Recipe[] {
-		return this.recipeList.sort((a, b) => {
-			const comparison = b.created.getTime() - a.created.getTime();
 			return descending ? comparison * -1 : comparison
 		});
 	}

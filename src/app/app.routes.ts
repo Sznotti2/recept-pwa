@@ -3,6 +3,8 @@ import { HomeComponent } from './features/home/home.component';
 import { RecipeViewComponent } from './shared/components/recipe-view/recipe-view.component';
 import { SearchComponent } from './features/search/search.component';
 import { BlogComponent } from './features/blog/blog.component';
+import { MyRecipiesComponent } from './features/my-recipies/my-recipies.component';
+import { RecipieEditorComponent } from './features/recipie-editor/recipie-editor.component';
 
 export const routes: Routes = [
     {
@@ -32,12 +34,18 @@ export const routes: Routes = [
             },
             {
                 path: 'my-recipes',
-                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+				component: MyRecipiesComponent
+                // loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
             },
             {
                 path: 'dashboard',
                 loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
-            }
+            },
+			{
+				path: 'recipe-editor',
+				component: RecipieEditorComponent,
+				// loadComponent: () => import('./features/recipie-editor/recipie-editor.component').then(m => m.RecipieEditorComponent)
+			},
         ]
 	},
     {

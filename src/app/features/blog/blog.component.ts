@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { BlogService } from '../../core/services/blog.service';
-import { BlogCard2Component } from '../../shared/components/blog-card2/blog-card2.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlogListComponent } from '../../shared/components/blog-list/blog-list.component';
 
 @Component({
 	selector: 'app-blog',
 	standalone: true,
-	imports: [BlogCard2Component, ReactiveFormsModule, FormsModule],
+	imports: [BlogListComponent, ReactiveFormsModule, FormsModule],
 	templateUrl: './blog.component.html',
 	styleUrl: './blog.component.scss'
 })

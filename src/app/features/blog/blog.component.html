@@ -13,9 +13,7 @@
 	</header>
 
 	<main>
-		@for (blog of blogs; track $index) {
-			<app-blog-card2 [blog]="blog"></app-blog-card2>
-		}
+		<app-blog-list [blogs]="blogs"></app-blog-list>
 	</main>
 
 </section>

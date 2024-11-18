@@ -1,0 +1,30 @@
+<section>
+	@for (recipe of recipes; track $index) {
+		<div class="recipe-card">
+			<img [src]="recipe.image" alt="{{ recipe.name }}">
+		
+			<div class="tags">
+				@for (tag of recipe.categories; track $index) {
+					<a class="chips link" href="#">{{ tag }}</a>
+				}
+			</div>
+		
+			<h3 [routerLink]="[ '/search', recipe.id ]" class="title">{{ recipe.name }}</h3>
+		
+			<ul class="info">
+				<li>{{ recipe.servings }} adag</li>
+				<li>
+					<span class="material-icons">star</span>
+					{{ recipe.rating }}
+				</li>
+				<li>
+					@if (recipe.isFavorite) {
+						<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite</i>
+					} @else {
+						<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite_border</i>
+					}
+				</li>
+			</ul>
+		</div>
+	}
+</section>

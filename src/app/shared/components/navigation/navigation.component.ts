@@ -22,11 +22,12 @@ export class NavigationComponent implements OnInit {
 			} else {
 				this.authService.currentUserSignal.set(null);
 			}
-			console.log(this.authService.currentUserSignal())
+			console.log("current user:")
+			console.log(this.authService.currentUserSignal()); //! törölj
 		})
 	}
 
 	logout() {
-		
+		this.authService.logout();
 	}
 }
