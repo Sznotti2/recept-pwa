@@ -43,7 +43,7 @@ export class RecipeFirebaseService {
 		description: string,
 		image: string,
 		categories: string[],
-		rating: number,
+		timeToMake: number,
 		servings: number,
 		ingredients: {
 			title: string;
@@ -60,7 +60,8 @@ export class RecipeFirebaseService {
 			description,
 			image,
 			categories,
-			rating,
+			timeToMake,
+			rating: 0,
 			servings,
 			isFavorite: false,
 			ingredients,

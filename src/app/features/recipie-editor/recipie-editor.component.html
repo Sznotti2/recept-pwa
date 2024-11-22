@@ -2,24 +2,30 @@
 	<form [formGroup]="recipeEditForm" (ngSubmit)="saveRecipe()">
 		<header>
 			<div class="image-upload">
-				<label for="image">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
-						viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-							d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-					</svg>
-					<p>Drag your image here or click in this area</p>
+				<label for="recipe-image">
+					@if (recipeImgSrc) {
+						<img [src]="recipeImgSrc" alt="">
+					} @else {
+						<div class="label-content">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+								viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+									d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+							</svg>
+							<p>Drag your image here or click in this area</p>
+						</div>
+					}
 				</label>
-				<input id="image" type="file" formControlName="image">
+				<input id="recipe-image" type="file" formControlName="image" (change)="onRecipeImageSelected($event)">
 			</div>
 			<div class="recipe__info">
 				<ul class="info">
 					<li>
-						<span class="material-icons">pie_chart</span>
+						<i class="material-icons">pie_chart</i>
 						<input type="number" formControlName="servings" placeholder="adag">
 					</li>
 					<li>
-						<span class="material-icons">star</span>
+						<i class="material-icons">schedule</i>
 						<input type="number" formControlName="timeToMake" placeholder="elkészítési idő">
 					</li>
 				</ul>
@@ -28,63 +34,90 @@
 			</div>
 
 			<div class="categories" formArrayName="categories">
-				@for (category of categories.controls; track $index) {
-					<div [formGroupName]="$index">
-						<input formControlName="name" placeholder="kategória"/>
-						<button class="icon-btn" type="button" (click)="removeCategory($index)">
-							<i class="material-icons">close</i>
-						</button>
-					</div>
-				}
+				<div *ngFor="let category of categories.controls; let i = index" [formGroupName]="i">
+					<input formControlName="name" placeholder="kategória"/>
+					<button class="icon-btn" type="button" (click)="removeCategory(i)" title="kategória eltávolítása">
+						<i class="material-icons">close</i>
+					</button>
+				</div>
 				
-				<button class="icon-btn" type="button" (click)="addCategory()">
+				<button class="icon-btn" type="button" (click)="addCategory()" title="kategória hozzáadása">
 					<i class="material-icons">add</i>
 				</button>
 			</div>
 		</header>
 
-		<section class="instructions" formArrayName="instructions">
+		<section class="instructions">
 			<h3>Elkészítés</h3>
-			
-			<ol>
-				@for (instruction of instructions.controls; track $index) {
-					<li [formGroupName]="$index">
-						<input formControlName="text" placeholder="recept leírás"/>
-						<div class="image-gallery">
-							@for (image of instruction.get('images').controls; track $index) {
-								<div [formGroupName]="$index">
-									<input formControlName="image" type="file">
-								</div>
-							}
-							<button class="icon-btn" type="button" (click)="addCategory()">
-								<i class="material-icons" description="kép hozzáadása">add</i>
+
+			<ol formArrayName="instructions">
+				<li *ngFor="let instruction of instructions.controls; let i = index" [formGroupName]="i">
+					<div class="instruction-row">
+						<textarea formControlName="text" cols="30" rows="3" placeholder="Recept leírása"></textarea>
+						<button class="icon-btn" type="button" title="leírás eltávolítása" (click)="removeInstruction(i)">
+							<i class="material-icons">close</i>
+						</button>
+					</div>
+					<div class="image-gallery" formArrayName="images">
+						<div *ngFor="let image of getImagesAt(i).controls; let j = index" [formGroupName]="j">
+							<div class="image-upload">
+								<label for="{{ i + '-' + j}}">
+									@if (instructionImgSrc.get(i+'-'+j)) {
+										<img [src]="instructionImgSrc.get(i+'-'+j)" alt="">
+									} @else {
+										<div class="label-content">
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+												viewBox="0 0 24 24" stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+													d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+											</svg>
+											<p>Drag your image here or click in this area</p>
+										</div>
+									}
+								</label>
+								<input id="{{ i + '-' + j}}" type="file" formControlName="image" (change)="onInstructionImageSelected($event, i, j)">
+							</div>
+							<button class="icon-btn" type="button" title="kép eltávolítása" (click)="removeImageInput(i, j)">
+								<i class="material-icons">close</i>
 							</button>
 						</div>
-
-						<button class="icon-btn" type="button" (click)="addCategory()">
-							<i class="material-icons" description="leírás hozzáadása">add</i>
+						<button class="icon-btn" type="button" title="kép hozzáadása" (click)="addImageInput(i)">
+							<i class="material-icons">add</i>
 						</button>
-					</li>
-				}
+					</div>
+				</li>
+				<button class="icon-btn" type="button" title="leírás hozzáadása" (click)="addInstruction()">
+					<i class="material-icons">add</i>
+				</button>
 			</ol>
-			<button class="icon-btn" type="button">
-				<i class="material-icons" (click)="addCategory()">add</i>
-			</button>
 		</section>
 		
-		<section class="ingredients">
+		<section class="ingredients" formArrayName="ingredients">
 			<h3>Hozzávalók</h3>
 
-			<!-- @for (item of recipe?.ingredients; track $index) {
-				<p>{{ item.title }}:</p>
-				<ul>
-					@for (ingredient of item.ingredientList; track $index) {
-						<li>{{ ingredient }}</li>
-					}
+			<ng-container *ngFor="let elem of ingredients.controls; let i = index" [formGroupName]="i">
+				<div class="row">
+					<input type="text" formControlName="title">
+					<button class="icon-btn" type="button" (click)="removeIngredient(i)">
+						<i class="material-icons">add</i>
+					</button>
+				</div>
+				<ul formArrayName="ingredientList">
+					<li *ngFor="let ingredient of getIngredientListAt(i).controls; let j = index" [formGroupName]="j">
+						<div class="row">
+							<input type="text" formControlName="ingredient">
+							<button class="icon-btn" type="button" (click)="removeIngredientItem(i, j)">
+								<i class="material-icons">close</i>
+							</button>
+						</div>
+					</li>
+					<button class="icon-btn" type="button" (click)="addIngredientItem(i)">
+						<i class="material-icons">add</i>
+					</button>
 				</ul>
-			} -->
-			<button class="icon-btn" type="button">
-				<i class="material-icons" (click)="addCategory()">add</i>
+			</ng-container>
+			<button class="icon-btn" type="button" (click)="addIngredient()">
+				<i class="material-icons">add</i>
 			</button>
 		</section>
 
