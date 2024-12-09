@@ -34,8 +34,8 @@
 			</div>
 
 			<div class="categories" formArrayName="categories">
-				<div *ngFor="let category of categories.controls; let i = index" [formGroupName]="i">
-					<input formControlName="name" placeholder="kategória"/>
+				<div *ngFor="let category of categories.controls; let i = index">
+					<input [formControlName]="i" placeholder="kategória"/>
 					<button class="icon-btn" type="button" (click)="removeCategory(i)" title="kategória eltávolítása">
 						<i class="material-icons">close</i>
 					</button>
@@ -59,7 +59,7 @@
 						</button>
 					</div>
 					<div class="image-gallery" formArrayName="images">
-						<div *ngFor="let image of getImagesAt(i).controls; let j = index" [formGroupName]="j">
+						<div *ngFor="let image of getImagesAt(i).controls; let j = index">
 							<div class="image-upload">
 								<label for="{{ i + '-' + j}}">
 									@if (instructionImgSrc.get(i+'-'+j)) {
@@ -75,7 +75,7 @@
 										</div>
 									}
 								</label>
-								<input id="{{ i + '-' + j}}" type="file" formControlName="image" (change)="onInstructionImageSelected($event, i, j)">
+								<input id="{{ i + '-' + j}}" type="file" [formControlName]="j" (change)="onInstructionImageSelected($event, i, j)">
 							</div>
 							<button class="icon-btn" type="button" title="kép eltávolítása" (click)="removeImageInput(i, j)">
 								<i class="material-icons">close</i>
@@ -103,9 +103,9 @@
 					</button>
 				</div>
 				<ul formArrayName="ingredientList">
-					<li *ngFor="let ingredient of getIngredientListAt(i).controls; let j = index" [formGroupName]="j">
+					<li *ngFor="let ingredient of getIngredientListAt(i).controls; let j = index">
 						<div class="row">
-							<input type="text" formControlName="ingredient">
+							<input type="text" [formControlName]="j">
 							<button class="icon-btn" type="button" (click)="removeIngredientItem(i, j)">
 								<i class="material-icons">close</i>
 							</button>

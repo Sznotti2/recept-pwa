@@ -1,15 +1,19 @@
 nav {
 	margin: var(--gap-small);
-	padding: 0 2rem;
-	min-height: var(--nav-height);
-	display: grid;
-	align-items: center;
-	grid-template-columns: repeat(3, 1fr);
 
 	border: 4px solid var(--gray-1000);
-	border-radius: var(--nav-height);
+	border-radius: calc(var(--nav-height) / 2);
 	// box-shadow: 3px 3px 0 3px black;
 	background-color: #90FF90;
+
+}
+
+.navbar {
+	min-height: var(--nav-height);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 2rem;
 
 	.logo {
 		font-size: 1.3rem;
@@ -18,7 +22,7 @@ nav {
 		color: var(--gray-1000);
 	}
 
-	> *:last-child {
+	>*:last-child {
 		justify-self: end;
 	}
 
@@ -28,12 +32,12 @@ nav {
 		padding-left: 0;
 	}
 
-	> #menu {
+	>#menu {
 		justify-content: center;
 		height: 100%;
 		display: flex;
 
-		> li {
+		>li {
 			height: inherit;
 			display: flex;
 			justify-content: center;
@@ -44,7 +48,7 @@ nav {
 				text-decoration: none;
 			}
 
-			> a {
+			>a {
 				height: inherit;
 				display: flex;
 				align-items: center;
@@ -109,19 +113,91 @@ nav {
 		}
 
 		/* magic */
-		/* csak akkor legyen aktív, ha: */
-		.dropdown-toggle:focus~.dropdown,
-		/* ha az ikonra kattintasz, de nem nyílt le a dropdown */
-		.dropdown:focus-within,
-		/* ha dropdown bármely elemére kattintasz */
-		.dropdown:hover {
+		#dropdown-toggle:checked ~ .dropdown,
+		.dropdown:focus-within {
 			opacity: 1;
 			transform: translate3d(0, 0, 0);
 			pointer-events: auto;
 		}
 
 		.dropdown-toggle:focus+label {
-			outline: 3px dashed #111;
+			// outline: 3px dashed #111;
+		}
+
+		#hamburger-container {
+			// width: 60px;
+			// height: 45px;
+			display: none;
+			width: 32px;
+			height: 32px;
+			position: relative;
+			-webkit-transform: rotate(0deg);
+			-moz-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+			-webkit-transition: .5s ease-in-out;
+			-moz-transition: .5s ease-in-out;
+			-o-transition: .5s ease-in-out;
+			transition: .5s ease-in-out;
+			cursor: pointer;
+
+			span {
+				display: block;
+				position: absolute;
+				height: 6px;
+				width: 100%;
+				background: #d3531a;
+				border-radius: 9px;
+				opacity: 1;
+				left: 0;
+				-webkit-transform: rotate(0deg);
+				-moz-transform: rotate(0deg);
+				-o-transform: rotate(0deg);
+				transform: rotate(0deg);
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;
+
+				&:nth-child(1) {
+					top: 0px;
+				}
+
+				&:nth-child(2),
+				&:nth-child(3) {
+					top: 10px;
+				}
+
+				&:nth-child(4) {
+					top: 20px;
+				}
+			}
+
+			&.open span:nth-child(1) {
+				top: 10px;
+				width: 0%;
+				left: 50%;
+			}
+
+			&.open span:nth-child(2) {
+				-webkit-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+				-o-transform: rotate(45deg);
+				transform: rotate(45deg);
+			}
+
+			&.open span:nth-child(3) {
+				-webkit-transform: rotate(-45deg);
+				-moz-transform: rotate(-45deg);
+				-o-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+			}
+
+			&.open span:nth-child(4) {
+				top: 10px;
+				width: 0%;
+				left: 50%;
+			}
 		}
 
 		.dropdown {
@@ -142,33 +218,6 @@ nav {
 			pointer-events: none;
 			/* !!! */
 			transition: var(--transition);
-
-
-			/* kis háromszög területe */
-			// &:before {
-			// 	position: absolute;
-			// 	top: -20px;
-			// 	left: 0;
-			// 	width: 100%;
-			// 	height: 20px;
-			// 	content: '';
-			// 	display: block;
-			// }
-
-			/* kis háromszög */
-			// &:after {
-			// 	position: absolute;
-			// 	top: -7px;
-			// 	right: 30px;
-			// 	width: 0;
-			// 	height: 0;
-			// 	border-left: 8px solid transparent;
-			// 	border-right: 8px solid transparent;
-			// 	border-bottom: 8px solid #111;
-			// 	content: '';
-			// 	display: block;
-			// 	transition: all .2s ease-in;
-			// }
 
 			li {
 				display: flex;
@@ -192,4 +241,130 @@ nav {
 			}
 		}
 	}
+}
+
+#mobile-nav {
+	flex-basis: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--gap-small);
+
+	height: 0px;
+	transition: var(--transition);
+
+	.mobile-nav-link-container:hover {
+		border-radius: var(--gap-small);
+		box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+	}
+
+	.wrapper a,
+	.mobile-nav-link {
+		padding: 1rem 1.25rem;
+		font-size: var(--fs-medium);
+		font-weight: 800;
+		text-decoration: none;
+		color: var(--clr-primary);
+
+		display: flex;
+		align-items: center;
+		gap: var(--gap-small);
+
+		&:active {
+			background-color: #7cdf7c;
+		}
+	}
+
+	.accordion {
+		border-radius: var(--gap-small);
+	
+		transition: var(--transition);
+		display: grid;
+		grid-template-rows: 0fr 0fr; // ezt fogjuk animálni
+
+		&:hover {
+			box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+		}
+		&:active {
+			background-color: #7cdf7c;
+		}
+	}
+	
+	> *,
+	.content {
+		overflow: hidden;
+	}
+
+	// itt a grid-template-rows lesz animálva 0fr-ről 1fr-re
+	// (ezért van csak 2 elem, mert az inputot elrejtettük display: none-nal)
+	.accordion:has(input:checked) {
+		--d: 90deg;
+		grid-template-rows: 0fr 1fr;
+		transition: var(--transition);
+		box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+	}
+
+	.wrapper {
+		padding: 0 1.25rem 1.25rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	label {
+		padding: 1rem 1.25rem;
+		font-size: var(--fs-medium);
+		font-weight: 800;
+		color: currentColor;
+		text-decoration: none;
+		display: flex;
+		flex-direction: row;
+		place-items: center;
+		cursor: pointer;
+	}
+	
+	label:before {
+		--chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath fill='white' d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E");
+		content: "";
+		left: 0;
+		top: 0;
+		width: 0.65rem;
+		aspect-ratio: 320 / 512;
+		display: inline-block;
+		margin-right: 0.75rem;
+		transform: rotate(var(--d, 0deg));
+		transition: var(--transition);
+		mask-image: var(--chevron-icon);
+		mask-size: 100% 100%;
+		-webkit-mask-image: var(--chevron-icon);
+		-webkit-mask-size: 100% 100%;
+		background-color: currentColor;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	nav:has(#dropdown-toggle:checked) #mobile-nav {
+		height: calc(100vh - var(--nav-height) - 2 * var(--gap-small));
+	}
+
+	#menu {
+		display: none !important;
+	}
+
+	#user-menu {
+		.material-icons {
+			display: none;
+		}
+
+		#hamburger-container {
+			display: block !important;
+		}
+
+		.dropdown {
+			display: none !important;
+		}
+	}
+
+	// #mobile-nav {
+	// 	height: calc(100vh - var(--nav-height) - 2 * var(--gap-small));
+	// }
 }

@@ -5,6 +5,11 @@ import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Va
 // https://dontpaniclabs.com/blog/post/2022/01/05/how-to-use-angular-formarrays-within-formgroups-in-reactive-forms/
 // https://www.tektutorialshub.com/angular/nested-formarray-example-add-form-fields-dynamically/
 
+// ingredients interface
+interface Ingredient {
+	title: string;
+	ingredientList: string[];
+}
 @Component({
 	selector: 'app-recipie-editor',
 	standalone: true,
@@ -45,14 +50,15 @@ export class RecipieEditorComponent implements OnInit {
 		this.recipeFirebaseService.addRecipe(
 			recipe.name,
 			recipe.description,
-			recipe.image,
+			this.recipeEditForm.get('image')?.value,
 			recipe.categories,
 			recipe.timeToMake,
 			recipe.servings,
 			recipe.ingredients,
 			recipe.instructions
 		);
-		console.log(recipe.ingredients);
+		console.log(recipe);
+
 	}
 
 	onRecipeImageSelected(event: any) {
@@ -90,10 +96,7 @@ export class RecipieEditorComponent implements OnInit {
 		return this.recipeEditForm.get('categories') as FormArray;
 	}
 	addCategory() {
-		const categoryGroup = this.formBuilder.group({
-			name: [""]
-		});
-		this.categories.push(categoryGroup);
+		this.categories.push(this.formBuilder.control(""));
 	}
 	removeCategory(index: number) {
 		this.categories.removeAt(index);
@@ -116,10 +119,7 @@ export class RecipieEditorComponent implements OnInit {
 		return this.ingredients.at(index).get("ingredientList") as FormArray
 	}
 	addIngredientItem(index: number): void {
-		const ingredientListGroup = this.formBuilder.group({
-			ingredient: [""]
-		});
-		this.getIngredientListAt(index).push(ingredientListGroup);
+		this.getIngredientListAt(index).push(this.formBuilder.control(""));
 	}
 	removeIngredientItem(ingredientIndex: number, itemIndex: number): void {
 		this.getIngredientListAt(ingredientIndex).removeAt(itemIndex);
@@ -149,10 +149,7 @@ export class RecipieEditorComponent implements OnInit {
 		return this.instructions.at(index).get("images") as FormArray
 	}
 	addImageInput(instructionIndex: number): void {
-		const imageGroup = this.formBuilder.group({
-			image: [""]
-		});
-		this.getImagesAt(instructionIndex).push(imageGroup);
+		this.getImagesAt(instructionIndex).push(this.formBuilder.control(""));
 	}
 	removeImageInput(instructionIndex: number, imageIndex: number): void {
 		this.getImagesAt(instructionIndex).removeAt(imageIndex);

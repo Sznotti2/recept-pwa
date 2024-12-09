@@ -61,14 +61,5 @@
 		<input type="file">
 	</div>
 
-	<div class="row">
-		<div class="switch-container">
-			<input type="checkbox" class="toggle-switch" id="keep-logged-in">
-			<label for="keep-logged-in">Emlékezz rám</label>
-		</div>
-
-		<a routerLink="/forgot-password">Elfelejtett jelszó?</a>
-	</div>
-
 	<button [disabled]="loginForm.invalid" class="btn" type="submit">Belépés</button>
 </form>

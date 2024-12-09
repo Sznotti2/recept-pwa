@@ -1,64 +1,111 @@
 <nav>
-    <a class="logo" routerLink="/home">Recept PWA</a>
+	<div class="navbar">
+		<a class="logo" routerLink="/home">Recept PWA</a>
 
-	<ul id="menu">
-		<li><a routerLink="/home">Főoldal</a></li>
-		<li>
-			<a routerLink="/search">Receptek</a>
-			<ul class="sub-menu">
-				<a routerLink="/">Torta</a>
-				<a routerLink="/">Pizza</a>
-				<a routerLink="/">Leves</a>
-				<a routerLink="/">Tárt</a>
-				<a routerLink="/">Muffin</a>
-				<a routerLink="/">Pite</a>
-			</ul>
-		<li><a routerLink="/blog">Blog</a></li>
-		<li><a routerLink="/about">Rólunk</a></li>
-	</ul>
-
-	<div id="user-menu">	
-		<input class="dropdown-toggle" type="checkbox" id="dropdown-toggle"/>
-		<label for="dropdown-toggle">
-			<span class="material-icons">person</span>
-		</label>
-		<ul class="dropdown">
-			<!-- @if (authService.currentUserSignal() == null) {
-				<li routerLink="/register">
-					<a>Regisztrálj</a>
-					<span class="material-icons">chevron_right</span>
-				</li>
-				<li routerLink="/login">
-					<a>Bejelentkezés</a>
-					<span class="material-icons">chevron_right</span>
-				</li>
-			}
-			@if (authService.currentUserSignal()) {
-				<li routerLink="/settings/profile">
-					<a>Profil</a>
-					<span class="material-icons">settings</span>
-				</li>
-				<li>
-					<a (click)="logout()">Kijelentkezés</a>
-					<span class="material-icons">logout</span>
-				</li>
-			} -->
-				<li routerLink="/register">
-					<a>Regisztrálj</a>
-					<span class="material-icons">chevron_right</span>
-				</li>
-				<li routerLink="/login">
-					<a>Bejelentkezés</a>
-					<span class="material-icons">chevron_right</span>
-				</li>
-				<li routerLink="/settings/profile">
-					<a>Profil</a>
-					<span class="material-icons">settings</span>
-				</li>
-				<li>
-					<a (click)="logout()">Kijelentkezés</a>
-					<span class="material-icons">logout</span>
-				</li>
+		<ul id="menu">
+			<li>
+				<a routerLink="/search">Receptek</a>
+				<ul class="sub-menu">
+					<a routerLink="/">Torta</a>
+					<a routerLink="/">Pizza</a>
+					<a routerLink="/">Leves</a>
+					<a routerLink="/">Tárt</a>
+					<a routerLink="/">Muffin</a>
+					<a routerLink="/">Pite</a>
+				</ul>
+			<li><a routerLink="/blog">Blog</a></li>
+			<li><a routerLink="/about">Rólunk</a></li>
 		</ul>
+	
+		<div id="user-menu">	
+			<input class="dropdown-toggle" type="checkbox" id="dropdown-toggle"/>
+			<label for="dropdown-toggle">
+				<span class="material-icons">person</span>
+				<div id="hamburger-container" (click)="toggleDropdown()" [ngClass]="{'open': isOpen}">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				  </div>
+			</label>
+			<ul class="dropdown">
+				<!-- @if (authService.currentUserSignal() == null) {
+					<li routerLink="/register">
+						<a>Regisztrálj</a>
+						<span class="material-icons">chevron_right</span>
+					</li>
+					<li routerLink="/login">
+						<a>Bejelentkezés</a>
+						<span class="material-icons">chevron_right</span>
+					</li>
+				}
+				@if (authService.currentUserSignal()) {
+					<li routerLink="/settings/profile">
+						<a>Profil</a>
+						<span class="material-icons">settings</span>
+					</li>
+					<li>
+						<a (click)="logout()">Kijelentkezés</a>
+						<span class="material-icons">logout</span>
+					</li>
+				} -->
+					<li routerLink="/register">
+						<a>Regisztrálj</a>
+						<span class="material-icons">chevron_right</span>
+					</li>
+					<li routerLink="/login">
+						<a>Bejelentkezés</a>
+						<span class="material-icons">chevron_right</span>
+					</li>
+					<li routerLink="/settings/profile">
+						<a>Profil</a>
+						<span class="material-icons">settings</span>
+					</li>
+					<li>
+						<a (click)="logout()" href="">Kijelentkezés</a>
+						<span class="material-icons">logout</span>
+					</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="mobile-nav">
+		<section class="accordion" id="overview">
+			<input type="checkbox" id="accordion-toggle" class="hidden">
+			<label for="accordion-toggle">Receptek</label>
+			<div class="content">
+				<div class="wrapper">
+					<a routerLink="/">Torta</a>
+					<a routerLink="/">Pizza</a>
+					<a routerLink="/">Leves</a>
+					<a routerLink="/">Tárt</a>
+					<a routerLink="/">Muffin</a>
+					<a routerLink="/">Pite</a>
+				</div>
+			</div>
+		</section>
+
+		<div class="mobile-nav-link-container">
+			<a routerLink="/blog" class="mobile-nav-link">Blog</a>
+		</div>
+		<div class="mobile-nav-link-container">
+			<a routerLink="/about" class="mobile-nav-link">Rólunk</a>
+		</div>
+
+		<div class="mobile-nav-link-container">
+			<a routerLink="/register" class="mobile-nav-link">Regisztrálj</a>
+		</div>
+
+		<div class="mobile-nav-link-container">
+			<a routerLink="/login" class="mobile-nav-link">Bejelentkezés</a>
+		</div>
+
+		<div class="mobile-nav-link-container">
+			<a routerLink="/settings/profile" class="mobile-nav-link">Profil</a>
+		</div>
+		<div class="mobile-nav-link-container">
+			<a (click)="logout()" class="mobile-nav-link" href="">Kijelentkezés</a>
+		</div>
+
 	</div>
 </nav>

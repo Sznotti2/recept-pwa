@@ -109,7 +109,7 @@ h6 {
 	--border-width-medium: ;
 	--border-width-large: ;
 
-	--transition: all .1s ease-in;
+	--transition: all .18s ease-in-out;
 }
 
 /* GLOBAL STYLES  */
@@ -121,6 +121,9 @@ body {
     background-color: var(--clr-bg-light);
 }
 
+.hidden {
+	display: none;
+}
 
 .btn {
     --offset: 5px;

@@ -1,6 +1,7 @@
-header {
+section {
 	margin: 0 auto;
-	width: 65ch;
+	padding: var(--gap-small);
+	max-width: 70ch;
 }
 
 p {
