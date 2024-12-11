@@ -15,7 +15,7 @@ export class RecipeFirebaseService {
 	recipeCollection = collection(this.firestore, "recipe");
 
 	private http = inject(HttpClient);
-	
+
 
 	constructor(private storage: Storage, private db: Database) {
 	}
@@ -84,32 +84,37 @@ export class RecipeFirebaseService {
 		const promise = addDoc(this.recipeCollection, newRecipe).then((response) => response.id);
 		return from(promise);
 	}
-	
+
+	addRecipe2(recipe: Recipe) {
+		const promise = addDoc(this.recipeCollection, recipe).then((response) => response.id);
+		return from(promise);
+	}
+
 	uploadImageAndSaveToDB(image: HTMLInputElement): Observable<string> {
 		return this.uploadImage(image).pipe(
-		  switchMap((imageUrl: string) => {
-			if (imageUrl) {
-			  const imageRef = dbRef(this.db, 'images/' + this.generateUniqueId());
-			  return from(set(imageRef, { imageUrl })).pipe(switchMap(() => of(imageUrl)));
-			} else {
-			  return of('');
-			}
-		  })
+			switchMap((imageUrl: string) => {
+				if (imageUrl) {
+					const imageRef = dbRef(this.db, 'images/' + this.generateUniqueId());
+					return from(set(imageRef, { imageUrl })).pipe(switchMap(() => of(imageUrl)));
+				} else {
+					return of('');
+				}
+			})
 		);
-	  }
+	}
 
-	  private generateUniqueId(): string {
+	private generateUniqueId(): string {
 		return Math.random().toString(36).substring(2, 15);
-	  }
+	}
 	uploadImage(image: HTMLInputElement): Observable<string> {
 		// Ellenőrizzük, hogy van-e kép kiválasztva
 		if (image.files && image.files.length > 0) {
 			const selectedImage = image.files[0];
 			const imagePath = `recipe/images/${selectedImage.name}`;
-	
+
 			// Referencia létrehozása a Firebase Storage-ban
 			const imageRef = storageRef(this.storage, imagePath);
-	
+
 			// Feltöltjük a képet és visszakapjuk az URL-t
 			return from(uploadBytes(imageRef, selectedImage)).pipe(
 				switchMap(() => getDownloadURL(imageRef)), // Ha sikeres a feltöltés, visszakapjuk a letöltési URL-t

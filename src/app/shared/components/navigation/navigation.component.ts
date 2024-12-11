@@ -4,11 +4,11 @@ import { AuthService } from '../../../core/services/auth.service';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-navigation',
-  standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgClass],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+	selector: 'app-navigation',
+	standalone: true,
+	imports: [RouterLink, RouterLinkActive, NgClass],
+	templateUrl: './navigation.component.html',
+	styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit {
 	authService = inject(AuthService);
@@ -24,8 +24,8 @@ export class NavigationComponent implements OnInit {
 			} else {
 				this.authService.currentUserSignal.set(null);
 			}
-			console.log("current user:")
-			console.log(this.authService.currentUserSignal()); //! törölj
+			// console.log("current user:")
+			// console.log(this.authService.currentUserSignal()); //! törölj
 		})
 	}
 

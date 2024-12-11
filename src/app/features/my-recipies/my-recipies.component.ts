@@ -3,6 +3,8 @@ import { RecipeListComponent } from '../../shared/components/recipe-list/recipe-
 import { RecipeFirebaseService } from '../../core/services/recipe-firebase.service';
 import { Recipe } from '../../core/interfaces/recipe';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { RecipeService } from '../../core/services/recipe.service';
 
 @Component({
   selector: 'app-my-recipies',
@@ -12,14 +14,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './my-recipies.component.scss'
 })
 export class MyRecipiesComponent implements OnInit {
-	recipeFirebaseService = inject(RecipeFirebaseService);
-	recipeList: Recipe[] = [];
+	recipeService = inject(RecipeService);
+	recipeList$!: Observable<Recipe[]>;
 
 
 	ngOnInit(): void {
-		this.recipeFirebaseService.getRecipes().subscribe(recipes => {
-			this.recipeList = recipes;
-			console.log(recipes);
-		});
+		this.recipeList$ = this.recipeService.getRecipes();
 	}
 }

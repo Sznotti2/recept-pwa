@@ -22,6 +22,7 @@
     "@angular/pwa": "^0.5.3",
     "@angular/router": "^18.2.7",
     "@angular/service-worker": "^18.2.7",
+    "dexie": "^4.0.10",
     "firebase": "^10.14.1",
     "material-icons": "^1.13.12",
     "rxjs": "~7.8.0",

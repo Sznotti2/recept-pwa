@@ -12,12 +12,12 @@ export interface Recipe {
 	instructions: Instruction[];
 }
 
-interface Ingredient {
+export interface Ingredient {
 	title: string;
 	ingredientList: string[]
 }
 
-interface Instruction {
+export interface Instruction {
 	text: string;
 	images?: string[];
 }

@@ -4,6 +4,7 @@ import { RecipeListComponent } from "../../shared/components/recipe-list/recipe-
 import { Recipe } from '../../core/interfaces/recipe';
 import { RecipeService } from '../../core/services/recipe.service';
 import { RecipeFirebaseService } from '../../core/services/recipe-firebase.service';
+import { Observable } from 'rxjs';
 
 interface Item {
 	value: string;
@@ -21,7 +22,7 @@ export class SearchComponent implements OnInit {
 	recipeService = inject(RecipeService);
 	recipeFirebaseService = inject(RecipeFirebaseService);
 
-	recipeList: Recipe[] = this.recipeService.getAllRecipes();
+	recipeList$!: Observable<Recipe[]>;
 	itemList : Item[] = [];
 
 	constructor() {
@@ -50,16 +51,12 @@ export class SearchComponent implements OnInit {
 		// 	],
 		// );
 
-		this.recipeFirebaseService.getRecipes().subscribe(recipes => {
-			// this.recipeService.recipesSig.set(recipes);
-			this.recipeList = recipes;
-			console.log(recipes);
-		});
+		this.recipeList$ = this.recipeService.getRecipes();
 
 	}
 
 	filter(event: Event) {
 		const input = event.target as HTMLInputElement;
-		this.recipeList = this.recipeService.filterRecipiesByName(input.value);
+		this.recipeList$ = this.recipeService.filterRecipiesByName(input.value);
 	}
 }

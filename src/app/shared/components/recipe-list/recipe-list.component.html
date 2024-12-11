@@ -1,5 +1,5 @@
 <section>
-	@for (recipe of recipes; track $index) {
+	@for (recipe of recipes$ | async; track $index) {
 		<div class="recipe-card">
 			<img [src]="recipe.image" alt="{{ recipe.name }}">
 		

@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
 	selector: 'app-profile',
@@ -10,40 +11,46 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 	styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-	loginForm: FormGroup;
+	authService = inject(AuthService);
 
+	editForm: FormGroup;
 	constructor(private formBuilder: FormBuilder) {
-		this.loginForm = this.formBuilder.group({
-			username: [""],
+		this.editForm = this.formBuilder.group({
+			username: ["", {
+				validators: [Validators.required],
+			}],
 			email: ["", {
 				validators: [Validators.required, Validators.email],
 			}],
-			password: ["", {
+			oldPassword: ["", {
+				validators: [Validators.required],
+			}],
+			newPassword: ["", {
 				validators: [Validators.required],
 			}],
 			image: [""],
 		});
+
+		// Set form values if user is logged in
+		this.authService.user$.subscribe(user => {
+			if (user) {
+				this.editForm.get("username")?.setValue(user.displayName);
+				this.editForm.get("email")?.setValue(user.email);
+			}
+		});
 	}
 
-	public login(): void {
-		if (this.loginForm.valid) {
-			console.log(this.loginForm.value);
+	public edit(): void {
+		if (this.editForm.valid) {
+			const form = this.editForm.value;
+			this.authService.editProfile(form.username, form.email, form.oldPassword, form.newPassword)
 		} else {
-			console.log("Invalid form");
+			console.log("Invalid form: " + this.editForm.value);
 		}
 	}
 
-	get email() {
-		return this.loginForm.controls["email"];
-	}
-	get password() {
-		return this.loginForm.controls["password"];
-	}
-	get username() {
-		return this.loginForm.controls["username"];
-	}
-	get image() {
-		return this.loginForm.controls["image"];
+	public delete() {
+		this.authService.deleteUser();
 	}
 
 	passwordVisible = false;
@@ -51,5 +58,22 @@ export class ProfileComponent {
 	revealPassword() {
 		this.passwordVisible = !this.passwordVisible;
 		this.inputType = this.passwordVisible ? "text" : "password";
+	}
+
+	// Getters
+	get email() {
+		return this.editForm.controls["email"];
+	}
+	get oldPassword() {
+		return this.editForm.controls["oldPassword"];
+	}
+	get newPassword() {
+		return this.editForm.controls["newPassword"];
+	}
+	get username() {
+		return this.editForm.controls["username"];
+	}
+	get image() {
+		return this.editForm.controls["image"];
 	}
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+<form [formGroup]="editForm" (ngSubmit)="edit()">
 
 	<div class="form-group">
 		<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''"
@@ -12,8 +12,6 @@
 			placeholder=" " formControlName="email">
 		<label>Email cím</label>
 	</div>
-	<!-- ha akarsz ikonokat csak töltsd le ezt:
-    https://www.npmjs.com/package/material-icons -->
 	@if (email.invalid && (email.dirty || email.touched)) {
 	@if (email.errors?.['required']) {
 	<div class="error">
@@ -30,24 +28,26 @@
 	}
 
 	<div class="form-group">
-		<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''"
-			[type]="inputType" placeholder=" " formControlName="password">
-		<label>Jelszó</label>
+		<input [ngClass]="oldPassword.valid ? 'valid' : oldPassword.dirty || oldPassword.touched ? 'invalid' : ''"
+			[type]="inputType" placeholder=" " formControlName="oldPassword">
+		<label>Régi jelszó</label>
 		@if (!passwordVisible) {
 		<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
 		} @else {
 		<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
 		}
-
 	</div>
-	@if (password.invalid && (password.dirty || password.touched)) {
-		@if (password.errors?.['required']) {
-		<div class="error">
-			<span class="material-icons">cancel</span>
-			<span>Jelszót kötelező megadni!</span>
-		</div>
+
+	<div class="form-group">
+		<input [ngClass]="newPassword.valid ? 'valid' : newPassword.dirty || newPassword.touched ? 'invalid' : ''"
+			[type]="inputType" placeholder=" " formControlName="newPassword">
+		<label>Új jelszó</label>
+		@if (!passwordVisible) {
+		<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
+		} @else {
+		<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
 		}
-	}
+	</div>
 
 	<div class="image-upload">
 		<div>
@@ -61,5 +61,6 @@
 		<input type="file">
 	</div>
 
-	<button [disabled]="loginForm.invalid" class="btn" type="submit">Belépés</button>
+	<button [disabled]="editForm.invalid" class="btn" type="submit">Módosítás</button>
+	<button class="btn" type="button" (click)="delete()">Fiók törlése</button>
 </form>
