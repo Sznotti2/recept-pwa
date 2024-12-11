@@ -1,3 +1,5 @@
+@use "../../../../styles";
+
 nav {
 	margin: var(--gap-small);
 
@@ -28,8 +30,9 @@ nav {
 
 	/* links, navigation */
 	ul {
-		list-style-type: none;
-		padding-left: 0;
+		// list-style-type: none;
+		// padding-left: 0;
+		@include styles.reset-list;
 	}
 
 	>#menu {
@@ -120,7 +123,7 @@ nav {
 			pointer-events: auto;
 		}
 
-		.dropdown-toggle:focus+label {
+		.dropdown-toggle:focus + label {
 			// outline: 3px dashed #111;
 		}
 

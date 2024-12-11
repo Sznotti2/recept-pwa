@@ -5,6 +5,7 @@ import { SearchComponent } from './features/search/search.component';
 import { BlogComponent } from './features/blog/blog.component';
 import { MyRecipiesComponent } from './features/my-recipies/my-recipies.component';
 import { RecipieEditorComponent } from './features/recipie-editor/recipie-editor.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -30,11 +31,13 @@ export const routes: Routes = [
             },
             {
                 path: 'my-blogs',
-                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
+				canActivate: [authGuard]
             },
             {
                 path: 'my-recipes',
-				component: MyRecipiesComponent
+				component: MyRecipiesComponent,
+				canActivate: [authGuard]
                 // loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
             },
             {
@@ -44,6 +47,7 @@ export const routes: Routes = [
 			{
 				path: 'recipe-editor',
 				component: RecipieEditorComponent,
+				canActivate: [authGuard]
 				// loadComponent: () => import('./features/recipie-editor/recipie-editor.component').then(m => m.RecipieEditorComponent)
 			},
         ]
