@@ -51,15 +51,15 @@ nav {
 				text-decoration: none;
 			}
 
-			>a {
+			> a {
 				height: inherit;
 				display: flex;
 				align-items: center;
 				font-size: var(--fs-normal);
-			}
 
-			a:hover {
-				text-decoration: underline;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 
 			.sub-menu {
@@ -67,23 +67,38 @@ nav {
 				position: absolute;
 				top: var(--nav-height);
 
-				display: flex;
-				flex-direction: column;
+				visibility: hidden;
+				opacity: 0;
+				transform: translate3d(0, 2rem, 0);
+				transition: all .2s ease-in-out;
 
-				// min-width: 10rem;
+				width: 15rem;
 				padding: var(--gap-small);
 				border: 3px solid var(--gray-1000);
 				border-radius: var(--gap-small);
 				background-color: #90FF90;
 
-				visibility: hidden;
-				opacity: 0;
-				transform: translate3d(0, 2rem, 0);
-				transition: all .2s ease-in-out;
+				.row {
+
+					+ .row {
+						margin-top: var(--gap-small);
+						// border-top: 1px solid;
+					}
+
+					.chips-container {
+						display: flex;
+						flex-wrap: wrap;
+						gap: .2rem;
+
+						a {
+							flex: 1;
+						}
+					}
+				}
 			}
 
-			a:hover+.sub-menu,
-			a:focus+.sub-menu,
+			a:hover +.sub-menu,
+			a:focus +.sub-menu,
 			.sub-menu:hover,
 			.sub-menu:focus-within {
 				visibility: visible;
@@ -116,15 +131,16 @@ nav {
 		}
 
 		/* magic */
-		#dropdown-toggle:checked ~ .dropdown,
-		.dropdown:focus-within {
+		// akkor fog lenyílni a dropdown, ha:
+		// ha rákattintasz vagy billentyűzettel ránavigálsz a labelre, akkor a checkbox-ra kerül a focus
+		// ha a lenyíló mezőre kerül ugyan ez a focus
+		// ha a dropdown látható és mégegyszer rákkattintasz a labelre, akkor egy pillanatra eltűnne a dropdown, ezt ellensújozza az actice pseudo class
+		#dropdown-toggle:focus ~ .dropdown,
+		.dropdown:focus-within,
+		#dropdown-toggle:active ~ .dropdown {
 			opacity: 1;
 			transform: translate3d(0, 0, 0);
 			pointer-events: auto;
-		}
-
-		.dropdown-toggle:focus + label {
-			// outline: 3px dashed #111;
 		}
 
 		#hamburger-container {
