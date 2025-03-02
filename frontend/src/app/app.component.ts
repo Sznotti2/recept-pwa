@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
 	selector: 'app-root',
@@ -9,7 +10,10 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss'
 })
-export class AppComponent {
-	title = 'recept-pwa';
+export class AppComponent implements OnInit {
+	authService = inject(AuthService);
 
+	ngOnInit(): void {
+		this.authService.checkAuthStatus();
+	}
 }

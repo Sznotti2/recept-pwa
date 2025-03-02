@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const cookieSession = require("cookie-session");
 const cookieParser = require('cookie-parser');
-const pool = require('./config/db.config');
 const userRoutes = require('./routes/user.routes');
 
 const app = express();
@@ -21,18 +20,9 @@ app.use(cookieSession({
 }));
 
 // Routes
-app.use('/api/user', userRoutes); // eg.: http://localhost:5000/api/user/register
-
-
-// Test connection to Database
-pool.getConnection()
-  .then(conn => {
-    console.log('Connected to MariaDB');
-    conn.release();
-  })
-  .catch(err => {
-    console.error('Unable to connect to MariaDB:', err) 
-  });
+app.use('/api/user', userRoutes);
+// app.use('/api/recipe', recipeRoutes);
+// app.use('/api/blog', blogRoutes);
 
 // Connect to Database
 const PORT = process.env.PORT || 5000;

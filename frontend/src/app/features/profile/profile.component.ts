@@ -38,7 +38,7 @@ export class ProfileComponent {
 	public edit(): void {
 		if (this.editForm.valid) {
 			const form = this.editForm.value;
-			this.authService.editProfile(form.username, form.email, form.oldPassword, form.newPassword)
+			// this.authService.editProfile(form.username, form.email, form.oldPassword, form.newPassword)
 		} else {
 			console.log("Invalid form: " + this.editForm.value);
 		}

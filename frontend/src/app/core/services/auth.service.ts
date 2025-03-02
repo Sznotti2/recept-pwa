@@ -17,11 +17,17 @@ export class AuthService {
 	private router = inject(Router);
 	
     private userSubject$: BehaviorSubject<User | null>;
-    public user: Observable<User | null>;
 
 	constructor() {
-        this.userSubject$ = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
-        this.user = this.userSubject$.asObservable();
+        this.userSubject$ = new BehaviorSubject<any>(null);
+	}
+
+	checkAuthStatus(): void {
+		this.http.get(API_URL + "/me", { withCredentials: true })
+			.subscribe({
+				next: (userData: any) => this.userSubject$.next(userData),
+				error: () => this.userSubject$.next(null)
+			});
 	}
 
 	register(username: string, email: string, password: string): Observable<any> {
@@ -38,16 +44,12 @@ export class AuthService {
 			{ email, password },
 			httpOptions
 		).pipe(map(user => {
-			// store user details and jwt token in local storage to keep user logged in between page refreshes
-			localStorage.setItem('user', JSON.stringify(user));
 			this.userSubject$.next(user as User);
 			return user;
 		}));
 	}
 
 	logout(): Observable<any> {
-        // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
         this.userSubject$.next(null);
         this.router.navigate(['/account/login']);
 

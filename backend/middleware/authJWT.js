@@ -1,13 +1,17 @@
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
 
 verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+  let token = req.cookies.token || req.headers['authorization'];
 
   if (!token) {
     return res.status(403).send({
       message: "No token provided!"
     });
+  }
+
+  // Ha a token a Bearer Authorization fejlécben érkezik
+  if (token.startsWith("Bearer")) {
+    token = token.split(" ")[1];
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
