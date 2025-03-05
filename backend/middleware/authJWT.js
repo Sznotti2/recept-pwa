@@ -20,8 +20,8 @@ verifyToken = (req, res, next) => {
         message: "Unauthorized!"
       });
     }
-    req.userId = decoded.id;
-    next();
+    req.userId = decoded.id; // A request objektum bővítése a felhasználó azonosítójával
+    next(); // A következő middleware vagy handler futtatása
   });
 };
 

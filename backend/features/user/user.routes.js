@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, logoutUser, updateUser, deleteUser, checkUserStatus } = require('../controllers/user.controller');
-const verifyToken = require('../middleware/authJWT');
+const { registerUser, loginUser, logoutUser, updateUser, deleteUser, checkUserStatus } = require('./user.service');
+const verifyToken = require('../../middleware/authJWT');
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);

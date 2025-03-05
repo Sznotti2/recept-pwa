@@ -3,7 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const cookieSession = require("cookie-session");
 const cookieParser = require('cookie-parser');
-const userRoutes = require('./routes/user.routes');
+const userRoutes = require('./features/user/user.routes');
+const recipeRoutes = require('./features/recipe/recipe.routes');
 
 const app = express();
 app.use(cors());
@@ -21,11 +22,11 @@ app.use(cookieSession({
 
 // Routes
 app.use('/api/user', userRoutes);
-// app.use('/api/recipe', recipeRoutes);
+app.use('/api/recipe', recipeRoutes);
 // app.use('/api/blog', blogRoutes);
 
 // Connect to Database
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4321;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 

@@ -1,13 +1,3 @@
-CREATE TABLE Languages (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	code VARCHAR(10) UNIQUE NOT NULL		-- pl. 'hu', 'en'
-) ENGINE = InnoDB;
-
-INSERT INTO Languages (code) VALUES
-('hu'),
-('en');
-
--- 1. Tábla: Users
 CREATE TABLE Users (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
@@ -18,9 +8,7 @@ CREATE TABLE Users (
 	social_links JSON,                  -- Közösségi média linkek (pl. {"facebook": "url", "instagram": "url"})
 	role ENUM('user', 'admin') DEFAULT 'user',
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	language_id INT,
-	FOREIGN KEY (language_id) REFERENCES Languages(id)
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE = InnoDB;
 
 INSERT INTO Users (name, email, password, role, language_id) -- minden adatot megadva
@@ -31,7 +19,6 @@ INSERT INTO Users (name, email, password, language_id) -- rövidített változat
 VALUES 
 	('Minden Áron', 'peter@email.com', 'user2', 2);
 
--- 2. Tábla: Recipes
 CREATE TABLE Recipes (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
@@ -72,7 +59,6 @@ INSERT INTO Recipes (name, image, description, cook_time, servings, difficulty, 
 			]
 		}, "egyszeru-dobostorta", 2);
 
--- 3. Tábla: Categories
 CREATE TABLE Tags (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL UNIQUE
@@ -87,7 +73,6 @@ INSERT INTO Tags (name) VALUES
 	("téli"),
 	("bármikor");
 
--- 4. Kapcsolótábla: RecipeCategories (many-to-many kapcsolat a Recipes és Categories között)
 CREATE TABLE RecipeTags (
 	recipe_id INT NOT NULL,
 	tag_id INT NOT NULL,
@@ -101,22 +86,20 @@ INSERT INTO RecipeTags (recipe_id, tag_id) VALUES
 	(1, 2),
 	(1, 7);
 
--- 5. Tábla: Instructions
 CREATE TABLE Instructions (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	recipe_id INT NOT NULL,
-	order INT NOT NULL,         -- a lépések sorrendjének meghatározása
+	step_order INT NOT NULL,         -- a lépések sorrendjének meghatározása
 	instruction_text TEXT NOT NULL,
 	FOREIGN KEY (recipe_id) REFERENCES Recipes(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-INSERT INTO Instructions (recipe_id, order, instruction_text) VALUES
+INSERT INTO Instructions (recipe_id, step_order, instruction_text) VALUES
 	(1, 1, "Tisztítsuk meg a munkaterületet"),
 	(1, 2, "Készítsük el a piskótát"),
 	(1, 3, "Most jön a krém, a krémek krémje"),
 	(1, 4, "stb...");
 
--- 6. Tábla: InstructionImages
 CREATE TABLE InstructionImages (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	instruction_id INT NOT NULL,
