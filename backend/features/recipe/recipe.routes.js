@@ -1,15 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { 
-    createRecipe, 
-    updateRecipe, 
-    deleteRecipe, 
-    getAllRecipes, 
-    getRecipeById, 
-    searchRecipe 
-} = require('./recipe.service');
+const { createRecipe, updateRecipe, deleteRecipe, getAllRecipes, getRecipeById, searchRecipe } = require('./recipe.service');
 const verifyToken = require('../../middleware/authJWT');
-
 
 router.post("/", verifyToken, createRecipe);
 router.put("/:id", verifyToken, updateRecipe);

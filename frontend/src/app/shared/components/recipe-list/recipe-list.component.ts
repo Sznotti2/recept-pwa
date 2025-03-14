@@ -6,18 +6,17 @@ import { Observable } from 'rxjs';
 import { RecipeService } from '../../../core/services/recipe.service';
 
 @Component({
-  selector: 'app-recipe-list',
-  standalone: true,
-  imports: [RouterLink, AsyncPipe ],
-  templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.scss'
+	selector: 'app-recipe-list',
+	standalone: true,
+	imports: [RouterLink, AsyncPipe],
+	templateUrl: './recipe-list.component.html',
+	styleUrl: './recipe-list.component.scss'
 })
 export class RecipeListComponent {
 	@Input() recipes$!: Observable<Recipe[]>;
-  recipeService = inject(RecipeService);
+	recipeService = inject(RecipeService);
 
 	toggleFavorite(recipe: Recipe) {
-		recipe.isFavorite = !recipe.isFavorite;
-    this.recipeService.saveFavoriteRecipesToIndexedDb();
+		console.log("toggleFavorite was called")
 	}
 }

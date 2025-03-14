@@ -29,13 +29,12 @@ CREATE TABLE Recipes (
 	difficulty ENUM('easy', 'medium', 'hard') NOT NULL,
 	ingerdients JSON NOT NULL,						-- így egyszerűbb a tárolása
 	slug VARCHAR(255) NOT NULL UNIQUE,              -- URL-barát azonosító
-	view_count INT DEFAULT 0, 
 	average_rating DECIMAL(3,2) DEFAULT 0,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_id INT,
 	FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE SET NULL		-- feéhasználó törlése esetén a recept ne vesszen el
-);
+) ENGINE = InnoDB;
 
 INSERT INTO Recipes (name, image, description, cook_time, servings, difficulty, ingerdients, slug, user_id) VALUES
 	("Egyszerű dobostorta", "path_to_image", "Legírás a dobostortaról, 2-3 mondat", 30, 4, "medium", {
@@ -77,8 +76,8 @@ CREATE TABLE RecipeTags (
 	recipe_id INT NOT NULL,
 	tag_id INT NOT NULL,
 	PRIMARY KEY (recipe_id, tag_id),
-	FOREIGN KEY (recipe_id) REFERENCES Recipes(id),
-	FOREIGN KEY (tag_id) REFERENCES Tags(id)
+	FOREIGN KEY (recipe_id) REFERENCES Recipes(id) ON DELETE CASCADE,
+	FOREIGN KEY (tag_id) REFERENCES Tags(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 INSERT INTO RecipeTags (recipe_id, tag_id) VALUES
@@ -140,7 +139,6 @@ CREATE TABLE Blogs (
 	image VARCHAR(255) NOT NULL,
 	slug VARCHAR(255) NOT NULL UNIQUE,
 	content JSON NOT NULL,
-	view_count INT DEFAULT 0,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE SET NULL

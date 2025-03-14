@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
-import { RecipeFirebaseService } from '../../core/services/recipe-firebase.service';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RecipeService } from '../../core/services/recipe.service';
 // https://dontpaniclabs.com/blog/post/2022/01/05/how-to-use-angular-formarrays-within-formgroups-in-reactive-forms/
 // https://www.tektutorialshub.com/angular/nested-formarray-example-add-form-fields-dynamically/
 
@@ -18,7 +18,7 @@ interface Ingredient {
 	styleUrl: './recipie-editor.component.scss'
 })
 export class RecipieEditorComponent implements OnInit {
-	recipeFirebaseService = inject(RecipeFirebaseService);
+	recipeService = inject(RecipeService);
 	recipeEditForm!: FormGroup;
 	recipeImgSrc = "";
 	instructionImgSrc: Map<string, string> = new Map();
@@ -47,18 +47,9 @@ export class RecipieEditorComponent implements OnInit {
 
 	saveRecipe() {
 		const recipe = this.recipeEditForm.value;
-		this.recipeFirebaseService.addRecipe(
-			recipe.name,
-			recipe.description,
-			this.recipeEditForm.get('image')?.value,
-			recipe.categories,
-			recipe.timeToMake,
-			recipe.servings,
-			recipe.ingredients,
-			recipe.instructions
-		);
+		recipe.image = this.recipeEditForm.get('image')?.value;
+		this.recipeService.addRecipe(recipe);
 		console.log(recipe);
-
 	}
 
 	onRecipeImageSelected(event: any) {

@@ -1,6 +1,5 @@
 const pool = require("../../config/db.config");
 
-
 exports.createRecipe = async (req, res) => {
     try {
         const conn = await pool.getConnection();
@@ -50,7 +49,7 @@ const createTags = async (recipeId, tags) => {
 				if (rows.length === 0) { // ha még nem létezik az adott cimke
 					const result = await conn.query('INSERT INTO Tags (name) VALUES (?)', [tag]);
 					await conn.query('INSERT INTO RecipeTags (recipe_id, tag_id) VALUES (?, ?)', [recipeId, result.insertId]);					
-				} else {
+				} else { // ha létezik, csak a kapcsolatot kell létrehozni
 					await conn.query('INSERT INTO RecipeTags (recipe_id, tag_id) VALUES (?, ?)', [recipeId, rows[0].id]);
 				}
 			}
@@ -140,12 +139,91 @@ exports.updateRecipe = async (req, res) => {
         const conn = await pool.getConnection();
         try {
             const recipeId = req.params.id;
-            const recipe = { name, image, description, cookTime, servings, difficulty, ingerdients, slug } = req.body;
-            await conn.query(
+            const recipe = { name, image, description, cookTime, servings, difficulty, ingerdients, slug, instructions, tags } = req.body;
+
+            const result = await conn.query(
                 'UPDATE Recipes SET name = ?, image = ?, description = ?, cook_time = ?, servings = ?, difficulty = ?, ingerdients = ?, slug = ? WHERE id = ?',
                 [recipe.name, recipe.image, recipe.description, recipe.cookTime, recipe.servings, recipe.difficulty, recipe.ingerdients, recipe.slug, recipeId]
             );
+
+            updateTags(result.insertId, recipe.tags);
+            updateInstructions(result.insertId, recipe.instructions); 
+
             res.status(201).json({ message: 'Recipe updated!' });
+        } catch (error) {
+            throw error;
+        } finally {
+            conn.release();
+        }
+    } catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			res.status(400).json({ error: error.message });
+		} else {
+			res.status(500).json({ error: "Internal server error" });
+		}
+    }
+}
+
+const updateTags = async (recipeId, tags) => {
+	try {
+		const conn = await pool.getConnection();
+
+		try {
+            // TODO: optimálisabb törlési stratégia kiválasztása
+            // get all tags for the recipe
+            const oldTags = await conn.query('SELECT * FROM Tags, RecipeTags WHERE Tags.id = RecipeTags.tag_id AND RecipeTags.recipe_id = ?', [recipeId]);
+
+            // delete connection if the tag is not in the new tags
+            for (let oldTag of oldTags) {
+                if (!tags.includes(oldTag.name)) {
+                    await conn.query('DELETE FROM RecipeTags WHERE recipe_id = ? AND tag_id = ?', [recipeId, oldTag.tag_id]);
+                }
+            }
+            // add new tags and create connection
+			for (let tag of tags) {
+				tag = tag.toLowerCase();
+                if (!oldTags.includes(tag)) {
+                    const rows = await conn.query('SELECT * FROM Tags WHERE name = ?', [tag]);
+                    if (rows.length === 0) { // ha még nem létezik az adott cimke
+                        const result = await conn.query('INSERT INTO Tags (name) VALUES (?)', [tag]);
+                        await conn.query('INSERT INTO RecipeTags (recipe_id, tag_id) VALUES (?, ?)', [recipeId, result.insertId]);					
+                    } else { // ha létezik, csak a kapcsolatot kell létrehozni
+                        await conn.query('INSERT INTO RecipeTags (recipe_id, tag_id) VALUES (?, ?)', [recipeId, rows[0].id]);
+                    }
+                }
+			}
+		} catch (error) {
+			throw error;
+		} finally {
+			conn.release();
+		}
+	} catch (error) {
+		throw error;
+	}
+}
+
+const updateInstructions = async (recipeId, instructions) => {
+    try {
+        const conn = await pool.getConnection();
+
+        try {
+            // TODO: optimálisabb törlési stratégia kiválasztása
+            await conn.query('DELETE FROM Instructions WHERE recipe_id = ?', [recipeId]);
+            // ON DELETE CASCADE miatt a kapcsolódó képek is törlődnek
+
+            for (let instruction of instructions) {
+                const result = await conn.query(
+                    'INSERT INTO Instructions (recipe_id, step_order, instruction_text) VALUES (?, ?, ?)',
+                    [recipeId, instruction.stepOrder, instruction.instructionText]
+                );
+
+                for (let image of instruction.images) {
+                    await conn.query(
+                        'INSERT INTO InstructionImages (instruction_id, image) VALUES (?, ?)',
+                        [result.insertId, image]
+                    );
+                }
+            }
         } catch (error) {
             throw error;
         } finally {

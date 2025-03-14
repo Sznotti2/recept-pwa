@@ -1,19 +1,21 @@
 import { inject, Injectable } from '@angular/core';
 import { Recipe } from '../interfaces/recipe';
 import { catchError, Observable, pipe, map } from 'rxjs';
-import { RecipeFirebaseService } from './recipe-firebase.service';
 import { OfflineRecipeDbService } from './offline-recipe-db.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+const API_URL = 'http://localhost:5000/api/recipe';
 @Injectable({
 	providedIn: 'root'
 })
 export class RecipeService {
-	recipeFireBaseService = inject(RecipeFirebaseService);
+	http = inject(HttpClient);
+
 	offlineRecipeDbService = inject(OfflineRecipeDbService);
 	// recipesSig = signal<Recipe[]>([]);
-	recipe$ = Observable<Recipe[]>;
+	// recipe$ = Observable<Recipe[]>;
 
-	private recipeList: Recipe[] = [
+	recipeList: Recipe[] = [
 		{
 			id: "wasd1",
 			name: "Csak egy teszt, nincs itt semmi látnivaló. Én más vagyok imnt a többiek.",
@@ -23,7 +25,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 3.2,
 			servings: 2,
-			isFavorite: false,
+			difficulty: "easy",
+			slug: "csak-egy-teszt",
 			ingredients: [
 				{ title: "a tetejére", ingredientList: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"] },
 			],
@@ -40,7 +43,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "hard",
+			slug: "tripla-csoki-mousse-torta",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -70,7 +74,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "medium",
+			slug: "tripla-csoki-mousse-torta",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -100,7 +105,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "medium",
+			slug: "tripla-csoki-mousse-torta",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -130,7 +136,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "hard",
+			slug: "sütés-nélkül-oreoval",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -160,7 +167,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "medium",
+			slug: "sütés-nélkül-oreoval",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -190,7 +198,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "easy",
+			slug: "sütés-nélkül-oreoval",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -220,7 +229,8 @@ export class RecipeService {
 			timeToMake: 60,
 			rating: 4.6,
 			servings: 8,
-			isFavorite: false,
+			difficulty: "easy",
+			slug: "sütés-nélkül-oreoval",
 			ingredients: [
 				{ title: "A kekszes alaphoz", ingredientList: ["200 g Oreo keksz", "10 dkg vaj"] },
 				{ title: " csokoládés rétegekhez", ingredientList: ["másfél tábla étcsoki (150 g)", "másfél tábla tejcsoki (150 g)", "másfél tábla fehér csoki (150 g)", "3*fél bögre (3*120) g 35%-os habtejszín", "3* háromnegyed bögre (3*160 g) 35%-os habtejszín", "3 teáskanál (3*4 g) zselatin"] },
@@ -244,96 +254,81 @@ export class RecipeService {
 
 	]
 
-	addRecipe(
-		name: string,
-		description: string,
-		image: string,
-		categories: string[],
-		timeToMake: number,
-		servings: number,
-		ingredients: {
-			title: string;
-			ingredientList: string[]
-		}[],
-		instructions: {
-			text: string;
-			images?: string[];
-		}[]): void {
-		const newRecipe: Recipe = {
-			id: new Date().getTime().toString(),
-			name,
-			description,
-			image,
-			categories,
-			timeToMake,
-			rating: 0,
-			servings,
-			isFavorite: false,
-			ingredients,
-			instructions,
-		};
-
-
-		if (navigator.onLine) {
-			this.recipeFireBaseService.addRecipe2(newRecipe).subscribe({
-				next: () => {
-					this.offlineRecipeDbService.saveRecipe(newRecipe); // Save offline as well
-				},
-				error: (err) => {
-					console.error('Error adding recipe to Firebase:', err);
-					this.offlineRecipeDbService.saveRecipe(newRecipe); // Save offline if Firebase fails
-				}
-			});
-		} else {
-			this.offlineRecipeDbService.saveRecipe(newRecipe);
-		}
+	addRecipe(recipe: Recipe): Observable<any> {
+		return this.http.post(
+			API_URL + "/",
+			{ 
+				"name": recipe.name,
+				"description": recipe.description,
+				"image": recipe.image,
+				"timeToMake": recipe.timeToMake,
+				"servings": recipe.servings,
+				"difficulty": recipe.difficulty,
+				"slug": recipe.slug,
+				"categories": recipe.categories,
+				"ingredients": recipe.ingredients,
+				"instructions": recipe.instructions,
+			},
+			{
+				withCredentials: true,
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			}
+		);
 	}
 
-	// getAllRecipes(): Recipe[] {
-	// 	return this.recipeList;
-	// }
-
-	// getRecipeById(id: string): Recipe | undefined {
-	// 	return this.recipeList.find((recipe) =>
-	// 		recipe.id === id
-	// 	);
-	// }
-
-	/**
-   * Ha online vagyunk, akkor a firestoreból kérjük le a boxokat, ha viszont nem akkor az indexedDB-ből.
-   */
-	getRecipes(): Observable<Recipe[]> {
-		if (navigator.onLine) {
-			return this.recipeFireBaseService.getRecipes().pipe(
-				// TODO elmenteni az indexedDB-be, hogy offline is el legyen tárolva
-				catchError(() => this.offlineRecipeDbService.getRecipes())
-			);
-		} else {
-			return this.offlineRecipeDbService.getRecipes();
-		}
+	getRecipes(): Observable<any> {
+		return this.http.get(
+			API_URL + "/",
+			{}
+		);
 	}
 
-	getRecipeById(id: string): Observable<Recipe | undefined> {
-		if (navigator.onLine) {
-			return this.recipeFireBaseService.getRecipeById(id);
-		} else {
-			return this.offlineRecipeDbService.getRecipeById(id);
-		}
+	getRecipeBySlug(slug: string): Observable<Recipe> {
+		return this.http.get<Recipe>(
+			API_URL + "/" + slug,
+			{}
+		);
 	}
 
-
-	saveFavoriteRecipesToIndexedDb(): void {
-		this.getRecipes().subscribe((recipes) => {
-			const favoriteRecipes = recipes.filter(recipe => recipe.isFavorite);
-			favoriteRecipes.forEach(recipe => {
-				this.offlineRecipeDbService.saveRecipe(recipe);
-			});
-		});
+	getFavoriteRecipes(): Observable<any> {
+		return this.http.get(
+			API_URL + "/favs",
+			{
+				withCredentials: true,
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			}
+		);
 	}
 
-	public filterRecipiesByName(searchTerm: string): Observable<Recipe[]> {
-		return this.getRecipes().pipe(
-			map(recipes => recipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm.toLowerCase())))
+	editRecipe(recipe: Recipe, id: number): Observable<any> {
+		return this.http.put(
+			API_URL + "/" + id,
+			{
+				"name": recipe.name,
+				"description": recipe.description,
+				"image": recipe.image,
+				"timeToMake": recipe.timeToMake,
+				"servings": recipe.servings,
+				"difficulty": recipe.difficulty,
+				"slug": recipe.slug,
+				"categories": recipe.categories,
+				"ingredients": recipe.ingredients,
+				"instructions": recipe.instructions,
+			},
+			{
+				withCredentials: true,
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			}
+		);
+	}
+
+	deleteRecipe(id: string): Observable<any> {
+		return this.http.delete(
+			API_URL + "/" + id,
+			{
+				withCredentials: true,
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			}
 		);
 	}
 

@@ -1,64 +1,41 @@
 <form [formGroup]="editForm" (ngSubmit)="edit()">
 
 	<div class="form-group">
-		<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''"
-			type="username" placeholder=" " formControlName="username">
+		<input type="username" placeholder=" " formControlName="username">
 		<label>Felhasználónév</label>
 	</div>
 
+	<div class="form-group">
+		<textarea placeholder=" " formControlName="bio"></textarea>
+		<label>Bio</label>
+	</div>
 
 	<div class="form-group">
-		<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="email"
-			placeholder=" " formControlName="email">
-		<label>Email cím</label>
-	</div>
-	@if (email.invalid && (email.dirty || email.touched)) {
-	@if (email.errors?.['required']) {
-	<div class="error">
-		<span class="material-icons">cancel</span>
-		<span>Az email címet meg kell adni!</span>
-	</div>
-	}
-	@if (email.hasError("email") ) {
-	<div class="error">
-		<span class="material-icons">cancel</span>
-		<span>Helytelen email formátum!</span>
-	</div>
-	}
-	}
-
-	<div class="form-group">
-		<input [ngClass]="oldPassword.valid ? 'valid' : oldPassword.dirty || oldPassword.touched ? 'invalid' : ''"
-			[type]="inputType" placeholder=" " formControlName="oldPassword">
-		<label>Régi jelszó</label>
+		<input [type]="inputType" placeholder=" " formControlName="password">
+		<label>Jelszó</label>
 		@if (!passwordVisible) {
-		<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
+			<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
 		} @else {
-		<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
-		}
-	</div>
-
-	<div class="form-group">
-		<input [ngClass]="newPassword.valid ? 'valid' : newPassword.dirty || newPassword.touched ? 'invalid' : ''"
-			[type]="inputType" placeholder=" " formControlName="newPassword">
-		<label>Új jelszó</label>
-		@if (!passwordVisible) {
-		<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
-		} @else {
-		<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
+			<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
 		}
 	</div>
 
 	<div class="image-upload">
-		<div>
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none"
-				viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-					d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-			</svg>
-			<p>Drag your image here or click in this area</p>
-		</div>
-		<input type="file">
+		<label for="profile-image">
+			@if (imageSrc) {
+				<img [src]="imageSrc" alt="">
+			} @else {
+				<div class="label-content">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+					</svg>
+					<p>Drag your image here or click in this area</p>
+				</div>
+			}
+		</label>
+		<input id="profile-image" type="file" accept="image/*" formControlName="image" (change)="onFileChange($event)">
 	</div>
 
 	<button [disabled]="editForm.invalid" class="btn" type="submit">Módosítás</button>

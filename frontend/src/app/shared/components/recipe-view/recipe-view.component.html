@@ -1,7 +1,7 @@
 <div class="container" *ngIf="recipe$ | async as recipe">
 	<!-- @if (recipe$ | async as recipe) { -->
 		<header>
-			<img [src]="recipe.image" alt="{{ recipe?.name }}">
+			<img [src]="recipe.image" alt="{{ recipe.name }}">
 			<div class="recipe__info">
 				<ul class="info">
 					<li>

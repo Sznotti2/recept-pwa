@@ -7,7 +7,8 @@ export interface Recipe {
 	timeToMake: number;
 	rating: number;
 	servings: number; // adagok
-	isFavorite: boolean;
+	slug: string;
+	difficulty: string;
 	ingredients: Ingredient[];
 	instructions: Instruction[];
 }

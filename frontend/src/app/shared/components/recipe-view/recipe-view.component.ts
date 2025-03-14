@@ -2,9 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../../core/services/recipe.service';
 import { Recipe } from '../../../core/interfaces/recipe';
-import { RecipeFirebaseService } from '../../../core/services/recipe-firebase.service';
-import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-recipe-view',
@@ -15,14 +14,12 @@ import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 })
 export class RecipeViewComponent {
 	route: ActivatedRoute = inject(ActivatedRoute);
-	recipe$: Observable<Recipe>;
 	recipeServise = inject(RecipeService);
-	recipeFirebaseService = inject(RecipeFirebaseService);
+
+	recipe$: Observable<Recipe>;
 
 	constructor() {
 		const recipeId = this.route.snapshot.params['id'];
-		// this.recipe = this.recipeServise.getRecipeById(recipeId);
-		this.recipe$ = this.recipeFirebaseService.getRecipeById(recipeId);
-
+		this.recipe$= this.recipeServise.getRecipeBySlug(recipeId);
 	}
 }

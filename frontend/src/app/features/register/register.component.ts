@@ -4,10 +4,6 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
-export const hasOnlyLowercaseLetters = (control: AbstractControl): ValidationErrors | null => {
-	return /[A-Z]/.test(control.value) ? null : { hasOnlyLowercaseLetters: true };
-}
-
 @Component({
 	selector: 'app-register',
 	standalone: true,
@@ -29,7 +25,7 @@ export class RegisterComponent {
 				validators: [Validators.required, Validators.email],
 			}],
 			password: ["", {
-				validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32), hasOnlyLowercaseLetters],
+				validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)],
 			}],
 			passwordAgain: ["", {
 				validators: [Validators.required],
@@ -44,9 +40,11 @@ export class RegisterComponent {
 	public register(): void {
 		if (this.registerForm.valid) {
 			const form = this.registerForm.value;
-			this.authService.register(form.username, form.email, form.password)
+			this.authService.register(form.username, form.email, form.password, form.passwordAgain)
 				.subscribe({
-					next: () => this.router.navigateByUrl("/"),
+					next: () => {
+						this.router.navigateByUrl("/")
+					},
 					error: (error) => this.errorMessage = error.code
 				});
 		} else {

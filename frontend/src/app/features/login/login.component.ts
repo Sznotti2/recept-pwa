@@ -34,7 +34,9 @@ export class LoginComponent {
 			const form = this.loginForm.value;
 			this.authService.login(form.email, form.password)
 				.subscribe({
-					next: () => this.router.navigateByUrl("/"),
+					next: () => {
+						this.router.navigateByUrl("/")
+					},
 					error: (error) => this.errorMessage = error.code
 				});
 		} else {

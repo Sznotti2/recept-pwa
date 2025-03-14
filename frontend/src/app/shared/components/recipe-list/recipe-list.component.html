@@ -18,11 +18,14 @@
 					{{ recipe.rating }}
 				</li>
 				<li>
+					<!--
 					@if (recipe.isFavorite) {
 						<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite</i>
 					} @else {
 						<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite_border</i>
 					}
+					-->
+					<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite_border</i>
 				</li>
 			</ul>
 		</div>
