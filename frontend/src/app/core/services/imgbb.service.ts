@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 export class ImgbbService {
 	http = inject(HttpClient);
 
-	private imgbbApiKey = process.env['IMG_BB_API_KEY'];
+	private imgbbApiKey = "secret_key";
 
 	upload(file: File): Observable<string> {
 		const formData = new FormData();
@@ -18,12 +18,13 @@ export class ImgbbService {
 			throw new Error('IMG_BB_API_KEY not set');
 		}
 
+/*
 		return this.http.post<any>("/upload", formData, { params: { key: this.imgbbApiKey } })
 			.pipe(map(response => response.data.url));
-/*
-		return this.http.post<{ data: { url: string } }>(`https://api.imgbb.com/1/upload?key=${this.imgbbApiKey}`, formData)
-			.pipe(map(response => response
-				.data.url));
 */
+		return this.http.post<{ data: { url: string } }>(
+			`https://api.imgbb.com/1/upload?key=${this.imgbbApiKey}`,
+			formData
+		).pipe(map(response => response.data.url));
 	}
 }

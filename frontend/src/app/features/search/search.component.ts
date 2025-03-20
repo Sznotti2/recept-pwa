@@ -3,7 +3,7 @@ import { MultiselectDropdownComponent } from '../../shared/components/multiselec
 import { RecipeListComponent } from "../../shared/components/recipe-list/recipe-list.component";
 import { Recipe } from '../../core/interfaces/recipe';
 import { RecipeService } from '../../core/services/recipe.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 interface Item {
 	value: string;
@@ -19,8 +19,8 @@ interface Item {
 })
 export class SearchComponent implements OnInit {
 	recipeService = inject(RecipeService);
-
 	recipeList$!: Observable<Recipe[]>;
+
 	itemList : Item[] = [];
 
 	constructor() {

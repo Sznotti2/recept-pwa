@@ -47,9 +47,17 @@ export class RecipieEditorComponent implements OnInit {
 
 	saveRecipe() {
 		const recipe = this.recipeEditForm.value;
+
 		recipe.image = this.recipeEditForm.get('image')?.value;
-		this.recipeService.addRecipe(recipe);
-		console.log(recipe);
+		recipe.slug = recipe.name.toLowerCase().replace(/ /g, "-");
+		recipe.categories = recipe.categories
+			.filter((category: string) => category !== "")
+			.map((category: string) => category.toLowerCase());
+
+		this.recipeService.addRecipe(recipe).subscribe({
+			next: (res) => console.log(res),
+			error: (err) => console.log(err)
+		});
 	}
 
 	onRecipeImageSelected(event: any) {
