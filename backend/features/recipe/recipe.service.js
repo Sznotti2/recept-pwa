@@ -18,7 +18,7 @@ exports.createRecipe = async (req, res) => {
 		cookTime = parseInt(cookTime);
 		servings = parseInt(servings);
 		if (Number.isNaN(cookTime) || Number.isNaN(servings)) return res.status(400).json({ error: 'Cook time and servings must be a number!', "cookTime": cookTime, "typoeOf": typeof cookTime });
-		
+
 		conn = await pool.getConnection();
 		const result = await conn.query(
 			'INSERT INTO Recipes (name, image, description, cook_time, servings, difficulty, ingredients, slug, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -65,6 +65,46 @@ const createInstructions = async (recipeId, instructions) => {
 	let conn;
 	try {
 		conn = await pool.getConnection();
+		// await conn.beginTransaction(); //TODO: nézz utána mit csinál
+
+		for (let i = 0; i < instructions.length; i++) {
+			const { text, images } = instructions[i];
+
+			const result = await conn.query(
+				"INSERT INTO Instructions (recipe_id, step_order, instruction_text) VALUES (?, ?, ?)",
+				[recipeId, i, text]
+			);
+
+			// ha vannak képek
+			if (images && images.length > 0) {
+				for (let image of images) {
+					if (image) { // nem üres string esetén
+						await conn.query(
+							"INSERT INTO InstructionImages (instruction_id, image) VALUES (?, ?)",
+							[result.insertId, image]
+						);
+					}
+				}
+			}
+		}
+
+		// await conn.commit(); //TODO: nézz utána mit csinál
+		console.log("Minden instruction beszúrva");
+	} catch (error) {
+		if (conn) await conn.rollback(); //TODO: nézz utána mit csinál
+		console.error("Hiba történt az instrukciók beszúrásakor:", error);
+		throw error;
+	} finally {
+		if (conn) conn.release();
+	}
+};
+
+
+/*
+const createInstructions = async (recipeId, instructions) => {
+	let conn;
+	try {
+		conn = await pool.getConnection();
 
 		console.log("createInstructions instructions: ", instructions);
 
@@ -90,6 +130,7 @@ const createInstructions = async (recipeId, instructions) => {
 		if (conn) conn.release();
 	}
 }
+*/
 
 exports.getAllRecipes = async (req, res) => {
 	let conn;
