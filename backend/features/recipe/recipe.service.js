@@ -140,7 +140,7 @@ exports.getAllRecipes = async (req, res) => {
 		res.status(200).json({ rows: rows });
 	} catch (error) {
 		if (process.env.NODE_ENV === 'development') {
-			res.status(400).json({ error: error.message });
+			res.status(500).json({ error: error.message });
 		} else {
 			res.status(500).json({ error: "Internal server error" });
 		}
@@ -154,8 +154,37 @@ exports.getRecipeById = async (req, res) => {
 	try {
 		const id = req.params.id;
 		conn = await pool.getConnection();
-		const rows = await conn.query('SELECT * FROM Recipes WHERE id = ?', [id]);
-		res.status(500).json({ rows: rows[0] });
+		const recipeRows = await conn.query('SELECT * FROM Recipes WHERE id = ?', [id]);
+		
+		if (!recipeRows || recipeRows.length === 0) {
+			return res.status(404).json({ message: "Recipe not found" });
+		}
+
+		const recipe = recipeRows[0];
+
+		const tagRows = await conn.query(
+			`SELECT name
+			FROM Tags
+			INNER JOIN RecipeTags ON Tags.id = RecipeTags.tag_id
+			WHERE RecipeTags.recipe_id = ?`, [id]);
+		
+		const instructionRows = await conn.query(
+			`SELECT id, step_order, instruction_text as text FROM Instructions
+			WHERE Instructions.recipe_id = ?`, [id]);
+		for (instruction of instructionRows) {
+			const row = await conn.query(
+				`SELECT image FROM InstructionImages
+				WHERE InstructionImages.instruction_id = ?`, [instruction.id]);
+			instruction.images = row.map(image => image.image);
+		}
+		
+		recipe.categories = tagRows.map(tag => tag.name) || [];
+		recipe.instructions = instructionRows;
+		recipe.ingredients = JSON.parse(recipe.ingredients);
+		recipe.timeToMake = recipe.cook_time;
+		recipe.rating = recipe.average_rating;
+
+		res.status(200).json({ rows: recipe });
 	} catch (error) {
 		if (process.env.NODE_ENV === 'development') {
 			res.status(400).json({ error: error.message });
@@ -165,7 +194,6 @@ exports.getRecipeById = async (req, res) => {
 	} finally {
 		if (conn) conn.release();
 	}
-
 }
 
 exports.updateRecipe = async (req, res) => {

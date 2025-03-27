@@ -4,6 +4,9 @@
 		<div class="form-group">
 			<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''" type="text" placeholder=" " formControlName="username">
 			<label>username</label>
+			@if (username.valid) {
+				<span class="marker">&#10003;</span>
+			}
 		</div>
 		<!-- ha akarsz ikonokat csak töltsd le ezt:
 		https://www.npmjs.com/package/material-icons -->
@@ -31,6 +34,9 @@
 		<div class="form-group">
 			<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="email" placeholder=" " formControlName="email">
 			<label>Email cím</label>
+			@if (email.valid) {
+				<span class="marker">&#10003;</span>
+			}
 		</div>
 		@if (email.invalid && (email.dirty || email.touched)) {
 			@if (email.errors?.['required']) {
@@ -50,6 +56,9 @@
 		<div class="form-group">
 			<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''" [type]="inputType" placeholder=" " formControlName="password">
 			<label>Jelszó</label>
+			@if (password.valid) {
+				<span class="marker">&#10003;</span>
+			}
             @if (!passwordVisible) {
                 <span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>                
             } @else {
@@ -66,7 +75,7 @@
 			@if ( password.hasError("minlength") ) {
 				<div class="error">
 					<span class="material-icons">cancel</span>
-					<span>A jelszó minimum 6 karakter kell, hogy legyen!</span>
+					<span>A jelszó minimum 6 karakter kell hogy legyen!</span>
 				</div>
 			}
 			@if ( password.hasError("maxlength") ) {
@@ -86,6 +95,9 @@
 		<div class="form-group">
 			<input [ngClass]="passwordAgain.valid ? 'valid' : passwordAgain.dirty || passwordAgain.touched ? 'invalid' : ''" type="password" placeholder=" " formControlName="passwordAgain">
 			<label>Jelszó újra</label>
+			@if (passwordAgain.valid) {
+				<span class="marker">&#10003;</span>
+			}
 		</div>
 		@if (passwordAgain.invalid && (passwordAgain.dirty || passwordAgain.touched)) {
 			@if (passwordAgain.errors?.['required']) {

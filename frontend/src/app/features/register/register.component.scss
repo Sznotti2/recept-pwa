@@ -4,8 +4,8 @@ main {
 	margin: var(--gap-small);
 
     form {
-        --_form-bg: var(--clr-bg-light);
-        max-width: 40rem;
+        --_form-bg: var(--gray-100);
+        max-width: 30rem;
         padding: 3rem;
         border: 4px solid black;
         border-radius: 1rem;
@@ -18,6 +18,13 @@ main {
         .form-group {
             position: relative;
 
+            .marker {
+                position: absolute;
+                top: 50%;
+                right: -1.3rem;
+                transform: translateY(-50%);
+                color: hsla(var(--clr-success-hsl), 1);
+            }
             input {
                 width: 100%;
                 // height: 5rem;
@@ -36,7 +43,7 @@ main {
             }
             input:focus {
                 outline: none;
-                border: 4px solid hsl(0, 0%, 18%);
+                border: 2px solid hsl(0, 0%, 18%);
             }
             input:focus + label,                        // ha belekattintasz az inputba
             input:not(:placeholder-shown) + label {    // ha írtál valamit az inputba
@@ -45,11 +52,8 @@ main {
                 transform: translateY(-1.9rem);
                 font-size: 1rem;
             }
-            input.valid {
-                border: 4px solid hsla(var(--clr-success-hsl), 1);
-            }
             input.invalid {
-                border: 4px solid hsla(var(--clr-error-hsl), 1);
+                border: 2px solid hsla(var(--clr-error-hsl), 1);
             }
 
             label {
@@ -63,13 +67,16 @@ main {
                 background-color: var(--_form-bg);
                 border-radius: 1rem;
                 transition: all .3s cubic-bezier(.215,.61,.355,1) .05s;
+                pointer-events: none; // hogy az egér áthaladjon rajta (nem kattintható)
+                user-select: none; // hogy ne lehessen kijelölni
             }
             
             .eye-icon {
                 position: absolute;
                 right: 1.5rem;
-                bottom: 1rem;
-                font-size: 32px;
+                bottom: 50%;
+                transform: translateY(50%);
+                font-size: 24px;
                 cursor: pointer;
                 user-select: none;
             }
@@ -102,7 +109,6 @@ main {
             box-shadow: 3px 3px 0 0 #ff2c36;
             font-weight: bold;
             display: flex;
-            justify-content: flex-start;
 			align-items: center;
             gap: 1rem;
         }

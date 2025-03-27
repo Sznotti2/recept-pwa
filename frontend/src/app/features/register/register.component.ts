@@ -45,7 +45,9 @@ export class RegisterComponent {
 					next: () => {
 						this.router.navigateByUrl("/")
 					},
-					error: (error) => this.errorMessage = error.code
+					error: (error) => {
+						this.errorMessage = error.error.error;
+					}
 				});
 		} else {
 			console.log("Invalid form");

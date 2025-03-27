@@ -13,9 +13,8 @@ form {
     .form-group {
         position: relative;
 
-        input {
+        input, textarea {
             width: 100%;
-            // height: 5rem;
             height: 4rem;
             padding: 1rem 1.5rem;
             appearance: none;
@@ -25,14 +24,22 @@ form {
             border-radius: 1rem;
             transition: all .3s cubic-bezier(.25,.46,.45,.94);
         }
+        textarea {
+            height: auto;
+        }
+
         input:hover {
             outline: none;
             border: 2px solid hsl(0, 0%, 18%);
         }
+        /*
         input:focus {
             outline: none;
             border: 4px solid hsl(0, 0%, 18%);
         }
+        */
+        textarea:focus + label,
+        textarea:not(:placeholder-shown) + label
         input:focus + label,                        // ha belekattintasz az inputba
         input:not(:placeholder-shown) + label {    // ha írtál valamit az inputba
             color: hsl(0, 0%, 18%);
@@ -51,7 +58,7 @@ form {
             position: absolute;
             left: 1.5rem;
             // bottom: 1.7rem;
-            bottom: 1.2rem;
+            top: 1.2rem;
             padding: 0 .3rem;
             letter-spacing: .1rem;
             color: #7a8697;

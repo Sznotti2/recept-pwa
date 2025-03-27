@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Recipe } from '../interfaces/recipe';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const API_URL = 'http://localhost:5000/api/recipe';
@@ -56,9 +56,18 @@ export class RecipeService {
 	}
 
 	getRecipeBySlug(slug: string): Observable<Recipe> {
-		return this.http.get<Recipe>(
+		return this.http.get<{ rows: Recipe }>(
 			API_URL + "/" + slug,
-			{}
+			{
+				withCredentials: true,
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			}
+		).pipe(
+			map(res => res.rows),
+			catchError(error => {
+				//console.error("Hiba történt a recept lekérésekor:", error);
+				return throwError(() => error);
+			})
 		);
 	}
 
