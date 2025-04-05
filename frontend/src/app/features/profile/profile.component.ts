@@ -40,7 +40,7 @@ export class ProfileComponent {
 				this.editForm.patchValue({
 					username: user.name || "",
 					bio: user.bio || "",
-					image: user.profilePicture || "",
+					image: user.profile_picture || "",
 				});
 			}
 		});
@@ -52,9 +52,9 @@ export class ProfileComponent {
    */
 	onFileChange(event: Event) {
 		const reader = new FileReader();
- 
+
 		const target = event.target as HTMLInputElement;
-		if(target && target.files && target.files.length > 0) {
+		if (target && target.files && target.files.length > 0) {
 			this.selectedImage = target.files[0];
 
 			// const [file] = Array.from(target.files); // több kép esetén
@@ -62,7 +62,7 @@ export class ProfileComponent {
 			reader.readAsDataURL(file);
 			reader.onload = () => {
 				this.imageSrc = reader.result as string; // kép megjelenítéshez
-			
+
 				// need to run CD since file load runs outside of zone
 				this.cd.markForCheck();
 			};

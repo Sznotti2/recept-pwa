@@ -1,0 +1,82 @@
+@if (blog) {
+<header>
+    <div class="author-container">
+        @if (author) {
+        <img src="{{ author.profile_picture }}" alt="{{ author.name }}" />
+        <div class="author-info">
+            <h3>{{ author.name }}</h3>
+            <p>{{ blog.created_at | date: 'yyyy.MM.dd.' }}</p>
+        </div>
+        } @else {
+        <img src="https://i0.wp.com/florrycreativecare.com/wp-content/uploads/2020/08/blank-profile-picture-mystery-man-avatar-973460.jpg"
+            alt="mystery man avatar" />
+        <div class="author-info">
+            <h3>Törölt fiók</h3>
+            <p>{{ blog.created_at | date: 'yyyy MM dd' }}</p>
+        </div>
+        }
+    </div>
+    <!--
+    <h2>{{ blog.title }}</h2>
+    <img src="{{ blog.image }}" alt="{{ blog.title }}" />
+    -->
+    <h2>Teszt blog felirat, csak, hogy minden simán menjen</h2>
+    <img src="https://c02.purpledshub.com/uploads/sites/41/2024/12/cat-zoomies.jpg" alt="{{ blog.title }}" />
+</header>
+
+<div class="content">
+    <main>
+        <section>
+            <p>{{ blog.description }}</p>
+        </section>
+        <section>
+            <h3 id="bevezetes">Bevezetés</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus, augue vitae ullamcorper lobortis,
+                erat mauris sollicitudin ex, at faucibus nunc sapien eget diam. Sed fringilla rutrum turpis, non luctus
+                ligula. Morbi a interdum lectus. In hac habitasse platea dictumst. Fusce sit amet rhoncus tortor.
+                Quisque eget massa eu neque pretium lacinia. Integer facilisis dapibus odio vitae cursus. Suspendisse
+                iaculis enim sit amet quam feugiat, nec posuere arcu suscipit. Duis faucibus turpis eu dictum eleifend.
+            </p>
+        </section>
+        <section>
+            <h3 id="a-tesztakrol">A tésztákról</h3>
+            <p>Phasellus laoreet nec sem sed euismod. Maecenas in turpis at erat imperdiet convallis ut suscipit dui.
+                Curabitur at malesuada ex, iaculis vehicula dui. Aliquam facilisis lacus vel metus molestie rhoncus.
+                Suspendisse sagittis, sem sit amet pellentesque sagittis, augue mauris viverra neque, sit amet faucibus
+                ligula tortor eget odio. Praesent commodo magna tincidunt magna egestas mattis. Integer eu dui et lorem
+                convallis ornare. Fusce ullamcorper ultricies leo eget tempor. Sed varius libero vulputate justo
+                pellentesque, non finibus tellus convallis. Nunc pharetra pretium justo vel cursus. Sed sit amet
+                sagittis enim. Vestibulum erat turpis, hendrerit vulputate ligula ullamcorper, semper vulputate dui.</p>
+            <img src="https://c02.purpledshub.com/uploads/sites/41/2024/12/cat-zoomies.jpg" alt="cat-zoomies">
+        </section>
+    </main>
+    <aside>
+        <ul>
+            <li><a href="/#bevezetes">Bevezetés</a></li>
+            <li><a href="a-tesztakrol">A tésztákról</a></li>
+            <li><a href="melyebben-a-tesztakrol">Mélyebben a tésztákról</a></li>
+            <li><a href="#">Most valami más</a></li>
+            <ul>
+                <li><a href="#">Krémekről röviden</a></li>
+                <li><a href="#">Egyszerű krémek</a></li>
+                <li><a href="#">Nehezebb krémek</a></li>
+                <li><a href="#">Trükkök</a></li>
+            </ul>
+            <li><a href="#">Valami felsorolás</a></li>
+            <ol>
+                <li><a href="#">Első</a></li>
+                <li><a href="#">Második</a></li>
+                <li><a href="#">Harmadik</a></li>
+                <li><a href="#">Negyedik</a></li>
+            </ol>
+        </ul>
+    </aside>
+</div>
+
+
+@if (author?.role === "admin") {
+<button routerLink="/settings/blog-editor/{{ blog.slug }}" class="btn" type="button">Szerkesztés</button>
+}
+} @else {
+<h2>Loading...</h2>
+}

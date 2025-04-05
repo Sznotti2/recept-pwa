@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { BlogService } from '../../core/services/blog.service';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,5 +9,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
-  blogs = inject(BlogService).getAllBlogs();
+
 }

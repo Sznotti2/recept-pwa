@@ -1,19 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RecipeService } from '../../core/services/recipe.service';
 // https://dontpaniclabs.com/blog/post/2022/01/05/how-to-use-angular-formarrays-within-formgroups-in-reactive-forms/
 // https://www.tektutorialshub.com/angular/nested-formarray-example-add-form-fields-dynamically/
 
-// ingredients interface
-interface Ingredient {
-	title: string;
-	ingredientList: string[];
-}
 @Component({
 	selector: 'app-recipie-editor',
 	standalone: true,
-	imports: [FormsModule, ReactiveFormsModule, CommonModule, NgFor],
+	imports: [FormsModule, ReactiveFormsModule, CommonModule],
 	templateUrl: './recipie-editor.component.html',
 	styleUrl: './recipie-editor.component.scss'
 })
@@ -63,7 +58,7 @@ export class RecipieEditorComponent implements OnInit {
 	onRecipeImageSelected(event: any) {
 		if (event.target.files && event.target.files[0]) {
 			const file = event.target.files[0];
-	
+
 			const reader = new FileReader();
 			reader.onload = () => {
 				if (reader.result) {
@@ -77,7 +72,7 @@ export class RecipieEditorComponent implements OnInit {
 	onInstructionImageSelected(event: any, instructionIndex: number, imageIndex: number) {
 		if (event.target.files && event.target.files[0]) {
 			const file = event.target.files[0];
-	
+
 			const reader = new FileReader();
 			reader.onload = () => {
 				if (reader.result) {

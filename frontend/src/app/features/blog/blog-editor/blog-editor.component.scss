@@ -1,0 +1,96 @@
+.icon-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: .25rem;
+	border: none;
+	background-color: transparent;
+	transition: all 0.2s ease;
+
+	&.close:hover,
+	&.close:focus {
+		background-color: lightcoral;
+	}
+
+	&.add:hover,
+	&.add:focus {
+		background-color: lightgreen;
+	}
+}
+
+textarea,
+input:not([type=checkbox]):not([type=file]) {
+	width: 100%;
+	border-radius: .3rem;
+	background-color: var(--gray-200);
+	border: 2px solid var(--gray-800);
+	padding: .6rem 1rem;
+	outline: 0;
+	transition-property: color, background-color, border-color, box-shadow;
+	transition-duration: 0.2s;
+	transition-timing-function: ease;
+
+	&:hover {
+		background-color: var(--gray-300);
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 2px var(--gray-800);
+		background-color: var(--gray-200);
+	}
+}
+
+textarea {
+	height: 6rem;
+	min-height: 3rem;
+	resize: vertical;
+}
+
+.paragraph-row,
+.image-upload-container {
+	position: relative;
+
+	.icon-btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: .5rem;
+	}
+}
+
+.image-upload {
+	display: grid;
+	margin-top: 0.5rem;
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+
+	input {
+		display: none;
+	}
+
+	label {
+		width: 100%;
+		display: grid;
+		place-items: center;
+		border-radius: 0.5rem;
+		border: 4px dashed darkgray;
+		color: black;
+		cursor: pointer;
+
+		transition: all 0.2s ease;
+
+		&:hover {
+			border: 4px dashed black;
+		}
+
+		.label-content {
+			padding: 2.5rem;
+		}
+
+		svg {
+			width: 2.2em;
+			height: 2.2em;
+		}
+	}
+}

@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Recipe } from '../../core/interfaces/recipe';
 import { RecipeService } from '../../core/services/recipe.service';
-import { Blog } from '../../core/interfaces/blog';
-import { BlogService } from '../../core/services/blog.service';
-import { BlogListComponent } from '../../shared/components/blog-list/blog-list.component';
+import { Blog } from '../blog/interfaces/blog';
+import { BlogListComponent } from '../blog/blog-list/blog-list.component';
 import { RecipeListComponent } from '../../shared/components/recipe-list/recipe-list.component';
-import { map, Observable } from 'rxjs';
+import { BlogService } from '../blog/services/blog.service';
 
 @Component({
 	selector: 'app-home',
@@ -18,13 +18,15 @@ export class HomeComponent {
 	recipeList: Observable<Recipe[]>;
 	recipeService = inject(RecipeService);
 
-	blogList: Blog[] = [];
+	blogList: Observable<Blog[]>;
 	blogService = inject(BlogService);
 
 	constructor() {
 		this.recipeList = this.recipeService.getRecipes().pipe(
 			map(recipes => recipes.slice(0, 8))
 		);
-		this.blogList = this.blogService.getAllBlogs().slice(0, 6);
+		this.blogList = this.blogService.getBlogs().pipe(
+			map(blog => blog.slice(0, 6))
+		);
 	}
 }

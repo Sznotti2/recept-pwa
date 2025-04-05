@@ -2,10 +2,13 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { RecipeViewComponent } from './shared/components/recipe-view/recipe-view.component';
 import { SearchComponent } from './features/search/search.component';
-import { BlogComponent } from './features/blog/blog.component';
 import { MyRecipiesComponent } from './features/my-recipies/my-recipies.component';
 import { RecipieEditorComponent } from './features/recipie-editor/recipie-editor.component';
 import { authGuard } from './core/guards/auth.guard';
+import { BlogEditorComponent } from './features/blog/blog-editor/blog-editor.component';
+import { BlogsPageComponent } from './features/blog/blogs-page/blogs-page.component';
+import { BlogViewComponent } from './features/blog/blog-view/blog-view.component';
+import { MyBlogsComponent } from './features/blog/my-blogs/my-blogs.component';
 
 export const routes: Routes = [
     {
@@ -17,12 +20,12 @@ export const routes: Routes = [
         path: "search/:id",
         component: RecipeViewComponent,
     },
-	{
-		path: "search",
-		component: SearchComponent
-	},
-	{
-		path: "settings",
+    {
+        path: "search",
+        component: SearchComponent
+    },
+    {
+        path: "settings",
         loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
         children: [
             {
@@ -31,34 +34,49 @@ export const routes: Routes = [
             },
             {
                 path: 'my-blogs',
-                loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
-				canActivate: [authGuard]
+                // loadComponent: () => import('./features/my-blogs/my-blogs.component').then(m => m.MyBlogsComponent),
+                component: MyBlogsComponent,
+                canActivate: [authGuard]
             },
             {
                 path: 'my-recipes',
-				component: MyRecipiesComponent,
-				canActivate: [authGuard]
+                component: MyRecipiesComponent,
+                canActivate: [authGuard]
                 // loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
             },
             {
                 path: 'dashboard',
                 loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
             },
-			{
-				path: 'recipe-editor',
-				component: RecipieEditorComponent,
-				canActivate: [authGuard]
-				// loadComponent: () => import('./features/recipie-editor/recipie-editor.component').then(m => m.RecipieEditorComponent)
-			},
+            {
+                path: 'recipe-editor',
+                component: RecipieEditorComponent,
+                canActivate: [authGuard]
+                // loadComponent: () => import('./features/recipie-editor/recipie-editor.component').then(m => m.RecipieEditorComponent)
+            },
+            {
+                path: 'blog-editor',
+                component: BlogEditorComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'blog-editor/:slug',
+                component: BlogEditorComponent,
+                canActivate: [authGuard]
+            }
         ]
-	},
+    },
     {
         path: 'about',
         loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent)
     },
     {
         path: 'blog',
-        component: BlogComponent,
+        component: BlogsPageComponent,
+    },
+    {
+        path: 'blog/:slug',
+        component: BlogViewComponent,
     },
     {
         path: 'login',

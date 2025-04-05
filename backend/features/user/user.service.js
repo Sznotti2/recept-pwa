@@ -8,7 +8,7 @@ exports.registerUser = async (req, res) => {
 		const { name, email, password, password2 } = req.body;
 		// Hibakezelés
 		if (!name || !email || !password || !password2) return res.status(400).json({ error: 'All fields are required' });
-		
+
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!emailRegex.test(email)) return res.status(400).json({ error: 'Invalid email format' });
 
@@ -21,7 +21,7 @@ exports.registerUser = async (req, res) => {
 		let rows = await conn.query('SELECT * FROM users WHERE email = ?', [email]);
 		if (rows.length > 0) return res.status(400).json({ error: 'Email already exists' });
 		rows = await conn.query('SELECT * FROM users WHERE name = ?', [name]);
-		if (rows.length > 0) return res.status(400).json({ error: 'Username already exists' }); 
+		if (rows.length > 0) return res.status(400).json({ error: 'Username already exists' });
 
 		const salt = await bcrypt.genSalt(10)
 		const hashedPassword = await bcrypt.hash(password, salt);
@@ -49,19 +49,19 @@ exports.loginUser = async (req, res) => {
 		// Hibakezelés 
 		if (!email || !password) return res.status(400).json({ error: 'All fields are required' });
 
-		//TODO: Email és felhasználónév is be lehet jelentkezni
 		conn = await pool.getConnection();
 		let rows = await conn.query(
-			'SELECT * FROM users WHERE email = ?',
-			[email]
+			'SELECT * FROM Users WHERE email = ? OR name = ?',
+			[email, email]
 		);
 
 		if (rows.length === 0 || !(await bcrypt.compare(password, rows[0].password))) {
 			return res.status(401).json({ error: 'Invalid credentials' });
 		}
+
 		const token = jwt.sign(
-			{ id: rows[0].id }, 
-			process.env.JWT_SECRET, 
+			{ id: rows[0].id },
+			process.env.JWT_SECRET,
 			{ expiresIn: process.env.JWT_EXPIRES_IN }
 		);
 
@@ -214,3 +214,26 @@ exports.deleteUser = async (req, res) => {
 		if (conn) conn.release();
 	}
 };
+
+exports.getUserById = async (req, res) => {
+	let conn;
+	try {
+		conn = await pool.getConnection();
+		const rows = await conn.query('SELECT name, email, profile_picture, bio, social_links, role FROM users WHERE id = ?', [req.params.id]);
+
+		if (rows.length === 0) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		// Ha minden rendben van, visszaküldjük a felhasználói adatokat
+		res.status(200).json({ row: rows[0] });
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			res.status(400).json({ message: error.message });
+		} else {
+			res.status(500).json({ message: "Internal server error" });
+		}
+	} finally {
+		conn.release();
+	}
+}

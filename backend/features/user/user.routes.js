@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, logoutUser, updateUser, deleteUser, getUserData, refreshToken } = require('./user.service');
+const { registerUser, loginUser, logoutUser, updateUser, deleteUser, getUserData, refreshToken, getUserById } = require('./user.service');
 const verifyToken = require('../../middleware/authJWT');
 
 router.post('/register', registerUser);
@@ -10,5 +10,6 @@ router.put('/', verifyToken, updateUser);
 router.delete('/', verifyToken, deleteUser);
 router.get('/me', verifyToken, getUserData);
 router.get('/refreshtoken', verifyToken, refreshToken);
+router.get('/:id', getUserById);
 
 module.exports = router;

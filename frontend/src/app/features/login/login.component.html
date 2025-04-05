@@ -1,8 +1,8 @@
 <main>
 	<form [formGroup]="loginForm" (ngSubmit)="login()">
 		<div class="form-group">
-			<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="email" placeholder=" " formControlName="email">
-			<label>Email cím</label>
+			<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="text" placeholder=" " formControlName="email">
+			<label>Email vagy felhasználónév</label>
 		</div>
 		<!-- ha akarsz ikonokat csak töltsd le ezt:
 		https://www.npmjs.com/package/material-icons -->

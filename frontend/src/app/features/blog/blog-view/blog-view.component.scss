@@ -1,0 +1,22 @@
+header {
+    display: grid;
+    justify-content: center;
+
+    .author-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    h2 {
+        text-align: center;
+    }
+}

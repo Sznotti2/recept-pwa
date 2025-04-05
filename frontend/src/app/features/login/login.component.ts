@@ -17,13 +17,13 @@ export const hasOnlyLowercaseLetters = (control: AbstractControl): ValidationErr
 	styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-	router = inject(Router);
-	authService = inject(AuthService);
+	private router = inject(Router);
+	private authService = inject(AuthService);
 
 	loginForm: FormGroup;
 	constructor(private formBuilder: FormBuilder) {
 		this.loginForm = this.formBuilder.group({
-			email: ["", { validators: [Validators.required, Validators.email] }],
+			email: ["", { validators: [Validators.required] }],
 			password: ["", { validators: [Validators.required] }],
 		});
 	}

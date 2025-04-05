@@ -1,0 +1,13 @@
+<section>
+	@for (blog of blogs$ | async; track blog.id) {
+	<div class="card">
+		<img [src]="blog.image" alt="{{ blog.title }}">
+
+		<div class="content">
+			<h3 routerLink="/blog/{{blog.slug}}">{{ blog.title }}</h3>
+			<p>{{ blog.description }}</p>
+			<span>{{ blog.created_at | date : 'y MMMM d' }}</span>
+		</div>
+	</div>
+	}
+</section>

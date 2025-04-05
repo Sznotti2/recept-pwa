@@ -75,27 +75,27 @@ export class AuthService {
 			}
 		);
 	}
-/*
-	editUser(name: string, password: string, bio: string, image: File): Observable<any> {
-		return this.imgbbService.upload(image).pipe(
-			map(profilePicture => {
-				// Itt már a profilePicture tartalmazza az uploadImage eredményét,
-				// amit felhasználhatsz a PUT kérésben.
-				return this.http.put(
-					API_URL + `/`,
-					{ name, password, bio, profilePicture },
-					{
-						withCredentials: true,
-						headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-					}
-				);
-			}),
-			tap(() => {
-				console.log("editUser sent");
-			})
-		);
-	}
-*/
+	/*
+		editUser(name: string, password: string, bio: string, image: File): Observable<any> {
+			return this.imgbbService.upload(image).pipe(
+				map(profilePicture => {
+					// Itt már a profilePicture tartalmazza az uploadImage eredményét,
+					// amit felhasználhatsz a PUT kérésben.
+					return this.http.put(
+						API_URL + `/`,
+						{ name, password, bio, profilePicture },
+						{
+							withCredentials: true,
+							headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+						}
+					);
+				}),
+				tap(() => {
+					console.log("editUser sent");
+				})
+			);
+		}
+	*/
 	editUser(name: string, password: string, bio: string, image: string): Observable<any> {
 		return this.http.put(
 			API_URL + `/`,
@@ -115,6 +115,18 @@ export class AuthService {
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 			}
+		);
+	}
+
+	getUser(id: number): Observable<User> {
+		return this.http.get<{ row: User }>(
+			API_URL + "/" + id,
+			{
+				withCredentials: true,
+				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+			}
+		).pipe(
+			map(response => response.row)
 		);
 	}
 }

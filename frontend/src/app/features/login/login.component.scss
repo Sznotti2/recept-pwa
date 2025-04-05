@@ -42,7 +42,7 @@ main {
             input:not(:placeholder-shown) + label {    // ha írtál valamit az inputba
                 color: hsl(0, 0%, 18%);
                 // transform: translateY(-2.6rem);
-                transform: translateY(-1.9rem);
+                transform: translateY(-1.9rem) scale(.9);
                 font-size: 1rem;
             }
             input.valid {

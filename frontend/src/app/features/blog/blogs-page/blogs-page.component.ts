@@ -1,32 +1,32 @@
 import { Component, inject } from '@angular/core';
-import { BlogService } from '../../core/services/blog.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BlogListComponent } from '../../shared/components/blog-list/blog-list.component';
+import { BlogService } from '../services/blog.service';
+import { BlogListComponent } from '../blog-list/blog-list.component';
 
 @Component({
-	selector: 'app-blog',
+	selector: 'app-blogs-page',
 	standalone: true,
 	imports: [BlogListComponent, ReactiveFormsModule, FormsModule],
-	templateUrl: './blog.component.html',
-	styleUrl: './blog.component.scss'
+	templateUrl: './blogs-page.component.html',
+	styleUrl: './blogs-page.component.scss'
 })
-export class BlogComponent {
+export class BlogsPageComponent {
 	blogService = inject(BlogService);
-	blogs = this.blogService.getAllBlogs();
+	blogs = this.blogService.getBlogs();
 
 	selectedOption = "";
-	blogSortForm : FormGroup;
+	blogSortForm: FormGroup;
 
-	constructor(private formBuilder : FormBuilder) {
+	constructor(private formBuilder: FormBuilder) {
 		this.blogSortForm = this.formBuilder.group({
 			timeAsc: [""],
-			timeDesc: [""],			
+			timeDesc: [""],
 			nameAsc: [""],
 			nameDesc: [""],
 		});
 	}
 
-	toggleDropdown(event : any) {
+	toggleDropdown(event: any) {
 		event.preventDefault();
 		event.stopPropagation();
 		event.target.classList.toggle('expanded');
@@ -36,12 +36,12 @@ export class BlogComponent {
 		element.checked = true;
 	}
 
-	sortBlogsByDate(ascending : boolean = false) {
-		this.blogs = this.blogService.sortBlogsByDate(this.blogs, ascending);
+	sortBlogsByDate(ascending: boolean = false) {
+		// this.blogs = this.blogService.sortBlogsByDate(this.blogs, ascending);
 	}
 
-	sortBlogsByName(ascending : boolean = false) {
-		this.blogs = this.blogService.sortBlogsByName(this.blogs, ascending);
+	sortBlogsByName(ascending: boolean = false) {
+		// this.blogs = this.blogService.sortBlogsByName(this.blogs, ascending);
 	}
 
 	sortBlogs() {
