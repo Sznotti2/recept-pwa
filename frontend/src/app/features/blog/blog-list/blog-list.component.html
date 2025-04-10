@@ -1,13 +1,26 @@
 <section>
 	@for (blog of blogs$ | async; track blog.id) {
-	<div class="card">
-		<img [src]="blog.image" alt="{{ blog.title }}">
+		@defer {
+			<div class="card" routerLink="/blog/{{blog.slug}}">
+				<div class="img-container">
+					<img [src]="blog.image" alt="{{ blog.title }}">
+				</div>
 
-		<div class="content">
-			<h3 routerLink="/blog/{{blog.slug}}">{{ blog.title }}</h3>
-			<p>{{ blog.description }}</p>
-			<span>{{ blog.created_at | date : 'y MMMM d' }}</span>
-		</div>
-	</div>
+				<div class="content">
+					<h3>{{ blog.title }}</h3>
+					<p>{{ blog.description }}</p>
+					<p>{{ blog.created_at | date : 'y MMMM d' }}</p>
+				</div>
+			</div>
+		} @placeholder (minimum 1s) {
+			<div class="card loading">
+				<div class="img-container"></div>
+				<div class="content">
+					<h3></h3>
+					<p></p>
+					<p></p>
+				</div>
+			</div>
+		}
 	}
 </section>

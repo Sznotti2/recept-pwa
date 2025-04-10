@@ -60,14 +60,30 @@ CREATE TABLE Blogs (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	author_id INT,
 	title VARCHAR(255) NOT NULL,
-	description TEXT NOT NULL,
+	description TEXT,
 	image VARCHAR(255) NOT NULL,
 	slug VARCHAR(255) NOT NULL UNIQUE,
-	content JSON NOT NULL,
+	status ENUM('draft', 'published', 'archived') DEFAULT 'draft',
+    meta_description VARCHAR(255),		-- SEO szempontból hasznos mező
+	-- content JSON NOT NULL,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	FOREIGN KEY (author_id) REFERENCES Users(id) ON DELETE SET NULL
 ) ENGINE = InnoDB;
+
+CREATE TABLE BlogBlocks (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    blog_id INT NOT NULL,
+    block_type VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,                                    -- A blokk tartalma (szöveg, kép URL, JSON-formátumú extra adatok stb.)
+    block_index INT NOT NULL,                           -- A blokk sorrendjének meghatározására
+    FOREIGN KEY (blog_id) REFERENCES Blogs(id) ON DELETE CASCADE,
+);
+
+-- Indexek létrehozása a gyakran használt oszlopokra (opcionális, de ajánlott a teljesítmény érdekében)
+-- CREATE INDEX idx_blogs_author ON Blogs(author_id);
+-- CREATE INDEX idx_blog_blocks_parent ON BlogBlocks(blog_id);
 
 CREATE TABLE Comments (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

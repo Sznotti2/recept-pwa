@@ -11,10 +11,12 @@ exports.createBlog = async (req, res) => {
 		}
 
 		conn = await pool.getConnection();
-		await conn.query(
+		const result = await conn.query(
 			'INSERT INTO Blogs (author_id, title, description, image, slug, content) VALUES (?, ?, ?, ?, ?, ?)',
 			[req.userId, title, description, image, slug, content]
 		);
+
+		createBlogBlocks(result.insertId, content);
 
 		res.status(201).json({ message: 'Blog created successfully!' });
 	} catch (error) {
@@ -26,6 +28,10 @@ exports.createBlog = async (req, res) => {
 	} finally {
 		conn.release();
 	}
+}
+
+const createBlogBlocks = async (id, content) => {
+
 }
 
 exports.getAllBlogs = async (req, res) => {
@@ -49,7 +55,6 @@ exports.getAllBlogs = async (req, res) => {
 		}
 	}
 }
-
 exports.getBlogById = async (req, res) => {
 	try {
 		let conn;

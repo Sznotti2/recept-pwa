@@ -25,7 +25,6 @@ export class BlogEditorComponent implements OnInit {
 	paragraphImgSrc: Map<string, string> = new Map();
 	slug = "";
 	blogSlug = "";
-	blogId = -1;
 	blog: Blog | null = null;
 
 	ngOnInit(): void {
@@ -33,8 +32,12 @@ export class BlogEditorComponent implements OnInit {
 			title: [""],
 			description: [""],
 			image: [""],
-			content: this.formBuilder.array([]),
-			slug: [""]
+			blocks: this.formBuilder.array([]),
+			slug: [""],
+			blogStatus: this.formBuilder.group({
+				status: ['draft']
+			}),
+			metaDescription: [""]
 		});
 
 		this.blogSlug = this.route.snapshot.params['slug'];
@@ -42,33 +45,16 @@ export class BlogEditorComponent implements OnInit {
 			this.blogService.getBlogBySlug(this.blogSlug).subscribe({
 				next: (res) => {
 					this.blog = res;
-					/*
-					const content = JSON.parse(res.content);
-					content.forEach((paragraph: any) => {
-						const group = this.formBuilder.group({
-							text: [paragraph.text, Validators.required],
-							images: this.formBuilder.array([])
-						});
-						this.content.push(group);
-	
-						paragraph.images.forEach((image: string) => {
-							this.getImagesAt(this.content.length - 1).push(this.formBuilder.control(image));
-						});
+					this.blogEditForm.patchValue({
+						title: res.title,
+						description: res.description,
+						slug: res.slug
 					});
-					*/
 				},
 				error: (err) => console.log(err)
 			});
-
-			this.blogEditForm.patchValue({
-				title: this.blog!.title,
-				description: this.blog!.description,
-				slug: this.blog!.slug
-			});
-			this.blogImgSrc = this.blog!.image;
-			this.blogId = this.blog!.id;
 		} else {
-			this.addParagraph();
+			this.addBlock();
 			this.addImageInput(0);
 		}
 	}
@@ -82,8 +68,15 @@ export class BlogEditorComponent implements OnInit {
 		});
 	}
 
+	update() {
+		this.blogService.updateBlog(this.blog!).subscribe({
+			next: () => this.router.navigateByUrl("/settings/my-blogs"),
+			error: (err) => console.log(err)
+		});
+	}
+
 	delete() {
-		this.blogService.deleteBlog(this.blogId).subscribe({
+		this.blogService.deleteBlog(this.blog!.id).subscribe({
 			next: () => this.router.navigateByUrl("/settings/my-blogs"),
 			error: (err) => console.log(err)
 		});
@@ -94,21 +87,35 @@ export class BlogEditorComponent implements OnInit {
 		this.blogEditForm.patchValue({ slug: this.slug });
 	}
 
-	get content(): FormArray {
-		return this.blogEditForm.get("content") as FormArray;
+	onBlogImageSelected(event: any) {
+		if (event.target.files && event.target.files[0]) {
+			const file = event.target.files[0];
+
+			const reader = new FileReader();
+			reader.onload = () => {
+				if (reader.result) {
+					this.blogImgSrc = reader.result as string;
+				}
+			};
+			reader.readAsDataURL(file);
+		}
+	};
+
+	get blocks(): FormArray {
+		return this.blogEditForm.get("blocks") as FormArray;
 	}
-	addParagraph(): void {
+	addBlock(): void {
 		const group = this.formBuilder.group({
 			text: ["", Validators.required],
 			images: this.formBuilder.array([])
 		});
-		this.content.push(group);
+		this.blocks.push(group);
 	}
-	removeParagraph(index: number): void {
+	removeBlock(index: number): void {
 
 	}
 	getImagesAt(index: number): FormArray {
-		return this.content.at(index).get("images") as FormArray
+		return this.blocks.at(index).get("images") as FormArray
 	}
 	addImageInput(index: number): void {
 		this.getImagesAt(index).push(this.formBuilder.control(""));
@@ -132,19 +139,5 @@ export class BlogEditorComponent implements OnInit {
 			reader.readAsDataURL(file);
 		}
 	}
-
-	onBlogImageSelected(event: any) {
-		if (event.target.files && event.target.files[0]) {
-			const file = event.target.files[0];
-
-			const reader = new FileReader();
-			reader.onload = () => {
-				if (reader.result) {
-					this.blogImgSrc = reader.result as string;
-				}
-			};
-			reader.readAsDataURL(file);
-		}
-	};
 
 }

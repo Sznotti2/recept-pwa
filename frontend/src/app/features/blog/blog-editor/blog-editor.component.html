@@ -4,15 +4,15 @@
 			<div class="image-upload">
 				<label for="blog-image">
 					@if (blogImgSrc) {
-					<img [src]="blogImgSrc" alt="">
+						<img [src]="blogImgSrc" alt="">
 					} @else {
-					<div class="label-content">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-								d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-						</svg>
-						<p>Drag your image here or click in this area</p>
-					</div>
+						<div class="label-content">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+									d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+							</svg>
+							<p>Drag your image here or click in this area</p>
+						</div>
 					}
 				</label>
 				<input id="blog-image" type="file" formControlName="image" (change)="onBlogImageSelected($event)">
@@ -20,17 +20,28 @@
 			<input type="text" formControlName="title" placeholder="Blog neve" (keyup)="onTitleChange($event)">
 			<textarea formControlName="description" placeholder="Blog leírása"></textarea>
 			<input type="text" formControlName="slug" placeholder="Slug" value="{{ slug }}">
+
+			<div class="radio-group">
+				<input id="draft" type="radio" name="status">
+				<label for="draft">Vázlat</label>
+				<input id="published" type="radio" name="status">
+				<label for="published">Publikált</label>
+				<input id="archived" type="radio" name="status">
+				<label for="archived">Archívált</label>
+			</div>
+
+			<input type="text" formControlName="metaDescription" placeholder="Meta leírás">
 		</section>
 
 		<section class="paragraphs">
 			<h3>Paragrafusok</h3>
 
-			<ol formArrayName="content">
-				<li *ngFor="let paragraph of content.controls; let i = index" [formGroupName]="i">
+			<ol formArrayName="blocks">
+				<li *ngFor="let paragraph of blocks.controls; let i = index" [formGroupName]="i">
 					<div class="paragraph-row">
 						<textarea formControlName="text" cols="30" rows="3" placeholder="Paragrafus"></textarea>
 						<button class="icon-btn close " type="button" title="leírás eltávolítása"
-							(click)="removeParagraph(i)">
+							(click)="removeBlock(i)">
 							<i class="material-icons">close</i>
 						</button>
 					</div>
@@ -40,16 +51,16 @@
 							<div class="image-upload">
 								<label for="{{ i + '-' + j}}">
 									@if (paragraphImgSrc.get(i+'-'+j)) {
-									<img [src]="paragraphImgSrc.get(i+'-'+j)" alt="">
+										<img [src]="paragraphImgSrc.get(i+'-'+j)" alt="">
 									} @else {
-									<div class="label-content">
-										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-											stroke="currentColor">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-												d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-										</svg>
-										<p>Drag your image here or click in this area</p>
-									</div>
+										<div class="label-content">
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+												stroke="currentColor">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+													d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+											</svg>
+											<p>Drag your image here or click in this area</p>
+										</div>
 									}
 								</label>
 								<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
@@ -65,17 +76,18 @@
 						</button>
 					</div>
 				</li>
-				<button class="icon-btn add" type="button" title="Paragrafus hozzáadása" (click)="addParagraph()">
-					<i class="material-icons">add</i>
-				</button>
 			</ol>
+			<button class="icon-btn add" type="button" title="Paragrafus hozzáadása" (click)="addBlock()">
+				<i class="material-icons">add</i>
+			</button>
 		</section>
 
 		<section>
-			<button class="btn" type="submit">Mentés</button>
-			<button class="btn" type="button">Mégse</button>
 			@if (blogSlug) {
-			<button class="btn" type="button" (click)="delete()">Törlés</button>
+				<button class="btn" type="button" (click)="update()">Frissítés</button>
+				<button class="btn" type="button" (click)="delete()">Törlés</button>
+			} @else {
+				<button class="btn" type="submit">Mentés</button>
 			}
 		</section>
 	</form>

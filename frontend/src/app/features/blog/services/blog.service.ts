@@ -12,7 +12,6 @@ export class BlogService {
 	private http = inject(HttpClient);
 
 	addBlog(blog: Blog): Observable<any> {
-		blog.content = JSON.stringify(blog.content, null, 2);
 		blog.image = "path-to-img";
 
 		return this.http.post<any>(

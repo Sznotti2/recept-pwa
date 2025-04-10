@@ -299,6 +299,44 @@ body {
 	}
 }
 
+.radio-group {
+	grid-column: span 2;
+	justify-self: start;
+
+	border: solid 2px var(--gray-800);
+	display: inline-block;
+	border-radius: 10px;
+	overflow: hidden;
+
+	input[type=radio] {
+		position: absolute;
+		visibility: hidden;
+		display: none;
+
+		&:checked+label {
+			color: var(--gray-200);
+			background: var(--gray-800);
+		}
+	}
+
+	label {
+		color: var(--gray-800);
+		display: inline-block;
+		cursor: pointer;
+		font-weight: bold;
+		padding: .3rem 1rem;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: var(--gray-200);
+		}
+	}
+
+	label+input[type=radio]+label {
+		border-left: solid 2px var(--gray-800);
+	}
+}
+
 /* LINKS */
 #links {
 
