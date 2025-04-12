@@ -42,6 +42,7 @@ export class ProfileComponent {
 					bio: user.bio || "",
 					image: user.profile_picture || "",
 				});
+				console.log("User data loaded", user);
 			}
 		});
 	}

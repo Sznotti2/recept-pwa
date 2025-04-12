@@ -5,11 +5,12 @@ import { BlogService } from '../services/blog.service';
 import { ImgbbService } from '../../../core/services/imgbb.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../interfaces/blog';
+import { DropdownSelectComponent } from '../../../shared/components/dropdown-select/dropdown-select.component';
 
 @Component({
 	selector: 'app-blog-editor',
 	standalone: true,
-	imports: [FormsModule, ReactiveFormsModule, NgFor],
+	imports: [FormsModule, ReactiveFormsModule, NgFor, DropdownSelectComponent],
 	templateUrl: './blog-editor.component.html',
 	styleUrl: './blog-editor.component.scss'
 })
@@ -34,9 +35,7 @@ export class BlogEditorComponent implements OnInit {
 			image: [""],
 			blocks: this.formBuilder.array([]),
 			slug: [""],
-			blogStatus: this.formBuilder.group({
-				status: ['draft']
-			}),
+			status: [""],
 			metaDescription: [""]
 		});
 
@@ -62,10 +61,11 @@ export class BlogEditorComponent implements OnInit {
 	create() {
 		const blog = this.blogEditForm.value;
 
-		this.blogService.addBlog(blog).subscribe({
-			next: () => this.router.navigateByUrl("/settings/my-blogs"),
-			error: (err) => console.log(err)
-		});
+		console.log(blog);
+		// this.blogService.addBlog(blog).subscribe({
+		// 	next: () => this.router.navigateByUrl("/settings/my-blogs"),
+		// 	error: (err) => console.log(err)
+		// });
 	}
 
 	update() {
@@ -80,6 +80,16 @@ export class BlogEditorComponent implements OnInit {
 			next: () => this.router.navigateByUrl("/settings/my-blogs"),
 			error: (err) => console.log(err)
 		});
+	}
+
+	onDropdownSelect(event: any) {
+		console.log(event);
+	}
+	
+	selectedValue: string = '';
+	onSelectionChange(selected: string) {
+		this.selectedValue = selected;
+		console.log('Kiválasztott érték:', selected);
 	}
 
 	onTitleChange(event: any) {
@@ -106,6 +116,7 @@ export class BlogEditorComponent implements OnInit {
 	}
 	addBlock(): void {
 		const group = this.formBuilder.group({
+			blockType: ["", Validators.required],
 			text: ["", Validators.required],
 			images: this.formBuilder.array([])
 		});
@@ -113,6 +124,9 @@ export class BlogEditorComponent implements OnInit {
 	}
 	removeBlock(index: number): void {
 
+	}
+	getBlockTypeAt(index: number): FormGroup {
+		return this.blocks.at(index).get("blockType") as FormGroup;
 	}
 	getImagesAt(index: number): FormArray {
 		return this.blocks.at(index).get("images") as FormArray

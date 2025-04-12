@@ -18,15 +18,15 @@ exports.registerUser = async (req, res) => {
 		if (!/\d/.test(password)) return res.status(400).json({ error: 'Password must contain at least one number' });
 		// Ha a felhasználó már létezik, hibát dobunk
 		conn = await pool.getConnection();
-		let rows = await conn.query('SELECT * FROM users WHERE email = ?', [email]);
+		let rows = await conn.query('SELECT * FROM Users WHERE email = ?', [email]);
 		if (rows.length > 0) return res.status(400).json({ error: 'Email already exists' });
-		rows = await conn.query('SELECT * FROM users WHERE name = ?', [name]);
+		rows = await conn.query('SELECT * FROM Users WHERE name = ?', [name]);
 		if (rows.length > 0) return res.status(400).json({ error: 'Username already exists' });
 
 		const salt = await bcrypt.genSalt(10)
 		const hashedPassword = await bcrypt.hash(password, salt);
 		await conn.query(
-			'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+			'INSERT INTO Users (name, email, password) VALUES (?, ?, ?)',
 			[name, email, hashedPassword]
 		);
 		res.status(201).json({ message: 'User registered successfully' });
@@ -97,7 +97,7 @@ exports.refreshToken = async (req, res) => {
 				return res.status(403).json({ error: 'Unauthorized' });
 			}
 			conn = await pool.getConnection();
-			const rows = await conn.query('SELECT * FROM users WHERE id = ?', [decoded.id]);
+			const rows = await conn.query('SELECT * FROM Users WHERE id = ?', [decoded.id]);
 			if (rows.length === 0) return res.status(404).json({ error: 'User not found' });
 
 			const newToken = jwt.sign(
@@ -131,7 +131,7 @@ exports.getUserData = async (req, res) => {
 	try {
 		// Lekérjük a felhasználó adatait az adatbázisból az ID alapján, ami a tokenben van
 		conn = await pool.getConnection();
-		const rows = await conn.query('SELECT name, email, profile_picture, bio, social_links, role FROM users WHERE id = ?', [req.userId]);
+		const rows = await conn.query('SELECT name, email, profile_picture, bio, social_links, role FROM Users WHERE id = ?', [req.userId]);
 
 		if (rows.length === 0) {
 			return res.status(404).json({ error: 'User not found' });
@@ -168,13 +168,13 @@ exports.updateUser = async (req, res) => {
 		conn = await pool.getConnection();
 
 		// hibakezelés
-		const rows = await conn.query('SELECT * FROM users WHERE id = ?', [req.userId]);
+		const rows = await conn.query('SELECT * FROM Users WHERE id = ?', [req.userId]);
 		if (rows.length === 0 || !(await bcrypt.compare(password, rows[0].password))) {
 			return res.status(401).json({ error: 'Invalid credentials' });
 		}
 
 		await conn.query(
-			'UPDATE users SET name = ?, profile_picture = ?, bio = ? WHERE id = ?',
+			'UPDATE Users SET name = ?, profile_picture = ?, bio = ? WHERE id = ?',
 			[name, profilePicture, bio, req.userId]
 		);
 		res.json({ message: 'User updated successfully' });
@@ -194,7 +194,7 @@ exports.deleteUser = async (req, res) => {
 	try {
 		conn = await pool.getConnection();
 		await conn.query(
-			'DELETE FROM users WHERE id = ?',
+			'DELETE FROM Users WHERE id = ?',
 			[req.userId]
 		);
 		res.json({ message: 'User deleted' });
@@ -219,7 +219,7 @@ exports.getUserById = async (req, res) => {
 	let conn;
 	try {
 		conn = await pool.getConnection();
-		const rows = await conn.query('SELECT name, email, profile_picture, bio, social_links, role FROM users WHERE id = ?', [req.params.id]);
+		const rows = await conn.query('SELECT name, email, profile_picture, bio, social_links, role FROM Users WHERE id = ?', [req.params.id]);
 
 		if (rows.length === 0) {
 			return res.status(404).json({ message: 'User not found' });

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Ingredient, Instruction, Recipe } from '../interfaces/recipe';
+import { Ingredient, Instruction, Recipe } from '../../features/recipe/interfaces/recipe';
 
 @Injectable({
 	providedIn: 'root'

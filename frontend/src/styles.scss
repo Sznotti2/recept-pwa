@@ -109,17 +109,10 @@ h6 {
 	--border-width-medium: ;
 	--border-width-large: ;
 
-	--transition: all .18s ease-in-out;
+	--transition: all 0.2s ease-in-out;
 }
 
 /* GLOBAL STYLES  */
-@mixin reset-list {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-
 body {
     font-family: 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;

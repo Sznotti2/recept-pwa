@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RecipeListComponent } from '../../shared/components/recipe-list/recipe-list.component';
-import { Recipe } from '../../core/interfaces/recipe';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RecipeService } from '../../core/services/recipe.service';
+import { RecipeListComponent } from '../recipe-list/recipe-list.component';
+import { RecipeService } from '../services/recipe.service';
+import { Recipe } from '../interfaces/recipe';
 
 @Component({
   selector: 'app-my-recipies',

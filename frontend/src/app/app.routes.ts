@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
-import { RecipeViewComponent } from './shared/components/recipe-view/recipe-view.component';
+import { RecipeViewComponent } from './features/recipe/recipe-view/recipe-view.component';
 import { SearchComponent } from './features/search/search.component';
-import { MyRecipiesComponent } from './features/my-recipies/my-recipies.component';
-import { RecipieEditorComponent } from './features/recipie-editor/recipie-editor.component';
+import { RecipieEditorComponent } from './features/recipe/recipie-editor/recipie-editor.component';
 import { authGuard } from './core/guards/auth.guard';
+import { MyRecipiesComponent } from './features/recipe/my-recipies/my-recipies.component';
 import { BlogEditorComponent } from './features/blog/blog-editor/blog-editor.component';
 import { BlogsPageComponent } from './features/blog/blogs-page/blogs-page.component';
 import { BlogViewComponent } from './features/blog/blog-view/blog-view.component';

@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { Recipe } from '../../../core/interfaces/recipe';
+import { Recipe } from '../../../features/recipe/interfaces/recipe';
 import { RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';

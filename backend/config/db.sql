@@ -78,8 +78,8 @@ CREATE TABLE BlogBlocks (
     block_type VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,                                    -- A blokk tartalma (szöveg, kép URL, JSON-formátumú extra adatok stb.)
     block_index INT NOT NULL,                           -- A blokk sorrendjének meghatározására
-    FOREIGN KEY (blog_id) REFERENCES Blogs(id) ON DELETE CASCADE,
-);
+    FOREIGN KEY (blog_id) REFERENCES Blogs(id) ON DELETE CASCADE
+) ENGINE = InnoDB;
 
 -- Indexek létrehozása a gyakran használt oszlopokra (opcionális, de ajánlott a teljesítmény érdekében)
 -- CREATE INDEX idx_blogs_author ON Blogs(author_id);

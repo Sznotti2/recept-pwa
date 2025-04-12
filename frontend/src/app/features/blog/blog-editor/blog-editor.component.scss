@@ -94,3 +94,45 @@ textarea {
 		}
 	}
 }
+
+
+.accordion {
+	--_label-height: 2rem;
+
+	section {
+		display: grid;
+		grid-template-rows: var(--_label-height) 1fr;
+		transition: var(--transition);
+
+		&:has(input:checked) {
+			grid-template-rows: var(--_label-height) 0fr;
+		}
+		&:has(input:checked) label i {
+			transform: rotate(90deg);
+		}
+
+		input.accordion-checkbox {
+			display: none;
+		}
+
+		label {
+			display: flex;
+			align-items: center;
+			gap: .5rem;
+			cursor: pointer;
+			user-select: none;
+
+			i {
+				transition: var(--transition);
+			}
+		}
+
+		div {
+			overflow: hidden;
+
+			> * + * {
+				margin-top: 0.5rem;
+			}
+		}
+	}
+}

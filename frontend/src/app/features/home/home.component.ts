@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Recipe } from '../../core/interfaces/recipe';
-import { RecipeService } from '../../core/services/recipe.service';
 import { Blog } from '../blog/interfaces/blog';
 import { BlogListComponent } from '../blog/blog-list/blog-list.component';
-import { RecipeListComponent } from '../../shared/components/recipe-list/recipe-list.component';
 import { BlogService } from '../blog/services/blog.service';
+import { Recipe } from '../recipe/interfaces/recipe';
+import { RecipeListComponent } from '../recipe/recipe-list/recipe-list.component';
+import { RecipeService } from '../recipe/services/recipe.service';
 
 @Component({
 	selector: 'app-home',

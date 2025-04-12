@@ -19,62 +19,129 @@
 			</div>
 			<input type="text" formControlName="title" placeholder="Blog neve" (keyup)="onTitleChange($event)">
 			<textarea formControlName="description" placeholder="Blog leírása"></textarea>
-			<input type="text" formControlName="slug" placeholder="Slug" value="{{ slug }}">
 
 			<div class="radio-group">
-				<input id="draft" type="radio" name="status">
+				<input id="draft" value="draft" type="radio" formControlName="status">
 				<label for="draft">Vázlat</label>
-				<input id="published" type="radio" name="status">
+				<input id="published" value="published" type="radio" formControlName="status">
 				<label for="published">Publikált</label>
-				<input id="archived" type="radio" name="status">
+				<input id="archived" value="archived" type="radio" formControlName="status">
 				<label for="archived">Archívált</label>
 			</div>
 
-			<input type="text" formControlName="metaDescription" placeholder="Meta leírás">
+
+			<div class="accordion">
+				<section>
+					<input class="accordion-checkbox" type="checkbox" id="first" checked>
+					<label for="first">
+						<i class="material-icons">chevron_right</i>
+						<h2>Haladó beállítások</h2>
+					</label>
+					<div>
+						<input type="text" formControlName="slug" placeholder="Slug" value="{{ slug }}">
+						<input type="text" formControlName="metaDescription" placeholder="Meta leírás">
+					</div>
+				</section>
+			</div>
 		</section>
 
 		<section class="paragraphs">
 			<h3>Paragrafusok</h3>
 
+
 			<ol formArrayName="blocks">
 				<li *ngFor="let paragraph of blocks.controls; let i = index" [formGroupName]="i">
-					<div class="paragraph-row">
-						<textarea formControlName="text" cols="30" rows="3" placeholder="Paragrafus"></textarea>
-						<button class="icon-btn close " type="button" title="leírás eltávolítása"
-							(click)="removeBlock(i)">
-							<i class="material-icons">close</i>
-						</button>
-					</div>
-					<div class="image-gallery" formArrayName="images">
-						<div class="image-upload-container"
-							*ngFor="let image of getImagesAt(i).controls; let j = index">
-							<div class="image-upload">
-								<label for="{{ i + '-' + j}}">
-									@if (paragraphImgSrc.get(i+'-'+j)) {
-										<img [src]="paragraphImgSrc.get(i+'-'+j)" alt="">
-									} @else {
-										<div class="label-content">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-												stroke="currentColor">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-													d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-											</svg>
-											<p>Drag your image here or click in this area</p>
-										</div>
-									}
-								</label>
-								<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
-									(change)="onParagraphImageSelected($event, i, j)">
+
+					<app-dropdown-select
+						formControlName="blockType"
+						[placeholder]="'Blokk típusa'"
+						[options]="['Alcím', 'Paragrafus', 'Kép', 'Gallária']"
+						(selectionChange)="onSelectionChange($event)">
+					</app-dropdown-select>
+
+					@switch (getBlockTypeAt(i).value) {
+						@case ('Alcím') {
+							<div class="paragraph-row">
+								<input formControlName="text" type="text" placeholder="Alcím">
 							</div>
-							<button class="icon-btn close" type="button" title="Kép eltávolítása"
-								(click)="removeImageInput(i, j)">
-								<i class="material-icons">close</i>
-							</button>
-						</div>
-						<button class="icon-btn add" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
-							<i class="material-icons">add</i>
-						</button>
-					</div>
+						}
+						@case ('Paragrafus') {
+							<div class="paragraph-row">
+								<textarea formControlName="text" cols="30" rows="3" placeholder="Paragrafus"></textarea>
+								<button class="icon-btn close " type="button" title="leírás eltávolítása"
+									(click)="removeBlock(i)">
+									<i class="material-icons">close</i>
+								</button>
+							</div>
+						}
+						@case ('Kép') {
+							<div class="image-gallery" formArrayName="images">
+								<div class="image-upload-container"
+									*ngFor="let image of getImagesAt(i).controls; let j = index">
+									<div class="image-upload">
+										<label for="{{ i + '-' + j}}">
+											@if (paragraphImgSrc.get(i+'-'+j)) {
+												<img [src]="paragraphImgSrc.get(i+'-'+j)" alt="">
+											} @else {
+												<div class="label-content">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+														stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+															d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+													</svg>
+													<p>Drag your image here or click in this area</p>
+												</div>
+											}
+										</label>
+										<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
+											(change)="onParagraphImageSelected($event, i, j)">
+									</div>
+									<button class="icon-btn close" type="button" title="Kép eltávolítása"
+										(click)="removeImageInput(i, j)">
+										<i class="material-icons">close</i>
+									</button>
+								</div>
+								<button class="icon-btn add" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
+									<i class="material-icons">add</i>
+								</button>
+							</div>
+						}
+						@case ('Gallária') {
+							<div class="image-gallery" formArrayName="images">
+								<div class="image-upload-container"
+									*ngFor="let image of getImagesAt(i).controls; let j = index">
+									<div class="image-upload">
+										<label for="{{ i + '-' + j}}">
+											@if (paragraphImgSrc.get(i+'-'+j)) {
+												<img [src]="paragraphImgSrc.get(i+'-'+j)" alt="">
+											} @else {
+												<div class="label-content">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+														stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+															d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+													</svg>
+													<p>Drag your image here or click in this area</p>
+												</div>
+											}
+										</label>
+										<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
+											(change)="onParagraphImageSelected($event, i, j)">
+									</div>
+									<button class="icon-btn close" type="button" title="Kép eltávolítása"
+										(click)="removeImageInput(i, j)">
+										<i class="material-icons">close</i>
+									</button>
+								</div>
+								<button class="icon-btn add" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
+									<i class="material-icons">add</i>
+								</button>
+							</div>
+						}
+						@default {
+							<p>default</p>
+						}
+					}
 				</li>
 			</ol>
 			<button class="icon-btn add" type="button" title="Paragrafus hozzáadása" (click)="addBlock()">

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RecipeService } from '../../core/services/recipe.service';
+import { RecipeService } from '../services/recipe.service';
 // https://dontpaniclabs.com/blog/post/2022/01/05/how-to-use-angular-formarrays-within-formgroups-in-reactive-forms/
 // https://www.tektutorialshub.com/angular/nested-formarray-example-add-form-fields-dynamically/
 

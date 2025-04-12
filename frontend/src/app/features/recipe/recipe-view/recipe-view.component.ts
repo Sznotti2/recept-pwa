@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeService } from '../../../core/services/recipe.service';
-import { Recipe } from '../../../core/interfaces/recipe';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { catchError, EMPTY, Observable } from 'rxjs';
+import { Recipe } from '../interfaces/recipe';
+import { RecipeService } from '../services/recipe.service';
 
 @Component({
 	selector: 'app-recipe-view',

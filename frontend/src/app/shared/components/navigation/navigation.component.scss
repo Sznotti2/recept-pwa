@@ -30,9 +30,8 @@ nav {
 
 	/* links, navigation */
 	ul {
-		// list-style-type: none;
-		// padding-left: 0;
-		@include styles.reset-list;
+		list-style-type: none;
+		padding-left: 0;
 	}
 
 	>#menu {

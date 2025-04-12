@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MultiselectDropdownComponent } from '../../shared/components/multiselect-dropdown/multiselect-dropdown.component';
-import { RecipeListComponent } from "../../shared/components/recipe-list/recipe-list.component";
-import { Recipe } from '../../core/interfaces/recipe';
-import { RecipeService } from '../../core/services/recipe.service';
 import { map, Observable } from 'rxjs';
+import { MultiselectDropdownComponent } from '../../shared/components/multiselect-dropdown/multiselect-dropdown.component';
+import { Recipe } from '../recipe/interfaces/recipe';
+import { RecipeListComponent } from '../recipe/recipe-list/recipe-list.component';
+import { RecipeService } from '../recipe/services/recipe.service';
 
 interface Item {
 	value: string;
