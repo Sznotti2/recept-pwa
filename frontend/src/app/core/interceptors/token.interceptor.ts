@@ -4,20 +4,25 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	// alapértelmezett header-ek, melyek minden kimenő kéréshez hozzá lesznek adva
+	private defaultHeaders: { [header: string]: string } = {
+		'Content-Type': 'application/json'
+	};
 
-		const token = localStorage.getItem("token");
+	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		// ellenőrizzük, hogy van-e már Content-Type header, ha nincs, akkor az alapértelmezettet használjuk
+		const contentType = request.headers.has('Content-Type')
+			? request.headers.get('Content-Type')
+			: this.defaultHeaders['Content-Type'];
 
-		if (token) {
-			const cloned = req.clone({
-				headers: req.headers.set("Authorization",
-					"Bearer " + token)
-			});
+		// a lényeg
+		const clonedRequest = request.clone({
+			withCredentials: true,
+			setHeaders: {
+				'Content-Type': contentType as string
+			}
+		});
 
-			return next.handle(cloned);
-		}
-		else {
-			return next.handle(req);
-		}
+		return next.handle(clonedRequest);
 	}
 }

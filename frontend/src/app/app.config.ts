@@ -19,7 +19,11 @@ export const appConfig: ApplicationConfig = {
 			withFetch(),
 			withInterceptorsFromDi()
 		),
-		{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+		{ 
+			provide: HTTP_INTERCEPTORS, 
+			useClass: TokenInterceptor, 
+			multi: true 
+		},
 
 	],
 };
