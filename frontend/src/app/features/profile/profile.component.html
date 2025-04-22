@@ -1,7 +1,7 @@
 <form [formGroup]="editForm" (ngSubmit)="edit()">
 
 	<div class="form-group">
-		<input type="username" placeholder=" " formControlName="username">
+		<input type="text" placeholder=" " formControlName="username">
 		<label>Felhasználónév</label>
 	</div>
 
@@ -10,13 +10,19 @@
 		<label>Bio</label>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group icon-input">
 		<input [type]="inputType" placeholder=" " formControlName="password">
 		<label>Jelszó</label>
 		@if (!passwordVisible) {
-			<span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>
+			<button (click)="revealPassword()" class="button" type="button">
+				<i class="material-icons icon">visibility_off</i>
+				<span class="visually-hidden">Jelszó felfedése</span>
+			</button>              
 		} @else {
-			<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
+			<button (click)="revealPassword()" class="button" type="button">
+				<i class="material-icons icon">visibility</i>
+				<span class="visually-hidden">Jelszó elrejtése</span>
+			</button>
 		}
 	</div>
 
@@ -38,6 +44,6 @@
 		<input id="profile-image" type="file" accept="image/*" formControlName="image" (change)="onFileChange($event)">
 	</div>
 
-	<button [disabled]="editForm.invalid" class="btn" type="submit">Módosítás</button>
-	<button class="btn" type="button" (click)="delete()">Fiók törlése</button>
+	<button [disabled]="editForm.invalid" class="button" type="submit">Módosítás</button>
+	<button class="button" type="button" (click)="delete()">Fiók törlése</button>
 </form>

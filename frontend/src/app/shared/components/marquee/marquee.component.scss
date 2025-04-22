@@ -1,0 +1,38 @@
+.marquee {
+	--padding: 10px;
+	--no-img: 7;
+	--img-width: 20rem;
+	--all-padding: calc(var(--no-img) * var(--padding));
+
+	overflow:hidden;
+	/* position: relative; */
+
+	> * {
+		animation: scroll 15s linear infinite;
+		display: flex;
+		width: calc(var(--img-width) * var(--no-img) + var(--all-padding));
+
+		&:hover {
+			transform: translate3d(10rem, 0, 0);
+			animation-play-state: paused;
+		}
+	}
+	
+	img {
+		width: var(--img-width);
+		aspect-ratio: 4 / 3;
+		padding: 0 var(--padding);
+		object-fit: cover;
+		object-position: center;
+	}
+}
+
+
+@keyframes scroll {
+	0% { 
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		transform: translate3d(calc( -1 * var(--img-width) * var(--no-img)), 0, 0);
+	}
+}

@@ -1,6 +1,7 @@
 
 <aside>
-	<input class="search-field" type="text" placeholder="sajnttorta" (input)="filter($event)">
+	<input type="search" placeholder="Search all the things" value="" (input)="filter($event)"/>
+
 	<app-multiselect-dropdown [items]="itemList"></app-multiselect-dropdown>
 </aside>
 <section>

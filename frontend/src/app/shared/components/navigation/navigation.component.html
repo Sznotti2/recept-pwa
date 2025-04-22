@@ -4,31 +4,32 @@
 
 		<ul id="menu">
 			<li>
-				<a routerLink="/search">Receptek</a>
+				<a routerLink="/search" routerLinkActive="active">Receptek</a>
 				<ul class="sub-menu">
-					<div class="row">
+					<li class="row">
 						<h4>Édességek</h4>
-						<div class="chips-container">
-							<a class="chips" routerLink="/">Torta</a>
-							<a class="chips" routerLink="/">Pizza</a>
-							<a class="chips" routerLink="/">Leves</a>
-							<a class="chips" routerLink="/">Tárt</a>
-							<a class="chips" routerLink="/">Muffin</a>
-							<a class="chips" routerLink="/">Pite</a>
-						</div>
-					</div>
-					<div class="row">
+						<ul class="chips">
+							<li><a routerLink="/">Torta</a></li>
+							<li><a routerLink="/">Pizza</a></li>
+							<li><a routerLink="/">Leves</a></li>
+							<li><a routerLink="/">Tárt</a></li>
+							<li><a routerLink="/">Muffin</a></li>
+							<li><a routerLink="/">Pite</a></li>
+						</ul>
+					</li>
+					<li class="row">
 						<h4>Évaszakok</h4>
-						<div class="chips-container">
-							<a class="chips" routerLink="/">Tavasz</a>
-							<a class="chips" routerLink="/">Nyár</a>
-							<a class="chips" routerLink="/">Ősz</a>
-							<a class="chips" routerLink="/">Tél</a>
+						<div class="chips">
+							<li><a routerLink="/">Tavasz</a></li>
+							<li><a routerLink="/">Nyár</a></li>
+							<li><a routerLink="/">Ősz</a></li>
+							<li><a routerLink="/">Tél</a></li>
 						</div>
-					</div>
+					</li>
 				</ul>
-			<li><a routerLink="/blog">Blog</a></li>
-			<li><a routerLink="/about">Rólunk</a></li>
+			<li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
+			<li><a routerLink="/about" routerLinkActive="active">Rólunk</a></li>
+			<span class="slider"></span>
 		</ul>
 	
 		<div id="user-menu">	
@@ -68,11 +69,14 @@
 	</div>
 
 	<div id="mobile-nav">
-		<section class="accordion" id="overview">
-			<input type="checkbox" id="accordion-toggle" class="hidden">
-			<label for="accordion-toggle">Receptek</label>
-			<div class="content">
-				<div class="wrapper">
+		<div class="accordion">
+			<section>
+				<input class="accordion-checkbox" type="checkbox" id="first" checked>
+				<label for="first">
+					<i class="material-icons">chevron_right</i>
+					<h3>Receptek</h3>
+				</label>
+				<div class="content">
 					<a routerLink="/">Torta</a>
 					<a routerLink="/">Pizza</a>
 					<a routerLink="/">Leves</a>
@@ -80,8 +84,8 @@
 					<a routerLink="/">Muffin</a>
 					<a routerLink="/">Pite</a>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 
 		<div class="mobile-nav-link-container">
 			<a routerLink="/blog" class="mobile-nav-link">Blog</a>

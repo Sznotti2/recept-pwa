@@ -33,10 +33,10 @@ export class BlogEditorComponent implements OnInit {
 			title: [""],
 			description: [""],
 			image: [""],
-			blocks: this.formBuilder.array([]),
+			content: this.formBuilder.array([]),
 			slug: [""],
 			status: [""],
-			metaDescription: [""]
+			meta_description: [""]
 		});
 
 		this.blogSlug = this.route.snapshot.params['slug'];
@@ -53,7 +53,7 @@ export class BlogEditorComponent implements OnInit {
 				error: (err) => console.log(err)
 			});
 		} else {
-			this.addBlock();
+			this.addContent();
 			this.addImageInput(0);
 		}
 	}
@@ -62,10 +62,10 @@ export class BlogEditorComponent implements OnInit {
 		const blog = this.blogEditForm.value;
 
 		console.log(blog);
-		// this.blogService.addBlog(blog).subscribe({
-		// 	next: () => this.router.navigateByUrl("/settings/my-blogs"),
-		// 	error: (err) => console.log(err)
-		// });
+		this.blogService.addBlog(blog).subscribe({
+			next: () => this.router.navigateByUrl("/settings/my-blogs"),
+			error: (err) => console.log(err)
+		});
 	}
 
 	update() {
@@ -97,7 +97,7 @@ export class BlogEditorComponent implements OnInit {
 		this.blogEditForm.patchValue({ slug: this.slug });
 	}
 
-	onBlogImageSelected(event: any) {
+	onContentImageSelected(event: any) {
 		if (event.target.files && event.target.files[0]) {
 			const file = event.target.files[0];
 
@@ -111,25 +111,25 @@ export class BlogEditorComponent implements OnInit {
 		}
 	};
 
-	get blocks(): FormArray {
-		return this.blogEditForm.get("blocks") as FormArray;
+	get content(): FormArray {
+		return this.blogEditForm.get("content") as FormArray;
 	}
-	addBlock(): void {
+	addContent(): void {
 		const group = this.formBuilder.group({
-			blockType: ["", Validators.required],
+			contentType: ["", Validators.required],
 			text: ["", Validators.required],
 			images: this.formBuilder.array([])
 		});
-		this.blocks.push(group);
+		this.content.push(group);
 	}
-	removeBlock(index: number): void {
+	removeContent(index: number): void {
 
 	}
-	getBlockTypeAt(index: number): FormGroup {
-		return this.blocks.at(index).get("blockType") as FormGroup;
+	getContentTypeAt(index: number): FormGroup {
+		return this.content.at(index).get("contentType") as FormGroup;
 	}
 	getImagesAt(index: number): FormArray {
-		return this.blocks.at(index).get("images") as FormArray
+		return this.content.at(index).get("images") as FormArray
 	}
 	addImageInput(index: number): void {
 		this.getImagesAt(index).push(this.formBuilder.control(""));

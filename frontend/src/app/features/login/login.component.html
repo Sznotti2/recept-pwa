@@ -21,15 +21,20 @@
 			}
 		}
 
-		<div class="form-group">
+		<div class="form-group icon-input">
 			<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''" [type]="inputType" placeholder=" " formControlName="password">
 			<label>Jelszó</label>
             @if (!passwordVisible) {
-                <span (click)="revealPassword()" class="material-icons eye-icon">visibility_off</span>                
+				<button (click)="revealPassword()" class="button" type="button">
+					<i class="material-icons icon">visibility_off</i>
+					<span class="visually-hidden">Jelszó felfedése</span>
+				</button>              
             } @else {
-    			<span (click)="revealPassword()" class="material-icons eye-icon">visibility</span>
+				<button (click)="revealPassword()" class="button" type="button">
+					<i class="material-icons icon">visibility</i>
+					<span class="visually-hidden">Jelszó elrejtése</span>
+				</button>
             }
-
 		</div>
 		@if (password.invalid && (password.dirty || password.touched)) {
 			@if (password.errors?.['required']) {
@@ -49,7 +54,7 @@
 			<a routerLink="/forgot-password">Elfelejtett jelszó?</a>
 		</div>
 
-		<button [disabled]="loginForm.invalid" class="btn" type="submit">Belépés</button>
+		<button [disabled]="loginForm.invalid" class="button" type="submit">Belépés</button>
 		@if (errorMessage) {
 			<div class="error">
 				<span class="material-icons-outlined">cancel</span>
@@ -63,7 +68,7 @@
 			<div class="line"></div>
 		</div>
 
-		<button class="btn" type="button">Login with Google</button>
+		<button class="button" type="button">Login with Google</button>
 	</form>
 	<p>Már van fiókod? <a routerLink="/register">Regisztrálj</a></p>
 </main>

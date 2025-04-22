@@ -6,6 +6,6 @@ export interface User {
     profile_picture?: string;
     bio?: string;
     role?: string;
-    created_at?: number;
-    updated_at?: number;
+    created_at?: Date;
+    updated_at?: Date;
 }

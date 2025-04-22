@@ -6,11 +6,12 @@ import { BlogService } from '../blog/services/blog.service';
 import { Recipe } from '../recipe/interfaces/recipe';
 import { RecipeListComponent } from '../recipe/recipe-list/recipe-list.component';
 import { RecipeService } from '../recipe/services/recipe.service';
+import { MarqueeComponent } from "../../shared/components/marquee/marquee.component";
 
 @Component({
 	selector: 'app-home',
 	standalone: true,
-	imports: [RecipeListComponent, BlogListComponent],
+	imports: [RecipeListComponent, BlogListComponent, MarqueeComponent],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.scss'
 })
@@ -21,6 +22,7 @@ export class HomeComponent {
 	blogList: Observable<Blog[]>;
 	blogService = inject(BlogService);
 
+
 	constructor() {
 		this.recipeList = this.recipeService.getRecipes().pipe(
 			map(recipes => recipes.slice(0, 8))
@@ -28,5 +30,11 @@ export class HomeComponent {
 		this.blogList = this.blogService.getBlogs().pipe(
 			map(blog => blog.slice(0, 6))
 		);
+	}
+
+	blogImgSrc = "";
+	onImageSelected(event: any) {
+		this.blogImgSrc = event;
+		console.log("Image selected: ", event);
 	}
 }

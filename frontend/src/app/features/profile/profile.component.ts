@@ -75,14 +75,15 @@ export class ProfileComponent {
 			const form = this.editForm.value;
 			if (this.selectedImage !== null) {
 				this.imgbb.upload(this.selectedImage as File).subscribe({
-					next: (res) => this.imgUrl = res,
+					next: (res) => {
+						this.authService.editUser(form.username, form.password, form.bio, res.data.url).subscribe({
+							next: (res) => console.log("Update successful", res),
+							error: (err) => console.error("Update error", err)
+						});
+					},
 					error: (err) => console.error("Upload error", err)
 				});
 			}
-			this.authService.editUser(form.username, form.password, form.bio, this.imgUrl).subscribe({
-				next: (res) => console.log("Update successful", res),
-				error: (err) => console.error("Update error", err)
-			});
 		} else {
 			console.log("Invalid form");
 		}

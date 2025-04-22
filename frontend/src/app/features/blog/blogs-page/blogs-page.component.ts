@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogService } from '../services/blog.service';
 import { BlogListComponent } from '../blog-list/blog-list.component';
+import { DropdownSelectComponent } from '../../../shared/components/dropdown-select/dropdown-select.component';
 
 @Component({
 	selector: 'app-blogs-page',
 	standalone: true,
-	imports: [BlogListComponent, ReactiveFormsModule, FormsModule],
+	imports: [BlogListComponent, ReactiveFormsModule, FormsModule, DropdownSelectComponent],
 	templateUrl: './blogs-page.component.html',
 	styleUrl: './blogs-page.component.scss'
 })
@@ -54,5 +55,11 @@ export class BlogsPageComponent {
 		} else if (this.selectedOption === "name-desc") {
 			this.sortBlogsByName(true);
 		}
+	}
+
+	onSelectionChange(event: any) {
+		console.log(event)
+		this.selectedOption = event;
+		this.sortBlogs();
 	}
 }

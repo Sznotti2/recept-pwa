@@ -9,7 +9,11 @@
 			<option value="name-desc">Név szerint [Z-A]</option>
 		</select>
 
-
+		<app-dropdown-select
+			[placeholder]="'Rendezés'"
+			[options]="['Legújabb elől', 'Legrégebbi elől', 'Név szerint [A-Z]', 'Név szerint [Z-A]']"
+			(selectionChange)="onSelectionChange($event)">
+		</app-dropdown-select>
 	</header>
 
 	<main>

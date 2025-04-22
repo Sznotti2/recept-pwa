@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { AsyncPipe, CommonModule, NgClass } from '@angular/common';
 
 @Component({
 	selector: 'app-navigation',
 	standalone: true,
-	imports: [RouterLink, NgClass, AsyncPipe, CommonModule],
+	imports: [RouterLink, RouterLinkActive, NgClass, AsyncPipe, CommonModule],
 	templateUrl: './navigation.component.html',
 	styleUrl: './navigation.component.scss'
 })

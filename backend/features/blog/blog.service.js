@@ -4,19 +4,18 @@ exports.createBlog = async (req, res) => {
 	let conn;
 
 	try {
-		const { title, description, image, slug, content } = req.body;
+		const { title, description, image, slug, content, status, meta_description } = req.body;
 
+		// Hibakezelés
 		if (!title || !description || !image || !slug) {
 			return res.status(400).json({ error: 'Please provide all required fields!' });
 		}
 
 		conn = await pool.getConnection();
-		const result = await conn.query(
-			'INSERT INTO Blogs (author_id, title, description, image, slug, content) VALUES (?, ?, ?, ?, ?, ?)',
-			[req.userId, title, description, image, slug, content]
+		await conn.query(
+			'INSERT INTO Blogs (author_id, title, description, image, slug, content, status, meta_description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+			[req.userId, title, description, image, slug, content, status, meta_description]
 		);
-
-		createBlogBlocks(result.insertId, content);
 
 		res.status(201).json({ message: 'Blog created successfully!' });
 	} catch (error) {
@@ -28,10 +27,6 @@ exports.createBlog = async (req, res) => {
 	} finally {
 		conn.release();
 	}
-}
-
-const createBlogBlocks = async (id, content) => {
-
 }
 
 exports.getAllBlogs = async (req, res) => {

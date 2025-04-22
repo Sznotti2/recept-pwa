@@ -116,22 +116,22 @@ header {
 
 }
 
-.icon-btn {
-	max-width: 3rem;
-	max-height: 3rem;
-	background: none;
-	border: 1px solid black;
-	cursor: pointer;
-	display: grid;
-	place-items: center;
+// .icon-btn {
+// 	max-width: 3rem;
+// 	max-height: 3rem;
+// 	background: none;
+// 	border: 1px solid black;
+// 	cursor: pointer;
+// 	display: grid;
+// 	place-items: center;
 
-	.material-icons {
-		--_size: 1.5rem;
-		width: var(--_size);
-		height: var(--_size);
-		font-size: var(--_size);
-	}
-}
+// 	.material-icons {
+// 		--_size: 1.5rem;
+// 		width: var(--_size);
+// 		height: var(--_size);
+// 		font-size: var(--_size);
+// 	}
+// }
 
 .categories {
 	padding: var(--gap-small) 0;

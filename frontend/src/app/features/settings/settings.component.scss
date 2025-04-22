@@ -20,20 +20,18 @@
 
     a {
 		padding: 0.75em 1em;
-		background-color: transparent;
 		border-radius: 8px;
-		border: 2px solid transparent;
 		text-decoration: none;
-		color: rgb(45, 45, 45);
-		transition: 0.15s ease;
+		color: var(--clr-text);
+		transition: var(--transition);
+		border: 2px solid transparent;
 
 		&.active-tab {
-			background-color: var(--clr-active);
-			color: black;
+			background-color: var(--clr-surface3);
 		}
 		&:hover,
 		&:focus {
-			border: 2px solid var(--clr-active);
+			border: var(--border);
 		}
 	}
 }

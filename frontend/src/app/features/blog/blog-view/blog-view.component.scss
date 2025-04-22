@@ -19,4 +19,38 @@ header {
     h2 {
         text-align: center;
     }
+
+	.blog-image {
+		height: 40rem;
+		object-fit: cover;
+		object-position: center;
+	}
+}
+
+.blog-content {
+	max-width: 1000px;
+	margin: 0 var(--gap-small);
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-template-areas: "main aside";
+
+	aside {
+		grid-area: aside;
+
+		.content {
+			margin: var(--gap-small) 0;
+		}
+	}
+
+	main {
+		grid-area: main;
+
+		border: 1px solid red;
+	}
+
+}
+@media screen and (max-width: 800px) {
+	.blog-content {
+		display: block;
+	}
 }

@@ -36,12 +36,12 @@
 				<div *ngFor="let category of categories.controls; let i = index">
 					<input [formControlName]="i" placeholder="kategória" />
 					<button class="icon-btn" type="button" (click)="removeCategory(i)" title="kategória eltávolítása">
-						<i class="material-icons">close</i>
+						<i class="material-icons icon">close</i>
 					</button>
 				</div>
 
 				<button class="icon-btn" type="button" (click)="addCategory()" title="kategória hozzáadása">
-					<i class="material-icons">add</i>
+					<i class="material-icons icon">add</i>
 				</button>
 			</div>
 
@@ -64,7 +64,7 @@
 						<textarea formControlName="text" cols="30" rows="3" placeholder="Recept leírás"></textarea>
 						<button class="icon-btn" type="button" title="leírás eltávolítása"
 							(click)="removeInstruction(i)">
-							<i class="material-icons">close</i>
+							<i class="material-icons icon">close</i>
 						</button>
 					</div>
 					<div class="image-gallery" formArrayName="images">
@@ -89,16 +89,16 @@
 							</div>
 							<button class="icon-btn" type="button" title="kép eltávolítása"
 								(click)="removeImageInput(i, j)">
-								<i class="material-icons">close</i>
+								<i class="material-icons icon">close</i>
 							</button>
 						</div>
 						<button class="icon-btn" type="button" title="kép hozzáadása" (click)="addImageInput(i)">
-							<i class="material-icons">add</i>
+							<i class="material-icons icon">add</i>
 						</button>
 					</div>
 				</li>
 				<button class="icon-btn" type="button" title="leírás hozzáadása" (click)="addInstruction()">
-					<i class="material-icons">add</i>
+					<i class="material-icons icon">add</i>
 				</button>
 			</ol>
 		</section>
@@ -110,7 +110,7 @@
 				<div class="row">
 					<input type="text" formControlName="title">
 					<button class="icon-btn" type="button" (click)="removeIngredient(i)">
-						<i class="material-icons">add</i>
+						<i class="material-icons icon">add</i>
 					</button>
 				</div>
 				<ul formArrayName="ingredientList">
@@ -118,23 +118,23 @@
 						<div class="row">
 							<input type="text" [formControlName]="j">
 							<button class="icon-btn" type="button" (click)="removeIngredientItem(i, j)">
-								<i class="material-icons">close</i>
+								<i class="material-icons icon">close</i>
 							</button>
 						</div>
 					</li>
 					<button class="icon-btn" type="button" (click)="addIngredientItem(i)">
-						<i class="material-icons">add</i>
+						<i class="material-icons icon">add</i>
 					</button>
 				</ul>
 			</ng-container>
 			<button class="icon-btn" type="button" (click)="addIngredient()">
-				<i class="material-icons">add</i>
+				<i class="material-icons icon">add</i>
 			</button>
 		</section>
 
 		<section>
-			<button class="btn" type="submit">Mentés</button>
-			<button class="btn" type="button">Mégse</button>
+			<button type="submit">Mentés</button>
+			<button type="button">Mégse</button>
 		</section>
 	</form>
 </div>

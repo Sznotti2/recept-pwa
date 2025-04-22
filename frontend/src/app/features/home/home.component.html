@@ -1,3 +1,165 @@
+<main>
+	<h2>Komponensek:</h2>
+	<div>
+		<section>
+			<h3>Gombok</h3>
+			<button class="button" type="button">Gomb</button>
+			<a class="button" href="#">Link gomb</a>
+			<button class="button" type="button">
+				Gomb ikonnal
+				<i class="material-icons icon">arrow_forward</i>
+			</button>
+			<button class="button" type="button">
+				<i class="material-icons icon">add</i>
+				Gomb ikonnal
+			</button>
+			<button class="button" type="button">
+				<i class="material-icons icon">favorite</i>
+				<span class="visually-hidden">Gyengén látók számára felirat</span>
+			</button>
+			<button class="button loading" type="button">Loading</button>
+			<button class="button" type="button" disabled>disabled</button>
+		</section>
+
+		<section>
+			<h3>Inputok</h3>
+			<input type="text" placeholder="Sima input">
+
+			<textarea placeholder="textarea"></textarea>
+
+			<input type="search" placeholder="Search all the things" value="" />
+
+			<div class="form-group">
+				<input type="text" placeholder=" ">
+				<label>Felhasználónév</label>
+			</div>
+			
+			<div class="form-group">
+				<textarea placeholder=" " rows="4"></textarea>
+				<label>Bio</label>
+			</div>
+
+			<div class="icon-input">
+				<!-- https://codepen.io/aaroniker/pen/PoqzyOG -->
+				<i class="material-icons icon">alternate_email</i>
+				<input type="email" placeholder="E-mail">
+			</div>
+			<div class="icon-input">
+				<input type="email" placeholder="E-mail">
+				<i class="material-icons icon">alternate_email</i>
+			</div>
+
+			<div class="icon-input">
+				<i class="material-icons icon">lock</i>
+				<input type="text" placeholder="Jelszó">
+				<button class="button" type="button">
+					<i class="material-icons icon">visibility</i>
+					<span class="visually-hidden">Jelszó felfedése</span>
+				</button>
+			</div>
+
+			<div class="radio-group">
+				<input id="draft" value="draft" type="radio" name="status" checked>
+				<label for="draft">Vázlat</label>
+				<input id="published" value="published" type="radio" name="status">
+				<label for="published">Publikált</label>
+				<input id="archived" value="archived" type="radio" name="status">
+				<label for="archived">Archívált</label>
+			</div>
+
+			<!-- From Uiverse.io by Yaya12085 --> 
+			<div class="radio-group2">
+				<label>
+					<input type="radio" id="value-1" name="value-radio" value="value-1">
+					<span>Vázlat</span>
+				</label>
+				<label>
+					<input type="radio" id="value-2" name="value-radio" value="value-2">
+					<span>Publikált</span>
+				</label>
+				<label>
+					<input type="radio" id="value-3" name="value-radio" value="value-3">
+					<span>Archívált</span>
+				</label>
+				<span class="selection"></span>
+			</div>
+
+			<div class="radio-test">
+				<li>
+					<span class="link">Valami</span>
+				</li>
+				<li>
+					<span class="link">Rólunk</span>
+				</li>
+				<li>
+					<span class="link active">Blog</span>
+				</li>
+				<span class="selection"></span>
+			</div>
+
+			<input type="checkbox">
+			<input type="radio">
+			<div class="switch-container">
+				<input type="checkbox" class="toggle-switch" id="keep-logged-in">
+				<label for="keep-logged-in">Emlékezz rám</label>
+			</div>
+
+			<div class="accordion">
+				<section>
+					<input class="accordion-checkbox" type="checkbox" id="sg-unique" checked>
+					<label for="sg-unique">
+						<i class="material-icons">chevron_right</i>
+						<h3>További tartalom</h3>
+					</label>
+					<div class="content">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi justo felis, lacinia vitae erat ut, bibendum consectetur ligula. Proin commodo ac nisl et laoreet. Nullam consequat enim ac facilisis accumsan. Suspendisse consequat tellus eget lorem interdum, non convallis nisl facilisis. Suspendisse imperdiet nec diam nec finibus. Nulla facilisi. Vestibulum nulla turpis, dapibus sit amet dapibus sed, volutpat lobortis nisi. Nullam convallis sapien nec risus scelerisque, non pharetra nibh sagittis. Nam semper urna eget nisl euismod lacinia. </p>
+						<p>Donec ut ligula id nunc efficitur fringilla. Donec nec ligula ac enim facilisis tincidunt. Donec ut ligula id nunc efficitur fringilla. Donec nec ligula ac enim facilisis tincidunt. Donec ut ligula id nunc efficitur fringilla. Donec nec ligula ac enim facilisis tincidunt.</p>
+					</div>
+				</section>
+			</div>
+		
+			<ul class="chips">
+				<li>
+					<a href="#">Chips</a>
+					<i class="material-icons icon">close</i>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+					<i class="material-icons icon">close</i>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+					<i class="material-icons icon">close</i>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+					<i class="material-icons icon">close</i>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+				</li>
+				<li>
+					<a href="#">Chips</a>
+				</li>
+			</ul>
+
+			<app-marquee></app-marquee>
+		</section>
+	</div>
+</main>
+
 <section class="recipe-showcase">
     <h2>Legnépszerűbb édességek</h2>
 

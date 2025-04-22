@@ -13,6 +13,7 @@ export class BlogService {
 
 	addBlog(blog: Blog): Observable<any> {
 		blog.image = "path-to-img";
+		blog.content = JSON.stringify(blog.content);
 
 		return this.http.post<any>(
 			API_URL + "/",
@@ -53,7 +54,10 @@ export class BlogService {
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 			}
 		).pipe(
-			map(res => res.row),
+			map(res => {
+				res.row.content = JSON.parse(res.row.content);
+				return res.row;
+			}),
 			catchError(error => {
 				//console.error("Hiba történt a recept lekérésekor:", error);
 				return throwError(() => error);
