@@ -62,7 +62,7 @@ exports.loginUser = async (req, res) => {
 		const token = jwt.sign(
 			{ id: rows[0].id },
 			process.env.JWT_SECRET,
-			{ expiresIn: process.env.JWT_EXPIRES_IN }
+			{ expiresIn: process.env.JWT_EXPIRES_IN/*, algorithm: 'RS256'*/ }
 		);
 
 		// Beállítjuk a sütit
@@ -73,7 +73,7 @@ exports.loginUser = async (req, res) => {
 			maxAge: 7 * 24 * 60 * 60 * 1000 // 7 nap
 		});
 
-		res.json({ user: { name: rows[0].name, email: rows[0].email } });
+		res.json({ user: { name: rows[0].name, email: rows[0].email, profile_picture: rows[0].profile_picture } });
 	} catch (error) {
 		if (process.env.NODE_ENV === 'development') {
 			res.status(400).json({ error: error.message });
