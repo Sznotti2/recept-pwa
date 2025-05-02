@@ -1,17 +1,17 @@
 .dropdown {
 	display: inline-block;
-	--placeholderText: var(--clr-text-light);
-	--border: var(--clr-border);
-	--borderActive: var(--clr-brand);
-	--background: var(--clr-surface1);
-	--arrow: var(--clr-text-light);
-	--arrowActive: var(--clr-text);
-	--listText: var(--clr-text-light);
-	--listBackground: var(--clr-surface1);
-	--listActive: var(--clr-surface2);
-	--listTextActive: var(--clr-text);
-	--listBorder: var(--clr-border);
-	--textFilled: var(--clr-text);
+	--placeholderText: hsla(var(--primary-hs), var(--lightness-100), 0.7);
+	--border: hsl(var(--primary-hs), var(--lightness-700));
+	--borderActive: hsl(var(--primary-hs), var(--lightness-100));
+	--background: hsl(var(--primary-hs), var(--lightness-800));
+	--arrow: hsla(var(--primary-hs), var(--lightness-100), 0.7);
+	--arrowActive: hsl(var(--primary-hs), var(--lightness-100));
+	--listText: hsla(var(--primary-hs), var(--lightness-100), 0.7);
+	--listBackground: hsl(var(--primary-hs), var(--lightness-800));
+	--listActive: hsl(var(--primary-hs), var(--lightness-700));
+	--listTextActive: hsl(var(--primary-hs), var(--lightness-100));
+	--listBorder: hsl(var(--primary-hs), var(--lightness-700));
+	--textFilled: hsl(var(--primary-hs), var(--lightness-100));
 	&.dark {
 		--max-scroll: 8;
 		--placeholderText: #3F4656;

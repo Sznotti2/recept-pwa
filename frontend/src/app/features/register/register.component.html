@@ -1,6 +1,8 @@
 <main>
 	<!-- ==={{ registerForm.controls["terms"].errors | json }}=== -->
 	<form [formGroup]="registerForm" (ngSubmit)="register()">
+		<h2 class="title">Regisztráció</h2>
+
 		<div class="form-group">
 			<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''" type="text" placeholder=" " formControlName="username">
 			<label>Felhasználónév</label>
@@ -54,12 +56,12 @@
 			<input [ngClass]="password.valid ? 'valid' : password.dirty || password.touched ? 'invalid' : ''" [type]="inputType" placeholder=" " formControlName="password">
 			<label>Jelszó</label>
             @if (!passwordVisible) {
-				<button (click)="revealPassword()" class="button" type="button">
+				<button (click)="revealPassword()" type="button">
 					<i class="material-icons icon">visibility_off</i>
 					<span class="visually-hidden">Jelszó felfedése</span>
 				</button>              
             } @else {
-				<button (click)="revealPassword()" class="button" type="button">
+				<button (click)="revealPassword()" type="button">
 					<i class="material-icons icon">visibility</i>
 					<span class="visually-hidden">Jelszó elrejtése</span>
 				</button>
@@ -127,7 +129,7 @@
 			<a routerLink="/forgot-password">Elfelejtett jelszó?</a>
 		</div>
 
-		<button [disabled]="registerForm.invalid" class="button" type="submit">Register</button>
+		<button [disabled]="registerForm.invalid" class="cta" type="submit">Register</button>
 		@if (errorMessage) {
 			<div class="error">
 				<span class="material-icons-outlined">cancel</span>
@@ -141,7 +143,7 @@
 			<div class="line"></div>
 		</div>
 
-		<button class="button" type="button">Register with Google</button>
+		<button type="button">Register with Google</button>
 	</form>
 	<p>Már van fiókod? <a routerLink="/login">Bejelentkezés</a></p>
 </main>

@@ -44,6 +44,6 @@
 		<input id="profile-image" type="file" accept="image/*" formControlName="image" (change)="onFileChange($event)">
 	</div>
 
-	<button [disabled]="editForm.invalid" class="button" type="submit">Módosítás</button>
-	<button class="button" type="button" (click)="delete()">Fiók törlése</button>
+	<button [disabled]="editForm.invalid" type="submit">Módosítás</button>
+	<button class="warning" type="button" (click)="delete()">Fiók törlése</button>
 </form>
