@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { User } from '../../core/interfaces/user';
 
 
 export const hasOnlyLowercaseLetters = (control: AbstractControl): ValidationErrors | null => {

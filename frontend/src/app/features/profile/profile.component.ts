@@ -1,30 +1,30 @@
-import { CommonModule, NgClass } from '@angular/common';
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { User } from '../../core/interfaces/user';
 import { ImgbbService } from '../../core/services/imgbb.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-profile',
 	standalone: true,
-	imports: [ReactiveFormsModule, NgClass, CommonModule],
+	imports: [ReactiveFormsModule, CommonModule],
 	templateUrl: './profile.component.html',
 	styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 	authService = inject(AuthService);
 	cd = inject(ChangeDetectorRef);
+	private router = inject(Router);
 
 	imgbb = inject(ImgbbService);
 	imageSrc = "";
 	selectedImage: File | null = null; // ez lesz elküldve az imgbb-nek
-	imgUrl = "";
 
 	user!: User;
 	editForm: FormGroup;
 	constructor(private formBuilder: FormBuilder) {
-
 		this.editForm = this.formBuilder.group({
 			username: [""],
 			bio: [""],
@@ -33,15 +33,17 @@ export class ProfileComponent {
 			}],
 			image: [""],
 		});
+	}
 
+	ngOnInit(): void {
 		// Ha a felhasználó már be van jelentkezve, töltsd fel az űrlapot az adataival
 		this.authService.user$.subscribe(user => {
 			if (user) {
 				this.editForm.patchValue({
 					username: user.name || "",
 					bio: user.bio || "",
-					image: user.profile_picture || "",
 				});
+				this.imageSrc = user.profile_picture || "";
 				console.log("User data loaded", user);
 			}
 		});
@@ -91,7 +93,7 @@ export class ProfileComponent {
 
 	public delete() {
 		this.authService.deleteUser().subscribe({
-			next: (res) => console.log("Delete successful", res),
+			next: (res) => this.router.navigateByUrl("/"),
 			error: (err) => console.error("Delete error", err)
 		});
 	}

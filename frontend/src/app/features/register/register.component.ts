@@ -43,7 +43,7 @@ export class RegisterComponent {
 			this.authService.register(form.username, form.email, form.password, form.passwordAgain)
 				.subscribe({
 					next: () => {
-						this.router.navigateByUrl("/")
+						this.router.navigateByUrl("/login")
 					},
 					error: (error) => {
 						this.errorMessage = error.error.error;

@@ -197,20 +197,25 @@ exports.deleteUser = async (req, res) => {
 			'DELETE FROM Users WHERE id = ?',
 			[req.userId]
 		);
+
+		res.clearCookie('token', {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production',
+			sameSite: 'Lax'
+		});
 		res.json({ message: 'User deleted' });
 	} catch (error) {
+		res.clearCookie('token', {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production',
+			sameSite: 'Lax'
+		});
 		if (process.env.NODE_ENV === 'development') {
 			res.status(400).json({ error: error.message });
 		} else {
 			res.status(500).json({ error: "Internal server error" });
 		}
 	} finally {
-		res.clearCookie('token', {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production',
-			sameSite: 'Strict'
-		});
-
 		if (conn) conn.release();
 	}
 };
