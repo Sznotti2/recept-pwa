@@ -33,16 +33,18 @@ main {
         }
 
         .error {
-            padding: 1rem 2.5rem;
-            border: 2px solid #ff2c36;
+            padding: 1rem;
+            border: 2px solid hsla(var(--clr-error-hsl), 1);
             border-radius: .5rem;
-            color: #ff2c36;
-            background-color: #ffc5c8;
-            box-shadow: 3px 3px 0 0 #ff2c36;
+            background-color: hsla(var(--clr-error-hsl), 0.2);
             font-weight: bold;
             display: flex;
 			align-items: center;
             gap: 1rem;
+
+            * {
+                color: hsla(var(--clr-error-hsl), 1);
+            }
         }
     }
 }

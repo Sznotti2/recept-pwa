@@ -12,19 +12,14 @@
 			<h3 [routerLink]="[ '/search', recipe.id ]" class="title">{{ recipe.name }}</h3>
 		
 			<ul class="info">
-				<li>{{ recipe.servings }} adag</li>
+				<li>
+					<span>{{ recipe.servings }} adag</span>
+				</li>
 				<li>
 					<span class="material-icons">star</span>
 					{{ recipe.rating }}
 				</li>
 				<li>
-					<!--
-					@if (recipe.isFavorite) {
-						<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite</i>
-					} @else {
-						<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite_border</i>
-					}
-					-->
 					<i class="material-icons favorite-icon" (click)="toggleFavorite(recipe)">favorite_border</i>
 				</li>
 			</ul>

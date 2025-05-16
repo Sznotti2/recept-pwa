@@ -141,15 +141,6 @@ header {
 	flex-wrap: wrap;
 	gap: .5rem;
 	margin-bottom: 1rem;
-
-	>div {
-		display: flex;
-		border: 2px solid black;
-
-		input {
-			padding-left: .5rem;
-		}
-	}
 }
 
 .instructions {
@@ -186,6 +177,16 @@ header {
 		align-items: start;
 	}
 
+	.image-upload-container {
+		position: relative;
+	
+		button {
+			position: absolute;
+			top: .5rem;
+			right: 0;
+			margin: .5rem;
+		}
+	}
 	.image-gallery {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);

@@ -11,7 +11,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	background-color: honeydew;
+	background-color: hsl(var(--primary-hs), var(--lightness-800));
 	overflow: hidden;
 	cursor: pointer;
 	transition: box-shadow 0.2s ease-in-out;
@@ -22,10 +22,6 @@ section {
 
 	@media screen and (min-width: 1024px) {
 		flex: 1 1 calc(33.333% - 1rem);
-	}
-
-	&:hover {
-		box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 	}
 
 	.img-container {
@@ -48,7 +44,7 @@ section {
 
 		p {
 			margin-block: 0.6rem;
-			color: rgb(90, 90, 90);
+			color: hsl(var(--primary-hs), var(--lightness-200));
 		}
 	}
 
