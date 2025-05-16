@@ -151,7 +151,6 @@ a:not([class]) {
 	--lightness-800: 20%;
 	--lightness-900: 10%;
 	--lightness-1000: 0%;
-
 }
 
 /* GLOBAL STYLES  */
@@ -189,7 +188,10 @@ button {
 	letter-spacing: 0.04em;
 	border: 2px solid hsl(var(--primary-hs), var(--lightness-800));
 	cursor: pointer;
-	transition: var(--transition);
+	transition: 
+		color .2s ease-in-out, 
+		border-color .2s ease-in-out, 
+		background-color .1s ease-in-out;
 
 	&:where(:not(:has(.visually-hidden))) {
 		padding: var(--button-padding, 0.35em 1em);
@@ -205,6 +207,7 @@ button {
 	&:where(:has(.visually-hidden)) {
 		border-radius: 50%;
 		padding: 0.5em;
+		user-select: none;
 	}
 
 	&:where(:not(:has(.icon))) {
@@ -285,7 +288,7 @@ input[type="date"] {
 	transition-property: border;
 
 	&:focus {
-		border: 2px solid hsl(var(--accent-hs), var(--lightness-500));
+		border: 2px solid hsl(var(--primary-hs), var(--lightness-100));
 	}
 }
 
@@ -366,7 +369,7 @@ input[type="search"] {
 		}
 	}
 	&:has(input:focus){
-		border: 2px solid hsl(var(--accent-hs), var(--lightness-500));
+		border: 2px solid var(--_clr-icon);
 	}
 
 	.icon {
@@ -469,16 +472,15 @@ input[type="search"] {
 		appearance: none;
 		width: var(--_width);
 		height: var(--_height);
-		background: #ddd;
+		background: hsl(var(--primary-hs), var(--lightness-700));
 		border-radius: 3em;
-		box-shadow: 0 0 0 var(--_border-width) black;
 		margin-left: .1em;
 		cursor: pointer;
 		outline: none;
 		transition: background-color .2s ease-in-out;
 
 		&:checked {
-			background-color: hotpink;
+			background-color: hsl(var(--accent-hs), var(--lightness-500));
 		}
 
 		&:after {
@@ -488,7 +490,6 @@ input[type="search"] {
 			height: var(--_height);
 			border-radius: 50%;
 			background-color: #fff;
-			box-shadow: 0 0 0 var(--_border-width) black;
 			transform: scale(.7);
 			left: 0;
 			transition: left .2s ease-in-out;
@@ -744,11 +745,13 @@ input[type="search"] {
 		list-style: none;
 		display: inline-flex;
 		align-items: center;
+		background-color: hsl(var(--primary-hs), var(--lightness-900));
 		border: 2px solid hsl(var(--primary-hs), var(--lightness-100));
 		border-radius: 9999px;
 		overflow: hidden;
 
-		&:has(a:hover) {
+		&:has(a:hover),
+		&:has(.icon:hover) {
 			background-color: hsl(var(--primary-hs), var(--lightness-800));
 		}
 		&:has(a:active) {
@@ -779,6 +782,7 @@ input[type="search"] {
 			color: hsl(var(--primary-hs), var(--lightness-100));
 			font-size: 1em;
 			cursor: pointer;
+			user-select: none;
 
 			&:hover {
 				color: var(--clr-bg);

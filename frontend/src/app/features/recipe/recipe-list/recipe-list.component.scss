@@ -9,30 +9,12 @@ section {
 .recipe-card {
     padding: 1rem;
     border-radius: 1rem;
-    border: 2px solid black;
-    // box-shadow: 5px 5px 0px 0px black;
-    background-color: whitesmoke;
+    background-color: hsl(var(--primary-hs), var(--lightness-800));
+	cursor: pointer;
 
     img {
         object-fit: cover;
         border-radius: 1rem;
-    }
-
-    .tags {
-        padding: 1rem 0 .7rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: .5rem;
-
-        > *:first-child {
-            background-color: #fe5a35;
-        }
-        > *:nth-child(2) {
-            background-color: #06ae56;
-        }
-        > *:last-child {
-            background-color: #91a8ec;
-        }
     }
 
     .title {
@@ -53,7 +35,7 @@ section {
 			align-items: center;
 
 			.favorite-icon {
-				color: red;
+				color: hsl(var(--warning-hs), var(--lightness-500));
 				cursor: pointer;
 				transition: all .2s ease-in-out;
 

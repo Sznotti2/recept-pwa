@@ -22,7 +22,7 @@ main {
             .line {
                 height: 2px;
                 width: 100%;
-                background-color: var(--clr-border);
+                background-color: hsl(var(--primary-hs), var(--lightness-100));
             }
         }
 
@@ -34,16 +34,16 @@ main {
 
         .error {
             padding: 1rem;
-            border: 2px solid hsla(var(--clr-error-hsl), 1);
+            border: 2px solid hsla(var(--warning-hs), 50%, 1);
             border-radius: .5rem;
-            background-color: hsla(var(--clr-error-hsl), 0.2);
+            background-color: hsla(var(--warning-hs), 50%, 0.2);
             font-weight: bold;
             display: flex;
 			align-items: center;
             gap: 1rem;
 
             * {
-                color: hsla(var(--clr-error-hsl), 1);
+                color: hsla(var(--warning-hs), 50%, 1);
             }
         }
     }

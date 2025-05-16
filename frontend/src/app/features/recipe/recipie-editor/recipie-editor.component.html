@@ -33,15 +33,17 @@
 			</div>
 
 			<div class="categories" formArrayName="categories">
-				<div *ngFor="let category of categories.controls; let i = index">
-					<input [formControlName]="i" placeholder="kategória" />
-					<button class="icon-btn" type="button" (click)="removeCategory(i)" title="kategória eltávolítása">
+				<div class="icon-input" *ngFor="let category of categories.controls; let i = index">
+					<input [formControlName]="i" placeholder="kategória">
+					<button class="warning" type="button" (click)="removeCategory(i)" title="kategória eltávolítása">
 						<i class="material-icons icon">close</i>
+						<span class="visually-hidden">Kategória eltávolítása</span>
 					</button>
 				</div>
 
-				<button class="icon-btn" type="button" (click)="addCategory()" title="kategória hozzáadása">
+				<button class="success" type="button" title="Kategória hozzáadása" (click)="addCategory()">
 					<i class="material-icons icon">add</i>
+					<span class="visually-hidden">Kategória hozzáadása</span>
 				</button>
 			</div>
 
@@ -62,13 +64,16 @@
 				<li *ngFor="let instruction of instructions.controls; let i = index" [formGroupName]="i">
 					<div class="instruction-row">
 						<textarea formControlName="text" cols="30" rows="3" placeholder="Recept leírás"></textarea>
-						<button class="icon-btn" type="button" title="leírás eltávolítása"
-							(click)="removeInstruction(i)">
+						<!-- <button class="icon-btn" type="button" title="leírás eltávolítása" (click)="removeInstruction(i)">
 							<i class="material-icons icon">close</i>
+						</button> -->
+						<button class="warning" type="button" title="Leírás eltávolítása" (click)="removeInstruction(i)">
+							<i class="material-icons icon">close</i>
+							<span class="visually-hidden">Leírás eltávolítása</span>
 						</button>
 					</div>
 					<div class="image-gallery" formArrayName="images">
-						<div *ngFor="let image of getImagesAt(i).controls; let j = index">
+						<div class="image-upload-container" *ngFor="let image of getImagesAt(i).controls; let j = index">
 							<div class="image-upload">
 								<label for="{{ i + '-' + j}}">
 									@if (instructionImgSrc.get(i+'-'+j)) {
@@ -87,18 +92,20 @@
 								<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
 									(change)="onInstructionImageSelected($event, i, j)">
 							</div>
-							<button class="icon-btn" type="button" title="kép eltávolítása"
-								(click)="removeImageInput(i, j)">
+							<button class="warning" type="button" title="Kép eltávolítása" (click)="removeImageInput(i, j)">
 								<i class="material-icons icon">close</i>
+								<span class="visually-hidden">Kép eltávolítása</span>
 							</button>
 						</div>
-						<button class="icon-btn" type="button" title="kép hozzáadása" (click)="addImageInput(i)">
+						<button class="success" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
 							<i class="material-icons icon">add</i>
+							<span class="visually-hidden">Kép hozzáadása</span>
 						</button>
 					</div>
 				</li>
-				<button class="icon-btn" type="button" title="leírás hozzáadása" (click)="addInstruction()">
+				<button class="success" type="button" title="Leírás hozzáadása" (click)="addInstruction()">
 					<i class="material-icons icon">add</i>
+					<span class="visually-hidden">Leírás hozzáadása</span>
 				</button>
 			</ol>
 		</section>
@@ -107,34 +114,37 @@
 			<h3>Hozzávalók</h3>
 
 			<ng-container *ngFor="let elem of ingredients.controls; let i = index" [formGroupName]="i">
-				<div class="row">
+				<div class="icon-input row">
 					<input type="text" formControlName="title">
-					<button class="icon-btn" type="button" (click)="removeIngredient(i)">
-						<i class="material-icons icon">add</i>
+					<button class="warning" type="button" title="Lista eltávolítása" (click)="removeIngredient(i)">
+						<i class="material-icons icon">close</i>
+						<span class="visually-hidden">Lista eltávolítása</span>
 					</button>
 				</div>
 				<ul formArrayName="ingredientList">
 					<li *ngFor="let ingredient of getIngredientListAt(i).controls; let j = index">
-						<div class="row">
+						<div class="icon-input row">
 							<input type="text" [formControlName]="j">
-							<button class="icon-btn" type="button" (click)="removeIngredientItem(i, j)">
+							<button class="warning" type="button" title="Listaelem eltávolítása" (click)="removeIngredientItem(i, j)">
 								<i class="material-icons icon">close</i>
+								<span class="visually-hidden">Listaelem eltávolítása</span>
 							</button>
 						</div>
 					</li>
-					<button class="icon-btn" type="button" (click)="addIngredientItem(i)">
+					<button class="success" type="button" title="Listaelem hozzáadása" (click)="addIngredientItem(i)">
 						<i class="material-icons icon">add</i>
+						<span class="visually-hidden">Listaelem hozzáadása</span>
 					</button>
 				</ul>
 			</ng-container>
-			<button class="icon-btn" type="button" (click)="addIngredient()">
+			<button class="success" type="button" title="Lista hozzáadása" (click)="addIngredient()">
 				<i class="material-icons icon">add</i>
+				<span class="visually-hidden">Lista hozzáadása</span>
 			</button>
 		</section>
 
 		<section>
-			<button type="submit">Mentés</button>
-			<button type="button">Mégse</button>
+			<button class="cta" type="submit">Mentés</button>
 		</section>
 	</form>
 </div>

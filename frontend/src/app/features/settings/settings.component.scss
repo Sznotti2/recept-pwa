@@ -22,16 +22,16 @@
 		padding: 0.75em 1em;
 		border-radius: 8px;
 		text-decoration: none;
-		color: var(--clr-text);
+		color: hsl(var(--primary-hs), var(--lightness-100));
 		transition: var(--transition);
 		border: 2px solid transparent;
 
 		&.active-tab {
-			background-color: var(--clr-surface3);
+			background-color: hsl(var(--primary-hs), var(--lightness-800));
 		}
 		&:hover,
 		&:focus {
-			border: var(--border);
+			border: 2px solid hsl(var(--primary-hs), var(--lightness-500));
 		}
 	}
 }

@@ -6,9 +6,6 @@
 		<div class="form-group">
 			<input [ngClass]="username.valid ? 'valid' : username.dirty || username.touched ? 'invalid' : ''" type="text" placeholder=" " formControlName="username">
 			<label>Felhasználónév</label>
-			@if (username.valid) {
-				<span class="marker">&#10003;</span>
-			}
 		</div>
 		<!-- ha akarsz ikonokat csak töltsd le ezt:
 		https://www.npmjs.com/package/material-icons -->

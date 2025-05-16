@@ -18,7 +18,7 @@ nav {
 		font-size: 1.3rem;
 		font-weight: bold;
 		text-decoration: none;
-		color: hsl(var(--accent-hs), var(--lightness-100));
+		color: hsl(var(--accent-hs), var(--lightness-500));
 	}
 
 	> *:last-child {
@@ -58,7 +58,7 @@ nav {
 			z-index: 1;
 	
 			&:has(a.active) ~ .slider {
-				border-bottom: 2px solid hsl(var(--accent-hs), var(--lightness-100));
+				border-bottom: 2px solid hsl(var(--accent-hs), var(--lightness-500));
 				display: inline-block;
 			}
 			&:nth-child(1):has(a.active) ~ .slider {
@@ -110,7 +110,7 @@ nav {
 	
 				&:hover,
 				&.active {
-					color: hsl(var(--accent-hs), var(--lightness-100));
+					color: hsl(var(--accent-hs), var(--lightness-500));
 				}
 			}
 		}

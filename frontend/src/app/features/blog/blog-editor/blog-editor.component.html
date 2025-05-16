@@ -67,16 +67,16 @@
 						@case ('Paragrafus') {
 							<div class="paragraph-row">
 								<textarea formControlName="text" cols="30" rows="3" placeholder="Paragrafus"></textarea>
-								<button class="icon-btn close " type="button" title="leírás eltávolítása"
+								<button class="warning" type="button" title="Leírás eltávolítása"
 									(click)="removeContent(i)">
-									<i class="material-icons">close</i>
+									<i class="material-icons icon">close</i>
+									<span class="visually-hidden">Leírás eltávolítása</span>
 								</button>
 							</div>
 						}
 						@case ('Kép') {
 							<div class="image-gallery" formArrayName="images">
-								<div class="image-upload-container"
-									*ngFor="let image of getImagesAt(i).controls; let j = index">
+								<div class="image-upload-container" *ngFor="let image of getImagesAt(i).controls; let j = index">
 									<div class="image-upload">
 										<label for="{{ i + '-' + j}}">
 											@if (paragraphImgSrc.get(i+'-'+j)) {
@@ -95,13 +95,14 @@
 										<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
 											(change)="onParagraphImageSelected($event, i, j)">
 									</div>
-									<button class="icon-btn close" type="button" title="Kép eltávolítása"
-										(click)="removeImageInput(i, j)">
-										<i class="material-icons">close</i>
+									<button class="warning" type="button" title="Kép eltávolítása" (click)="removeImageInput(i, j)">
+										<i class="material-icons icon">close</i>
+										<span class="visually-hidden">Kép eltávolítása</span>
 									</button>
 								</div>
-								<button class="icon-btn add" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
-									<i class="material-icons">add</i>
+								<button class="success" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
+									<i class="material-icons icon">add</i>
+									<span class="visually-hidden">Kép hozzáadása</span>
 								</button>
 							</div>
 						}
@@ -127,13 +128,14 @@
 										<input id="{{ i + '-' + j}}" type="file" [formControlName]="j"
 											(change)="onParagraphImageSelected($event, i, j)">
 									</div>
-									<button class="icon-btn close" type="button" title="Kép eltávolítása"
-										(click)="removeImageInput(i, j)">
-										<i class="material-icons">close</i>
+									<button class="warning" type="button" title="Kép eltávolítása" (click)="removeImageInput(i, j)">
+										<i class="material-icons icon">close</i>
+										<span class="visually-hidden">Kép eltávolítása</span>
 									</button>
 								</div>
-								<button class="icon-btn add" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
-									<i class="material-icons">add</i>
+								<button class="success" type="button" title="Kép hozzáadása" (click)="addImageInput(i)">
+									<i class="material-icons icon">add</i>
+									<span class="visually-hidden">Kép hozzáadása</span>
 								</button>
 							</div>
 						}
@@ -143,17 +145,18 @@
 					}
 				</li>
 			</ol>
-			<button class="icon-btn add" type="button" title="Paragrafus hozzáadása" (click)="addContent()">
-				<i class="material-icons">add</i>
+			<button class="success" type="button" title="Paragrafus hozzáadása" (click)="addContent()">
+				<i class="material-icons icon">add</i>
+				<span class="visually-hidden">Paragrafus hozzáadása</span>
 			</button>
 		</section>
 
 		<section>
 			@if (blogSlug) {
-				<button class="button" type="button" (click)="update()">Frissítés</button>
-				<button class="button" type="button" (click)="delete()">Törlés</button>
+				<button type="button" (click)="update()">Frissítés</button>
+				<button class="warning" type="button" (click)="delete()">Törlés</button>
 			} @else {
-				<button class="button" type="submit">Mentés</button>
+				<button class="cta" type="submit">Mentés</button>
 			}
 		</section>
 	</form>
