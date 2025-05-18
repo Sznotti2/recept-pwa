@@ -34,25 +34,26 @@
 	
 		<div id="user-menu">	
 			<input class="dropdown-toggle" type="checkbox" id="dropdown-toggle"/>
-			<label for="dropdown-toggle">
-				<ng-container *ngIf="authService.user$ | async as User; else visitor">
+			<ng-container *ngIf="authService.user$ | async as User; else visitor">
+				<label for="dropdown-toggle">
 					<ng-container *ngIf="User.profile_picture; else defaultImage">
-						<img class="profile-image" [src]="User.profile_picture" alt="Profile Image">
+						<img class="profile-image user-icon" [src]="User.profile_picture" alt="Profile Image">
 					</ng-container>
 					<ng-template #defaultImage>
-						<span class="material-icons">person</span>
-					</ng-template>					
-				</ng-container>
-				<ng-template #visitor>
-					<button class="br-round" type="button" routerLink="/login">Bejelentkezés</button>
-				</ng-template>
-				<div id="hamburger-container" (click)="toggleDropdown()" [ngClass]="{'open': isOpen}">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-			</label>
+						<span class="material-icons user-icon">person</span>
+					</ng-template>
+					<div id="hamburger-container" (click)="toggleDropdown()" [ngClass]="{'open': isOpen}">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</label>
+			</ng-container>
+			<ng-template #visitor>
+				<button class="cta login-btn" type="button" routerLink="/login">Bejelentkezés</button>
+			</ng-template>
+
 			<ul class="dropdown">
 				<ng-container *ngIf="authService.user$ | async as User; else guestMenu">
 					<li routerLink="/settings/profile">

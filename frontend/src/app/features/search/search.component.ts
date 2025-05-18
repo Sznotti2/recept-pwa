@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { MultiselectDropdownComponent } from '../../shared/components/multiselect-dropdown/multiselect-dropdown.component';
 import { Recipe } from '../recipe/interfaces/recipe';
 import { RecipeListComponent } from '../recipe/recipe-list/recipe-list.component';
 import { RecipeService } from '../recipe/services/recipe.service';
@@ -13,7 +12,7 @@ interface Item {
 @Component({
 	selector: 'app-search',
 	standalone: true,
-	imports: [MultiselectDropdownComponent, RecipeListComponent],
+	imports: [RecipeListComponent],
 	templateUrl: './search.component.html',
 	styleUrl: './search.component.scss'
 })

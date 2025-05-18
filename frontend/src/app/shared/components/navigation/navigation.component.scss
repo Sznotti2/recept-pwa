@@ -46,7 +46,6 @@ nav {
 		position: relative;
 		width: var(--container_width);
 
-
 		.slider {
 			display: none;
 			position: absolute;
@@ -146,6 +145,10 @@ nav {
 			width: 2.5rem;
 			height: 2.5rem;
 			border-radius: 50%;
+		}
+
+		.login-btn {
+			border-radius: var(--nav-height);
 		}
 
 		/* magic */

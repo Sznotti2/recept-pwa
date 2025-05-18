@@ -1,5 +1,7 @@
 form {
-	max-width: 30rem;
+	width: 30rem;
+	max-width: calc(100% - var(--gap-small) * 2);
+	margin: 0 auto;
 	padding: 3rem;
 	border: var(--border);
 	border-radius: 1rem;
@@ -7,52 +9,71 @@ form {
 	flex-direction: column;
 	gap: 1rem;
 	margin-bottom: 1rem;
-	background-color: var(--clr-surface1);
+	background-color: hsl(var(--primary-hs), var(--lightness-800));
 
-    .error {
-        padding: 1rem 2.5rem;
-        border: 2px solid #ff2c36;
-        border-radius: .5rem;
-        color: #ff2c36;
-        background-color: #ffc5c8;
-        box-shadow: 3px 3px 0 0 #ff2c36;
-        font-weight: bold;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 1rem;
-    }
+	.divider {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
 
-    .image-upload {
-        display: grid;
-        margin-top: 0.5rem; 
-        grid-template-columns: repeat(1, minmax(0, 1fr)); 
+		.line {
+			height: 2px;
+			width: 100%;
+			background-color: hsl(var(--primary-hs), var(--lightness-100));
+		}
+	}
 
-        input {
-            display: none;
-        }
+	.row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 
-        div {
-            padding: 2.5rem; 
-            width: 100%; 
-            display: grid;
-            place-items: center;
-            border-radius: 0.5rem; 
-            border: 4px dashed darkgray;
-            color: darkgray;
-            cursor: pointer;
+	.error {
+		padding: 1rem;
+		border: 2px solid hsla(var(--warning-hs), 50%, 1);
+		border-radius: .5rem;
+		background-color: hsla(var(--warning-hs), 50%, 0.2);
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
 
-            transition: all 0.2s ease;
+		* {
+			color: hsla(var(--warning-hs), 50%, 1);
+		}
+	}
+}
 
-            &:hover {
-                border: 4px dashed black;
-                color: black;
-            }
+.image-upload {
+	display: grid;
+	margin-top: 0.5rem; 
+	grid-template-columns: repeat(1, minmax(0, 1fr)); 
 
-            svg {
-                width: 2.2em;
-                height: 2.2em;
-            }
-        }
-    }
+	input {
+		display: none;
+	}
+
+	div {
+		padding: 2.5rem; 
+		width: 100%; 
+		display: grid;
+		place-items: center;
+		border-radius: 0.5rem; 
+		border: 4px dashed darkgray;
+		color: darkgray;
+		cursor: pointer;
+
+		transition: all 0.2s ease;
+
+		&:hover {
+			border: 4px dashed black;
+			color: black;
+		}
+
+		svg {
+			width: 2.2em;
+			height: 2.2em;
+		}
+	}
 }

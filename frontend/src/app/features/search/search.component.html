@@ -2,7 +2,6 @@
 <aside>
 	<input type="search" placeholder="Search all the things" value="" (input)="filter($event)"/>
 
-	<app-multiselect-dropdown [items]="itemList"></app-multiselect-dropdown>
 </aside>
 <section>
 	<app-recipe-list [recipes$]="recipeList$"></app-recipe-list>

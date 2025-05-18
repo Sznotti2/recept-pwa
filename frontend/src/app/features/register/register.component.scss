@@ -1,10 +1,8 @@
 main {
-    display: grid;
-    place-items: center;
-	margin: var(--gap-small);
-
     form {
-        max-width: 30rem;
+		width: 30rem;
+		max-width: calc(100% - var(--gap-small) * 2);
+		margin: 0 auto;
         padding: 3rem;
         border: var(--border);
         border-radius: 1rem;
@@ -47,4 +45,8 @@ main {
             }
         }
     }
+
+	p {
+		text-align: center;
+	}
 }

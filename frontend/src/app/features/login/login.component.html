@@ -1,11 +1,12 @@
 <main>
 	<form [formGroup]="loginForm" (ngSubmit)="login()">
+		<h2 class="title">Bejelentkezés</h2>
+
 		<div class="form-group">
 			<input [ngClass]="email.valid ? 'valid' : email.dirty || email.touched ? 'invalid' : ''" type="text" placeholder=" " formControlName="email">
 			<label>Email vagy felhasználónév</label>
 		</div>
-		<!-- ha akarsz ikonokat csak töltsd le ezt:
-		https://www.npmjs.com/package/material-icons -->
+		
 		@if (email.invalid && (email.dirty || email.touched)) {
 			@if (email.errors?.['required']) {
 				<div class="error">
