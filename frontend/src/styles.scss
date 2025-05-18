@@ -135,10 +135,6 @@ a:not([class]) {
 	--warning-hs: 0, 85%;
 	--success-hs: 119, 94%;
 }
-[class*='blue'] {
-	--primary-hs: 210, 100%;
-	--accent-hs: 330, 100%;
-}
 [class*='dark'] {
 	--lightness-000: 100%;
 	--lightness-100: 90%;
@@ -152,6 +148,30 @@ a:not([class]) {
 	--lightness-900: 10%;
 	--lightness-1000: 0%;
 }
+[class*='blue'] {
+	--primary-hs: 210, 100%;
+	--accent-hs: 330, 100%;
+}
+[class*='green'] {
+	--primary-hs: 120, 100%;
+	--accent-hs: 330, 100%;
+}
+[class*='red'] {
+	--primary-hs: 0, 100%;
+	--accent-hs: 330, 100%;
+}
+[class*='purple'] {
+	--primary-hs: 270, 100%;
+	--accent-hs: 330, 100%;
+}
+[class*='pink'] {
+	--primary-hs: 330, 100%;
+	--accent-hs: 330, 100%;
+}
+[class*='orange'] {
+	--primary-hs: 30, 100%;
+	--accent-hs: 330, 100%;
+}
 
 /* GLOBAL STYLES  */
 body {
@@ -160,6 +180,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: hsl(var(--primary-hs), var(--lightness-900));
 	color: hsl(var(--primary-hs), var(--lightness-100));
+	transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 h1, h2, h3, h4, h5, h6, span, p {

@@ -1,0 +1,36 @@
+<div class="theme-switcher">
+	<button type="button" (click)="toggleMenu()">
+		<i class="material-icons icon">dark_mode</i>
+		<span class="visually-hidden">Open theme switcher</span>
+	</button>
+
+	<div class="dropdown-menu" *ngIf="isOpen">
+		<div class="theme-options">
+			<label>
+				<input type="radio" name="theme" [value]="'light'" [(ngModel)]="selectedTheme"
+					(change)="onThemeChange('light')" />
+				Világos
+			</label>
+			<label>
+				<input type="radio" name="theme" [value]="'dark'" [(ngModel)]="selectedTheme"
+					(change)="onThemeChange('dark')" />
+				Sötét
+			</label>
+		</div>
+
+		<div class="color-options">
+			<label>
+				<input type="checkbox" [checked]="selectedColor === 'blue'" (change)="onColorChange('blue', $event)" />
+				Kék
+			</label>
+			<label>
+				<input type="checkbox" [checked]="selectedColor === 'red'" (change)="onColorChange('red', $event)" />
+				Piros
+			</label>
+			<label>
+				<input type="checkbox" [checked]="selectedColor === 'green'" (change)="onColorChange('green', $event)" />
+				Zöld
+			</label>
+		</div>
+	</div>
+</div>

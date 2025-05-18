@@ -1,0 +1,31 @@
+.theme-switcher {
+	position: relative;
+	display: inline-block;
+
+	.dropdown-menu {
+		position: absolute;
+		top: calc(100% + 10px + 1rem);
+		right: 0;
+		background-color: hsl(var(--primary-hs), var(--lightness-800));
+		padding: 1rem;
+		z-index: 1000;
+		border-radius: 1rem;
+	}
+
+	.theme-options,
+	.color-options {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
+
+	.theme-options label,
+	.color-options label {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+}
