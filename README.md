@@ -1,110 +1,34 @@
-#Megvalósítandó Oldalak és Funkciók
-1. Főoldal
+## **Frontend setup**
 
-    Funkciók:
-        Tematikus receptajánló blokkok (például szezonális receptek, legnépszerűbb receptek, újdonságok).
-        Gyors navigáció a különböző recept kategóriákhoz.
-        Kiemelt receptek vagy népszerű blogbejegyzések megjelenítése.
-    Lehetséges Kiegészítések:
-        Karusszel az aktuális kedvencekhez.
-        Új felhasználók üdvözlése vagy bemutatása.
-        Hírlevél feliratkozási lehetőség.
+### **navigate to `frontend/` directory**
 
-2. Recept Kereső Oldal
+```
+$ cd frontend
+$ npm install
+$ ng serve
+(to topen automatically use ng serve -o)
+```
+You can now view the app on http://localhost:4200/
 
-    Funkciók:
-        Keresés recept név alapján.
-        Szűrés különböző kritériumok szerint (pl. alkalom, hozzávalók, nehézségi szint, elkészítési idő).
-        Kategóriák szerinti böngészés.
-    Lehetséges Kiegészítések:
-        Filter mentése, hogy a felhasználók újrahasználhassák őket.
-        Kulcsszavas keresés és ajánlások keresés közben.
+### setup server and databse
 
-3. Recept Részletes Nézet (Recept View)
+ - in XAMPP start the MySQL and Apache server
+ - navigate to `127.0.0.1/phpmyadmin/`
+ - create a database with the name recept-pwa
+ (you can use a different name but be sure to update the config in `backend/config/db.config.js`)
+ - navigate to the SQL tab and paste the SQL code found in the `backend/config/db.sql`
 
-    Funkciók:
-        Recept leírása, hozzávalók, elkészítési lépések.
-        Képgaléria az elkészítés lépéseiről vagy az elkészült ételről.
-        Kommentek megtekintése és hozzáadásának lehetősége.
-        Értékelési lehetőség (pl. csillagokkal vagy lájkokkal).
-        Kedvencek közé mentés.
-    Lehetséges Kiegészítések:
-        Lépésről-lépésre útmutató interaktív módon (pl. lépésről-lépésre kattintva haladhassanak előre).
-        Hozzávalók átszámítása a választott adagok szerint.
-        Hasonló receptek ajánlása.
+### **navigate to `backend/` directory**
 
-4. Blog Oldal
+```
+$ cd ..
+$ cd backend
+$ npm install
+$ npm start
+```
 
-    Funkciók:
-        Blog bejegyzések listája, melyek gasztronómiával kapcsolatos tippeket, élményeket, éttermek bemutatását stb. tartalmazzák.
-        Bejegyzés részletes nézete, kommentelési lehetőséggel.
-    Lehetséges Kiegészítések:
-        Bejegyzések kedvencek közé mentése.
-        Blog író/szerkesztő oldal, ahol új bejegyzések készíthetők.
+#### Now the application should be ready to roll
 
-5. Felhasználói Profil Oldal
-
-    Funkciók:
-        Felhasználói adatok megjelenítése és szerkesztése (név, email stb.).
-        Kedvenc receptek megjelenítése.
-        Személyes beállítások módosítása (pl. értesítések, hírlevelek).
-    Lehetséges Kiegészítések:
-        Felhasználói aktivitás követése (pl. általuk kedvelt receptek, hozzászólások stb.).
-        Saját receptjeik és blogbejegyzéseik listája.
-
-6. Recept Író/Szerkesztő Oldal
-
-    Funkciók:
-        Új recept létrehozása és meglévők szerkesztése.
-        Kategória és címke hozzárendelése a recepthez.
-        Képfeltöltés.
-        Recepthez kapcsolódó tippek vagy megjegyzések hozzáadása.
-    Lehetséges Kiegészítések:
-        Előnézet a recept megjelenéséről közzététel előtt.
-        Mentési lehetőség későbbi szerkesztéshez.
-
-#Opcionális Oldalak és Funkciók
-
-1. Recept Nyomtatási Nézet
-
-    Funkciók:
-        Letisztult, nyomtatásra kész nézet, amely csak a legfontosabb információkat tartalmazza.
-    Lehetséges Kiegészítések:
-        PDF formátumban letöltési lehetőség.
-        Hozzávalók bevásárlólistába mentése.
-
-2. Bevásárlólista Oldal
-
-    Funkciók:
-        A recept hozzávalóit automatikusan bevásárlólistába lehet menteni.
-        Saját bevásárlólista összeállítása és szerkesztése.
-    Lehetséges Kiegészítések:
-        Listák mentése és megosztása.
-        Mennyiségek módosítása a szükséges adag alapján.
-
-3. Értékelések és Vélemények Oldal
-
-    Funkciók:
-        Felhasználói értékelések és vélemények megtekintése összegző nézetben.
-        Értékelési lehetőség (1-5 csillag vagy egyéb rendszer).
-    Lehetséges Kiegészítések:
-        Felhasználói rangsor a legaktívabb értékelők szerint.
-        Értékelés statisztikái (pl. az értékelések megoszlása).
-
-4. Értesítések és Események Oldal
-
-    Funkciók:
-        Értesítések megtekintése (új hozzászólás a kedvenc receptekhez, új recept az érdeklődési kör szerint stb.).
-    Lehetséges Kiegészítések:
-        Értesítések személyre szabása, hogy milyen eseményekről kapjon értesítést.
-
-5. Felhasználói Közösségi Funkciók
-
-    Funkciók:
-        Recept megosztása másokkal vagy közösségi médiában.
-        Követési funkció, ahol felhasználók követhetik egymást.
-    Lehetséges Kiegészítések:
-        Felhasználói üzenetek és fórumok.
 
 ## ReceptPwa
 
