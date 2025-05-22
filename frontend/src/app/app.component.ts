@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './shared/components/navigation/navigation.component';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './features/auth/services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../auth/services/auth.service';
 import { User } from '../../core/interfaces/user';
 import { ImgbbService } from '../../core/services/imgbb.service';
 import { Router } from '@angular/router';

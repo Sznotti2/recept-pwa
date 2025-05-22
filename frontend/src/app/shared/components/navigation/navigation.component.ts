@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../features/auth/services/auth.service';
 import { AsyncPipe, CommonModule, NgClass } from '@angular/common';
 import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
 

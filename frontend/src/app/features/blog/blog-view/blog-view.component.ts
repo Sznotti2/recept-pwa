@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Blog } from '../interfaces/blog';
 import { BlogService } from '../services/blog.service';
 import { CommonModule, DatePipe } from '@angular/common';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../core/interfaces/user';
 
 @Component({

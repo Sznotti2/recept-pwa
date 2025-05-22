@@ -1,10 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../interfaces/user';
-import { ImgbbService } from './imgbb.service';
-
-const API_URL = 'http://localhost:5000/api/user';
+import { User } from '../../../core/interfaces/user';
+import { ImgbbService } from '../../../core/services/imgbb.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -12,6 +11,7 @@ const API_URL = 'http://localhost:5000/api/user';
 export class AuthService {
 	private http = inject(HttpClient);
 	imgbbService = inject(ImgbbService);
+	apiUrl = environment.apiUrl + 'user';
 
 	user$: BehaviorSubject<User | null>;
 
@@ -21,20 +21,20 @@ export class AuthService {
 
 	refreshToken(): Observable<any> {
 		return this.http.get(
-			API_URL + "/refreshtoken"
+			this.apiUrl + "/refreshtoken"
 		);
 	}
 
 	register(username: string, email: string, password: string, passwordAgain: string): Observable<any> {
 		return this.http.post(
-			API_URL + "/register",
+			this.apiUrl + "/register",
 			{ "name": username, "email": email, "password": password, "password2": passwordAgain }
 		);
 	}
 
 	login(email: string, password: string): Observable<any> {
 		return this.http.post(
-			API_URL + "/login",
+			this.apiUrl + "/login",
 			{ "email": email, "password": password }
 		).pipe(map(user => {
 			this.user$.next(user as User);
@@ -45,14 +45,14 @@ export class AuthService {
 		this.user$.next(null);
 
 		return this.http.post(
-			API_URL + `/logout`,
+			this.apiUrl + `/logout`,
 			{}
 		);
 	}
 
 	editUser(name: string, password: string, bio: string, profilePicture: string): Observable<any> {
 		return this.http.put(
-			API_URL + `/`,
+			this.apiUrl + `/`,
 			{ name, password, bio, profilePicture }
 		);
 	}
@@ -60,14 +60,14 @@ export class AuthService {
 	deleteUser(): Observable<any> {
 		this.user$.next(null);
 		return this.http.delete(
-			API_URL + `/`,
+			this.apiUrl + `/`,
 			{}
 		);
 	}
 
 	getUser(id: number): Observable<User> {
 		return this.http.get<{ row: User }>(
-			API_URL + "/" + id
+			this.apiUrl + "/" + id
 		).pipe(
 			map(response => response.row)
 		);
@@ -75,7 +75,7 @@ export class AuthService {
 	
 	autoLogin(): Observable<any> {
 		return this.http.get<{ user: User }>(
-			API_URL + "/me"
+			this.apiUrl + "/me"
 		).pipe(
 			map(response => {
 				const user = response.user as User;

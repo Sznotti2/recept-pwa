@@ -2,18 +2,19 @@ import { inject, Injectable } from '@angular/core';
 import { Recipe } from '../interfaces/recipe';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
-const API_URL = 'http://localhost:5000/api/recipe';
 @Injectable({
 	providedIn: 'root'
 })
 export class RecipeService {
 	http = inject(HttpClient);
+	apiUrl = environment.apiUrl + 'recipe';
 
 	addRecipe(recipe: Recipe): Observable<any> {
 		console.log("addRecipe: ", recipe.instructions);
 		return this.http.post<any>(
-			API_URL + "/",
+			this.apiUrl + "/",
 			{
 				"name": recipe.name,
 				"description": recipe.description,
@@ -41,7 +42,7 @@ export class RecipeService {
 
 	getRecipes(): Observable<Recipe[]> {
 		return this.http.get<{ rows: Recipe[] }>(
-			API_URL + "/",
+			this.apiUrl + "/",
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -57,7 +58,7 @@ export class RecipeService {
 
 	getRecipeBySlug(slug: string): Observable<Recipe> {
 		return this.http.get<{ rows: Recipe }>(
-			API_URL + "/" + slug,
+			this.apiUrl + "/" + slug,
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -73,7 +74,7 @@ export class RecipeService {
 
 	getFavoriteRecipes(): Observable<any> {
 		return this.http.get(
-			API_URL + "/favs",
+			this.apiUrl + "/favs",
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -83,7 +84,7 @@ export class RecipeService {
 
 	editRecipe(recipe: Recipe, id: number): Observable<any> {
 		return this.http.put(
-			API_URL + "/" + id,
+			this.apiUrl + "/" + id,
 			{
 				"name": recipe.name,
 				"description": recipe.description,
@@ -105,7 +106,7 @@ export class RecipeService {
 
 	deleteRecipe(id: string): Observable<any> {
 		return this.http.delete(
-			API_URL + "/" + id,
+			this.apiUrl + "/" + id,
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })

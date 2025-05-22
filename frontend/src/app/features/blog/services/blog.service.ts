@@ -2,21 +2,21 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Blog } from '../interfaces/blog';
-
-const API_URL = 'http://localhost:5000/api/blog';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class BlogService {
 	private http = inject(HttpClient);
+	apiUrl = environment.apiUrl + 'blog';
 
 	addBlog(blog: Blog): Observable<any> {
 		blog.image = "path-to-img";
 		blog.content = JSON.stringify(blog.content);
 
 		return this.http.post<any>(
-			API_URL + "/",
+			this.apiUrl + "/",
 			blog,
 			{
 				withCredentials: true,
@@ -32,7 +32,7 @@ export class BlogService {
 
 	getBlogs(): Observable<Blog[]> {
 		return this.http.get<{ rows: Blog[] }>(
-			API_URL + "/",
+			this.apiUrl + "/",
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -48,7 +48,7 @@ export class BlogService {
 
 	getBlogBySlug(slug: string): Observable<Blog> {
 		return this.http.get<{ row: Blog }>(
-			API_URL + "/" + slug,
+			this.apiUrl + "/" + slug,
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -67,7 +67,7 @@ export class BlogService {
 
 	updateBlog(blog: Blog): Observable<any> {
 		return this.http.put<any>(
-			API_URL + "/",
+			this.apiUrl + "/",
 			blog,
 			{
 				withCredentials: true,
@@ -83,7 +83,7 @@ export class BlogService {
 
 	deleteBlog(id: number): Observable<any> {
 		return this.http.delete(
-			API_URL + "/" + id,
+			this.apiUrl + "/" + id,
 			{
 				withCredentials: true,
 				headers: new HttpHeaders({ 'Content-Type': 'application/json' })
