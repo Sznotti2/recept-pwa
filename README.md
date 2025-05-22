@@ -3,10 +3,9 @@
 ### **navigate to `frontend/` directory**
 
 ```
-$ cd frontend
 $ npm install
 $ ng serve
-(to topen automatically use ng serve -o)
+(to to open automatically use ng serve -o)
 ```
 You can now view the app on http://localhost:4200/
 
@@ -14,15 +13,15 @@ You can now view the app on http://localhost:4200/
 
  - in XAMPP start the MySQL and Apache server
  - navigate to `127.0.0.1/phpmyadmin/`
- - create a database with the name recept-pwa
+ - create a database with the name `recept-pwa`
  (you can use a different name but be sure to update the config in `backend/config/db.config.js`)
  - navigate to the SQL tab and paste the SQL code found in the `backend/config/db.sql`
 
 ### **navigate to `backend/` directory**
 
+ - create a `.env` file and copy the content of `.env.sample` in it
+
 ```
-$ cd ..
-$ cd backend
 $ npm install
 $ npm start
 ```
