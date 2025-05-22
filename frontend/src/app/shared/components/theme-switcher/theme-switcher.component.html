@@ -4,7 +4,7 @@
 		<span class="visually-hidden">Open theme switcher</span>
 	</button>
 
-	<div class="dropdown-menu" *ngIf="isOpen">
+	<div class="dropdown-menu" [ngClass]="{'open': isOpen}">
 		<div class="theme-options">
 			<label>
 				<input type="radio" name="theme" [value]="'light'" [(ngModel)]="selectedTheme"

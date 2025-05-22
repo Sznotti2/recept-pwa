@@ -31,10 +31,10 @@
 			<li><a routerLink="/about" routerLinkActive="active">Rólunk</a></li>
 			<span class="slider"></span>
 		</ul>
-
-		<app-theme-switcher></app-theme-switcher>
 	
-		<div id="user-menu">	
+		<div id="user-menu">
+			<app-theme-switcher></app-theme-switcher>
+
 			<input class="dropdown-toggle" type="checkbox" id="dropdown-toggle"/>
 			<ng-container *ngIf="authService.user$ | async as User; else visitor">
 				<label for="dropdown-toggle">

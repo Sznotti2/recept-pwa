@@ -207,7 +207,7 @@ button {
 	font-weight: 600;
 	text-decoration: none;
 	letter-spacing: 0.04em;
-	border: 2px solid hsl(var(--primary-hs), var(--lightness-800));
+	border: none;
 	cursor: pointer;
 	transition: 
 		color .2s ease-in-out, 
@@ -250,10 +250,10 @@ button {
 	}
 
 	&:hover {
-		border-color: hsl(var(--primary-hs), var(--lightness-100));
+		background-color: hsl(var(--primary-hs), var(--lightness-700));
 	}
 	&:active {
-		background-color: hsl(var(--primary-hs), var(--lightness-700));
+		background-color: hsl(var(--primary-hs), var(--lightness-600));
 	}
 	&:focus-visible {
 		outline: 2px solid hsl(var(--primary-hs), var(--lightness-100));
@@ -265,7 +265,6 @@ button {
 
 		&:hover {
 			background-color: hsl(var(--primary-hs), var(--lightness-800));
-			border-color: hsl(var(--primary-hs), var(--lightness-800));
 		}
 	}
 }

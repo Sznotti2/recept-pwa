@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/user';
 import { ImgbbService } from './imgbb.service';
@@ -73,7 +73,7 @@ export class AuthService {
 		);
 	}
 	
-	autoLogin(): Observable<User> {
+	autoLogin(): Observable<any> {
 		return this.http.get<{ user: User }>(
 			API_URL + "/me"
 		).pipe(
@@ -81,6 +81,11 @@ export class AuthService {
 				const user = response.user as User;
 				this.user$.next(user);
 				return user;
+			}),
+			catchError((error) => {
+				this.user$.next(null);
+				console.error("Error during auto-login:", error);
+				return of(null);
 			})
 		);
 	}

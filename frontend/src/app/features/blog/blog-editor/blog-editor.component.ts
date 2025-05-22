@@ -28,7 +28,7 @@ export class BlogEditorComponent implements OnInit {
 	blogSlug = "";
 	blog: Blog | null = null;
 
-	ngOnInit(): void {
+	constructor() {
 		this.blogEditForm = this.formBuilder.group({
 			title: [""],
 			description: [""],
@@ -38,7 +38,9 @@ export class BlogEditorComponent implements OnInit {
 			status: [""],
 			meta_description: [""]
 		});
+	}
 
+	ngOnInit(): void {
 		this.blogSlug = this.route.snapshot.params['slug'];
 		if (this.blogSlug) {
 			this.blogService.getBlogBySlug(this.blogSlug).subscribe({

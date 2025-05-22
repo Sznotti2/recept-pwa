@@ -44,7 +44,6 @@ export class ProfileComponent implements OnInit {
 					bio: user.bio || "",
 				});
 				this.imageSrc = user.profile_picture || "";
-				console.log("User data loaded", user);
 			}
 		});
 	}

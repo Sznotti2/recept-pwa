@@ -18,14 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		// this.authService.refreshToken();
-		const authSubscription = this.authService.autoLogin().subscribe({
-			next: () => {
-				console.log(this.authService.user$.value);
-			},
-			error: (error) => {
-				console.error("Error during auto-login:", error);
-			}
-		});
+		const authSubscription = this.authService.autoLogin().subscribe();
 		this.subscriptions.add(authSubscription);
 	}
 
