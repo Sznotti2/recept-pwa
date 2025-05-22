@@ -50,10 +50,10 @@ export class AuthService {
 		);
 	}
 
-	editUser(name: string, password: string, bio: string, image: string): Observable<any> {
+	editUser(name: string, password: string, bio: string, profilePicture: string): Observable<any> {
 		return this.http.put(
 			API_URL + `/`,
-			{ name, password, bio, image }
+			{ name, password, bio, profilePicture }
 		);
 	}
 

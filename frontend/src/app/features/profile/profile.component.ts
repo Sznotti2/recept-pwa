@@ -78,12 +78,18 @@ export class ProfileComponent implements OnInit {
 			if (this.selectedImage !== null) {
 				this.imgbb.upload(this.selectedImage as File).subscribe({
 					next: (res) => {
+						console.log("Imagbb result", res.data.url);
 						this.authService.editUser(form.username, form.password, form.bio, res.data.url).subscribe({
-							next: (res) => console.log("Update successful", res),
+							next: () => console.log("Update successful"),
 							error: (err) => console.error("Update error", err)
 						});
 					},
 					error: (err) => console.error("Upload error", err)
+				});
+			} else if (this.imageSrc !== "") {
+				this.authService.editUser(form.username, form.password, form.bio, this.imageSrc).subscribe({
+					next: () => console.log("Update successful"),
+					error: (err) => console.error("Update error", err)
 				});
 			}
 		} else {

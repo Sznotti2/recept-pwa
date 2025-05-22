@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ImgbbService {
 	private apiUrl = 'https://api.imgbb.com/1/upload';
-	private apiKey = '6e5937a88f9cc70a7accb4327ff3c773';
+	private apiKey = 'a93c16f07c936f70f2562aa495830ed2';
 
 	constructor(private http: HttpClient) { }
 
@@ -29,6 +29,7 @@ export class ImgbbService {
 				formData.append('key', this.apiKey);
 
 				return this.http.post(this.apiUrl, formData).pipe(
+					map((response: any) => response),
 					catchError(this.handleError)
 				);
 			})
