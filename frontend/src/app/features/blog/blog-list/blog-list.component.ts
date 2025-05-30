@@ -12,5 +12,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './blog-list.component.scss'
 })
 export class BlogListComponent {
-  @Input() blogs$!: Observable<Blog[]>;
+  @Input() blogs!: Observable<Blog[]>;
 }

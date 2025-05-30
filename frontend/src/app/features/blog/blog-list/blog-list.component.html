@@ -1,6 +1,7 @@
 <section>
-	@for (blog of blogs$ | async; track blog.id) {
+	@for (blog of blogs | async; track blog.id) {
 		@defer {
+			<!-- <div class="card" routerLink="/blog/{{blog.slug}}"> -->
 			<div class="card" routerLink="/blog/{{blog.slug}}">
 				<div class="img-container">
 					<img [src]="blog.image" alt="{{ blog.title }}">
@@ -12,7 +13,7 @@
 					<p>{{ blog.created_at | date : 'y MMMM d' }}</p>
 				</div>
 			</div>
-		} @placeholder (minimum 1s) {
+		} @loading (minimum 1s) {
 			<div class="card loading">
 				<div class="img-container"></div>
 				<div class="content">
